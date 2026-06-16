@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payroll adjustments — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="payroll-adjustments.css" />
+</head>
+<body>
+<script src="hubstaff-shell.js"></script>
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+
+<div id="shell-content">
+  <div class="pa-page">
+
+    <!-- Sticky page header -->
+    <header class="pa-header">
+      <div class="pa-header-top">
+        <h2 class="pa-title">Payroll adjustments</h2>
+        <a href="#" class="pa-create">Create payroll adjustment</a>
+      </div>
+      <hr class="pa-divider" />
+      <div class="pa-toolbar">
+        <div class="pa-select"><span class="pa-select-ph">All members</span><i class="material-symbols-rounded pa-caret">expand_more</i></div>
+      </div>
+    </header>
+
+    <div class="pa-body">
+
+      <!-- Adjustments DataTable -->
+      <div class="pa-card">
+
+        <!-- toolbar: past-adjustments toggle -->
+        <div class="pa-card-toolbar">
+          <div class="pa-toggle">
+            <button class="pa-toggle-btn is-active" data-toggle="hide" type="button">Hide past adjustments</button>
+            <button class="pa-toggle-btn" data-toggle="show" type="button">Show past adjustments</button>
+          </div>
+        </div>
+
+        <div class="pa-table-wrap">
+          <table class="pa-table">
+            <thead>
+              <tr>
+                <th class="pa-th">Policy</th>
+                <th class="pa-th">Members</th>
+                <th class="pa-th">Amount</th>
+                <th class="pa-th">Frequency</th>
+                <th class="pa-th">Ends on</th>
+                <th class="pa-th"></th>
+              </tr>
+            </thead>
+            <tbody id="pa-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- footer / pagination -->
+        <div class="pa-foot">
+          <div class="pa-foot-left">
+            <span class="pa-foot-count" id="pa-count">Showing 8 items</span>
+            <label class="pa-per-page">
+              <select class="pa-per-select"><option selected>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select>
+              <span>per page</span>
+            </label>
+          </div>
+          <div class="pa-foot-right"><button class="pa-page-link is-active" type="button">1</button></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Edit payroll adjustment modal -->
+<div class="pam-overlay" id="pam-overlay">
+  <div class="pam-modal" role="dialog" aria-modal="true" aria-labelledby="pam-title">
+    <button class="pam-close" id="pam-close" type="button" aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+    <header class="pam-header"><h1 class="pam-title" id="pam-title">Edit payroll adjustment</h1></header>
+    <section class="pam-body">
+      <form id="pam-form">
+        <div class="pam-fields">
+          <div class="pam-section-title">Define rules</div>
+
+          <label class="pam-field">
+            <span class="pam-label">Name <abbr title="required">*</abbr></span>
+            <input class="pam-input" type="text" id="pam-name" placeholder="Enter the Payroll name" />
+          </label>
+
+          <label class="pam-field" id="pam-amount-field">
+            <span class="pam-label">Amount per member <abbr title="required">*</abbr></span>
+            <div class="pam-split">
+              <input class="pam-split-input" type="number" id="pam-amount" placeholder="0.00" min="0" max="1000000" step="0.01" />
+              <span class="pam-split-suffix">USD</span>
+            </div>
+            <span class="pam-helper">Pay adjustments are always set in organization currency, (USD — US Dollar).</span>
+          </label>
+
+          <div class="pam-field">
+            <span class="pam-label">Ends on</span>
+            <div class="pam-endson">
+              <div class="pam-endson-control">
+                <button type="button" class="pam-switch" id="pam-endswitch" role="switch" aria-checked="false"></button>
+                <input class="pam-input pam-input--disabled" id="pam-endson-off" type="text" placeholder="Runs until stopped" disabled />
+                <div class="pam-date-wrap" id="pam-endson-on" hidden>
+                  <input class="pam-input" type="text" placeholder="Select Date" value="Wed, Sep 30, 2026" readonly />
+                  <span class="material-symbols-rounded">calendar_month</span>
+                </div>
+              </div>
+              <div class="pam-endson-spacer"></div>
+            </div>
+          </div>
+
+          <div class="pam-info" id="pam-deduction-info">
+            <span class="material-symbols-rounded">info</span>
+            If a deduction is greater than the payment, it will not be applied at all.
+          </div>
+
+          <div class="pam-section-title pam-section-title--mt">Select members</div>
+
+          <div class="pam-segmented" role="radiogroup">
+            <button type="button" class="pam-seg is-active" data-seg="manual">Manual</button>
+            <button type="button" class="pam-seg" data-seg="import_csv">Import CSV</button>
+          </div>
+
+          <div class="pam-seg-panel" data-panel="manual">
+            <label class="pam-field">
+              <span class="pam-label">Members</span>
+              <div class="pam-select is-active" id="pam-members" tabindex="0">
+                <span class="pam-select-val" id="pam-members-val">1 member</span>
+                <i class="material-symbols-rounded pam-select-caret">expand_more</i>
+              </div>
+            </label>
+          </div>
+
+          <div class="pam-seg-panel" data-panel="import_csv" hidden>
+            <div class="pam-warning"><span><strong>Attention!</strong> A bulk upload will fully replace the list of members associated with this Payroll adjustment. Make sure to include all desired members in the file.</span></div>
+            <div class="pam-import">
+              <div class="pam-import-head">Follow these steps to import members</div>
+              <div class="pam-import-step">
+                <div class="pam-import-step-left"><span class="pam-step-num">1</span><span>Download the template</span></div>
+                <a class="pam-import-btn" href="#"><span class="material-symbols-rounded">download</span>Download</a>
+              </div>
+              <div class="pam-import-step">
+                <div class="pam-import-step-left"><span class="pam-step-num">2</span><span>Fill in member emails</span></div>
+                <button class="pam-import-btn" type="button"><span class="material-symbols-rounded">info</span>How to use CSV</button>
+              </div>
+              <div class="pam-import-step pam-import-step--last">
+                <div class="pam-import-step-left"><span class="pam-step-num">3</span><span>Upload completed CSV <span class="pam-muted">(Max of 5Mb)</span></span></div>
+                <label class="pam-import-btn"><span class="material-symbols-rounded pam-rot">download</span>Upload<input type="file" accept=".csv" hidden></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="pam-info">
+            <span class="material-symbols-rounded">info</span>
+            <span>Only members with time worked, PTO, or holidays will receive adjustments.<a href="#" class="pam-link">Contact support</a>.</span>
+          </div>
+        </div>
+
+        <div class="pam-footer">
+          <button type="button" class="pam-btn pam-btn--outline" id="pam-cancel">Cancel</button>
+          <button type="submit" class="pam-btn pam-btn--solid">Update</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script>
+  HubstaffShell.init({ activeItem: 'financials', activeSubHref: 'payroll-adjustments.html', expanded: true });
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  // Sample data (no real PII). Amounts are in the organization currency.
+  var ROWS = [
+    { policy:'bbbb',             members:1,  amount:'-USD 442.00',    dir:'neg', frequency:'Every pay period', ends:'Forever' },
+    { policy:'wwww',             members:1,  amount:'-USD 4,636.00',  dir:'neg', frequency:'Every pay period', ends:'Forever' },
+    { policy:'mmm',              members:1,  amount:'+USD 346.00',    dir:'pos', frequency:'Every pay period', ends:'Forever' },
+    { policy:'ddd',              members:1,  amount:'+USD 26,642.00', dir:'pos', frequency:'Every pay period', ends:'Forever' },
+    { policy:'123123123',        members:29, amount:'+USD 100.00',    dir:'pos', frequency:'One time',         ends:'One time payment', warn:'1 member is missing a pay period' },
+    { policy:'Manager doing it', members:2,  amount:'+USD 120.00',    dir:'pos', frequency:'One time',         ends:'One time payment' },
+    { policy:'Bonus',            members:1,  amount:'+USD 50.00',     dir:'pos', frequency:'Every pay period', ends:'Forever' },
+    { policy:'Bonus',            members:3,  amount:'+USD 50.00',     dir:'pos', frequency:'Every pay period', ends:'Forever' },
+  ];
+  // Hidden by default; revealed by "Show past adjustments".
+  var PAST_ROWS = [
+    { policy:'Spring bonus',     members:4,  amount:'+USD 150.00',    dir:'pos', frequency:'One time',         ends:'Apr 30, 2026', past:true },
+    { policy:'Temp deduction',   members:1,  amount:'-USD 200.00',    dir:'neg', frequency:'Every pay period', ends:'May 31, 2026', past:true },
+  ];
+
+  function rowHTML(r) {
+    var warn = r.warn
+      ? '<button class="pa-warn" type="button" title="' + r.warn + '"><span class="material-symbols-rounded">warning</span></button>'
+      : '';
+    var members = r.members + (r.members === 1 ? ' member' : ' members');
+    return '<tr class="pa-row"' + (r.past ? ' data-past="1" hidden' : '') + '>' +
+      '<td class="pa-td"><span class="pa-policy"><span>' + r.policy + '</span>' + warn + '</span></td>' +
+      '<td class="pa-td"><a class="pa-members" href="#"><span class="material-symbols-rounded">group</span>' + members + '</a></td>' +
+      '<td class="pa-td"><span class="pa-amount pa-amount--' + r.dir + '">' + r.amount + '</span></td>' +
+      '<td class="pa-td">' + r.frequency + '</td>' +
+      '<td class="pa-td">' + r.ends + '</td>' +
+      '<td class="pa-td pa-td--actions">' +
+        '<div class="pa-actions">' +
+          '<button class="pa-actions-btn" type="button">Actions <span class="material-symbols-rounded">keyboard_arrow_down</span></button>' +
+          '<div class="pa-menu">' +
+            '<a class="pa-menu-item pam-edit" href="#" data-name="' + r.policy + '" data-amount="' + r.amount.replace(/[^0-9.]/g, '') + '" data-type="' + r.dir + '" data-members="' + members + '">Edit</a>' +
+            '<a class="pa-menu-item" href="#">Delete</a>' +
+          '</div>' +
+        '</div>' +
+      '</td>' +
+    '</tr>';
+  }
+
+  document.getElementById('pa-tbody').innerHTML = ROWS.concat(PAST_ROWS).map(rowHTML).join('');
+
+  // Actions dropdowns
+  function closeMenus() { document.querySelectorAll('.pa-menu.is-open').forEach(function (m) { m.classList.remove('is-open'); }); }
+  document.querySelectorAll('.pa-actions-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var menu = btn.nextElementSibling;
+      var open = menu.classList.contains('is-open');
+      closeMenus();
+      if (!open) menu.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', closeMenus);
+
+  // Hide / Show past adjustments
+  var btnHide = document.querySelector('[data-toggle="hide"]');
+  var btnShow = document.querySelector('[data-toggle="show"]');
+  var countEl = document.getElementById('pa-count');
+  function setPast(showPast) {
+    document.querySelectorAll('.pa-row[data-past="1"]').forEach(function (r) { r.hidden = !showPast; });
+    btnHide.classList.toggle('is-active', !showPast);
+    btnShow.classList.toggle('is-active', showPast);
+    countEl.textContent = 'Showing ' + (showPast ? ROWS.length + PAST_ROWS.length : ROWS.length) + ' items';
+  }
+  btnHide.addEventListener('click', function () { setPast(false); });
+  btnShow.addEventListener('click', function () { setPast(true); });
+
+  // ── Edit payroll adjustment modal ──
+  var overlay = document.getElementById('pam-overlay');
+  var endSwitch = document.getElementById('pam-endswitch');
+
+  function setSeg(which) {
+    document.querySelectorAll('.pam-seg').forEach(function (s) { s.classList.toggle('is-active', s.getAttribute('data-seg') === which); });
+    document.querySelectorAll('.pam-seg-panel').forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== which; });
+  }
+  function setEndOn(on) {
+    endSwitch.classList.toggle('is-on', on);
+    endSwitch.setAttribute('aria-checked', on ? 'true' : 'false');
+    document.getElementById('pam-endson-off').hidden = on;
+    document.getElementById('pam-endson-on').hidden = !on;
+  }
+  // Annotation shown ONLY while the Edit dialog is open — swaps out the list-level annotations
+  var EDIT_ANNOTATION = {
+    page: 'Edit payroll adjustment',
+    required: [
+      { text: 'Amount per member — add a "USD" suffix + helper note', target: '#pam-amount-field', sub: [
+        'Show the organization currency code ("USD") as a boxed suffix segment beside the field — same pattern as the Edit pay rate modal',
+        'Add a helper note below: "Pay adjustments are always set in organization currency, (USD — US Dollar)."',
+        'Makes it explicit the amount is in the org currency, not the member\'s local currency',
+      ]},
+    ],
+    suggestions: [],
+  };
+  function openEdit(d) {
+    document.getElementById('pam-name').value = d.name || '';
+    document.getElementById('pam-amount').value = d.amount || '';
+    document.getElementById('pam-members-val').textContent = d.members || 'Select';
+    document.getElementById('pam-deduction-info').style.display = (d.type === 'neg') ? '' : 'none';
+    setSeg('manual');
+    setEndOn(false);
+    overlay.classList.add('is-open');
+    if (window.DesignAnnotations) DesignAnnotations.setContext(EDIT_ANNOTATION);  // dialog-only annotation
+  }
+  function closeEdit() {
+    overlay.classList.remove('is-open');
+    if (window.DesignAnnotations) DesignAnnotations.clearContext();  // restore the list annotations
+  }
+
+  document.getElementById('pa-tbody').addEventListener('click', function (e) {
+    var edit = e.target.closest('.pam-edit');
+    if (!edit) return;
+    e.preventDefault();
+    closeMenus();
+    openEdit({
+      name: edit.getAttribute('data-name'),
+      amount: edit.getAttribute('data-amount'),
+      type: edit.getAttribute('data-type'),
+      members: edit.getAttribute('data-members'),
+    });
+  });
+
+  document.getElementById('pam-close').addEventListener('click', closeEdit);
+  document.getElementById('pam-cancel').addEventListener('click', closeEdit);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeEdit(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeEdit(); });
+  document.querySelectorAll('.pam-seg').forEach(function (s) { s.addEventListener('click', function () { setSeg(s.getAttribute('data-seg')); }); });
+  endSwitch.addEventListener('click', function () { setEndOn(!endSwitch.classList.contains('is-on')); });
+  document.getElementById('pam-form').addEventListener('submit', function (e) { e.preventDefault(); closeEdit(); });
+})();
+</script>
+
+<script>
+  DesignAnnotations.init({
+    page: 'Payroll adjustments',
+    required: [
+      { text: 'Show the currency code, not the symbol', target: '.pa-amount', sub: [
+        'Display adjustment amounts with the ISO currency code (e.g. "USD 442.00" / "+USD 346.00"), never the "$" symbol',
+        'Applies to every pill in the Amount column — deductions and additions',
+        'Consistent with the team payment, payment records, and member pay-rate screens',
+      ]},
+      { text: 'Actions → Edit dialog needs a currency note + suffix', target: '.pa-actions-btn', sub: [
+        'Actions → Edit opens the "Edit payroll adjustment" dialog',
+        'There, the Amount per member field must carry a "USD" suffix and a helper note',
+        'Open the dialog, then re-open annotations to see the field-level note',
+      ]},
+    ],
+    suggestions: [],
+  });
+</script>
+
+</body>
+</html>

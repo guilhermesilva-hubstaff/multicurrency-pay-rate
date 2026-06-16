@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Payment — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="team-payment.css" />
+</head>
+<body>
+<script src="hubstaff-shell.js"></script>
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+
+<div id="shell-content">
+  <div class="tp-page">
+
+    <!-- Sticky page header -->
+    <header class="tp-header">
+      <a href="payment-records.html" class="tp-back">
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span>Back</span>
+      </a>
+
+      <div class="tp-header-row">
+        <h2 class="tp-title">
+          <span>ID00129 - Team Payment</span>
+          <a href="#" class="tp-title-edit" aria-label="Edit friendly name"><span class="material-symbols-rounded">edit</span></a>
+        </h2>
+        <div class="tp-header-actions">
+          <a href="#" class="tp-export">Export payment</a>
+          <a href="payment-records.html" class="tp-nav-btn" aria-label="Previous payment"><span class="material-symbols-rounded">arrow_back</span></a>
+          <a href="payment-records.html" class="tp-nav-btn" aria-label="Next payment"><span class="material-symbols-rounded">arrow_forward</span></a>
+        </div>
+      </div>
+
+      <hr class="tp-divider" />
+
+      <div class="tp-filterbar">
+        <div class="tp-select"><span class="tp-select-ph">All members</span><i class="material-symbols-rounded tp-caret">expand_more</i></div>
+        <button class="tp-filters-btn"><span class="material-symbols-rounded">filter_list</span>Filters</button>
+      </div>
+    </header>
+
+    <div class="tp-body">
+
+      <!-- Details: summary + payment details -->
+      <div class="tp-details">
+
+        <!-- Summary card -->
+        <div class="tp-card tp-summary">
+          <div class="tp-summary-head">
+            <div class="tp-summary-head-left">
+              <div class="tp-total">Total: USD 12,102.26</div>
+              <button class="tp-bd-link" id="tp-bd-open" type="button">View breakdown<span class="material-symbols-rounded">keyboard_arrow_down</span></button>
+            </div>
+            <span class="tp-pill tp-pill--error">Error</span>
+          </div>
+
+          <div class="tp-summary-body">
+            <div class="tp-breakrow">
+              <div class="tp-subcard">
+                <div class="tp-sub-label">Earning Breakdown</div>
+                <div class="tp-metrics">
+                  <div class="tp-metric"><div class="tp-metric-label">Total Worked</div><div class="tp-metric-value">USD 11,293.26</div></div>
+                  <div class="tp-metric"><div class="tp-metric-label">PTO</div><div class="tp-metric-value">USD 366.00</div></div>
+                  <div class="tp-metric"><div class="tp-metric-label">Holidays</div><div class="tp-metric-value">USD 227.00</div></div>
+                </div>
+              </div>
+              <div class="tp-subcard">
+                <div class="tp-sub-label">Adjustment Breakdown</div>
+                <div class="tp-metrics">
+                  <div class="tp-metric"><div class="tp-metric-label">Additions</div><div class="tp-metric-value">USD 390.00</div></div>
+                  <div class="tp-metric"><div class="tp-metric-label">Deductions</div><div class="tp-metric-value">USD 174.00</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tp-subcard tp-balance-card">
+              <div class="tp-sub-label">Balance Breakdown</div>
+              <div class="tp-balance">
+                <div class="tp-metric"><div class="tp-metric-label"><span class="tp-dot tp-dot--pending"></span>Pending</div><div class="tp-metric-value">USD 1,405.58</div></div>
+                <div class="tp-metric"><div class="tp-metric-label"><span class="tp-dot tp-dot--int"></span>Processing (Int)</div><div class="tp-metric-value">USD 1,583.28</div></div>
+                <div class="tp-metric"><div class="tp-metric-label"><span class="tp-dot tp-dot--ext"></span>Processing (Ext)</div><div class="tp-metric-value">USD 900.00</div></div>
+                <div class="tp-metric"><div class="tp-metric-label"><span class="tp-dot tp-dot--error"></span>Error</div><div class="tp-metric-value">USD 500.00</div></div>
+                <div class="tp-metric"><div class="tp-metric-label"><span class="tp-dot tp-dot--paid"></span>Paid</div><div class="tp-metric-value">USD 7,713.40</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tp-summary-foot">
+            <div class="tp-foot-item"><span class="tp-foot-label">Date range:</span><span class="tp-foot-value">Mon, Feb 23, 2026 - Sun, Mar 1, 2026</span></div>
+            <div class="tp-foot-item"><span class="tp-foot-label">Created by:</span><span class="tp-foot-value">(Automatic)</span></div>
+            <div class="tp-foot-item"><span class="tp-foot-label">Paid via:</span><span class="tp-foot-value"><span class="tp-pay-via">D</span>Dummy</span></div>
+          </div>
+        </div>
+
+        <!-- Payment details card -->
+        <div class="tp-card tp-details-card">
+          <div class="tp-details-head">
+            <div class="tp-details-title">Payment details</div>
+            <div class="tp-segmented" role="radiogroup">
+              <button class="tp-seg is-active" data-tab="notes" type="button">Notes (0)</button>
+              <button class="tp-seg" data-tab="logs" type="button">Payment log</button>
+            </div>
+          </div>
+
+          <div class="tp-details-content">
+            <!-- Notes (empty state) -->
+            <div class="tp-tabpanel" data-panel="notes">
+              <div class="tp-notes-empty">
+                <span class="material-symbols-rounded tp-notes-empty-icon">sticky_note_2</span>
+                <p class="tp-notes-empty-title">No notes yet</p>
+                <p class="tp-notes-empty-desc">Use notes to record updates, decisions, or context related to this payment.</p>
+                <button class="tp-add-note-btn" type="button">Add note</button>
+              </div>
+            </div>
+
+            <!-- Payment log -->
+            <div class="tp-tabpanel" data-panel="logs" hidden>
+              <table class="tp-log-table">
+                <tbody>
+                  <tr><td><span class="tp-pill tp-pill--gray">Succeeded</span></td><td class="tp-log-desc">Payment succeeded for USD 12,102.26 via Dummy</td><td class="tp-log-date">Tue, Mar 3, 2026 10:56 am</td></tr>
+                  <tr><td><span class="tp-pill tp-pill--gray">Attempted</span></td><td class="tp-log-desc">Payment attempt for USD 12,102.26 via Dummy</td><td class="tp-log-date">Tue, Mar 3, 2026 10:56 am</td></tr>
+                  <tr><td><span class="tp-pill tp-pill--gray">Changed payer</span></td><td class="tp-log-desc">Payment gateway changed to Dummy</td><td class="tp-log-date">Tue, Mar 3, 2026 10:56 am</td></tr>
+                  <tr><td><span class="tp-pill tp-pill--gray">Created manually</span></td><td class="tp-log-desc">Payment created by (Automatic)</td><td class="tp-log-date">Tue, Mar 3, 2026 10:56 am</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment error alert -->
+      <div class="tp-error-banner" role="alert">
+        <div class="tp-error-banner__main">
+          <div class="tp-error-banner__title">
+            <span class="material-symbols-rounded">cancel</span>
+            1 error occurred during payment processing
+          </div>
+          <div class="tp-error-banner__desc">Please see details in the table below. You can use filters to customize the view.</div>
+        </div>
+        <div class="tp-error-banner__actions">
+          <a href="#" class="tp-err-btn tp-err-btn--outline">Split failed transactions</a>
+          <a href="#" class="tp-err-btn tp-err-btn--solid">Retry</a>
+        </div>
+      </div>
+
+      <!-- Members DataTable -->
+      <div class="tp-card tp-table-card">
+        <div class="tp-table-toolbar">
+          <label class="tp-groupby">
+            <span class="tp-groupby-label">Group By</span>
+            <select class="tp-groupby-native" id="tp-groupby-select" aria-label="Group by">
+              <option value="members">Members</option>
+              <option value="currency">Currency</option>
+            </select>
+          </label>
+          <button class="tp-cols-btn" aria-label="Columns"><span class="material-symbols-rounded">view_column</span></button>
+        </div>
+
+        <div class="tp-table-wrap">
+          <table class="tp-table">
+            <thead>
+              <tr>
+                <th class="tp-th tp-th--sorted"><div class="tp-th-inner">Members<span class="material-symbols-rounded tp-sort tp-sort--active">arrow_upward</span></div></th>
+                <th class="tp-th">Hours</th>
+                <th class="tp-th">Pay rate</th>
+                <th class="tp-th">Status</th>
+                <th class="tp-th">Error details</th>
+                <th class="tp-th">Total amount</th>
+              </tr>
+            </thead>
+            <tbody id="tp-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="tp-foot">
+          <div class="tp-foot-left">
+            <span class="tp-foot-count">Showing 16 items</span>
+            <label class="tp-per-page">
+              <select class="tp-per-select"><option selected>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select>
+              <span>per page</span>
+            </label>
+          </div>
+          <div class="tp-foot-right"><button class="tp-page-link is-active" type="button">1</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Filters drawer -->
+<div class="tpf-backdrop" id="tpf-backdrop"></div>
+<aside class="tpf-drawer" id="tpf-drawer" role="dialog" aria-modal="true" aria-label="Filters">
+  <div class="tpf-head">
+    <h3 class="tpf-head-title">Filters</h3>
+    <button class="tpf-close" id="tpf-close" type="button" aria-label="Close">
+      <span class="material-symbols-rounded">close</span>
+    </button>
+  </div>
+
+  <div class="tpf-body">
+    <div class="tpf-section">
+      <p class="tpf-section-title">Currency</p>
+      <label class="tpf-field">
+        <span class="tpf-label">Filter by currency</span>
+        <select class="tpf-native-select" id="tpf-currency">
+          <option value="all">All currencies · USD organization total</option>
+          <option value="BRL">BRL — Brazilian Real</option>
+          <option value="CAD">CAD — Canadian Dollar</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="GBP">GBP — British Pound</option>
+          <option value="PHP">PHP — Philippine Peso</option>
+          <option value="USD">USD — US Dollar</option>
+        </select>
+      </label>
+      <p class="tpf-hint">Filtering by a currency turns the summary into a <strong>Filtered Total</strong> — the USD value with the original currency beneath.</p>
+    </div>
+
+    <hr class="tpf-hr" />
+
+    <div class="tpf-section">
+      <p class="tpf-section-title">Status and details</p>
+      <div class="tpf-fields" id="tpf-status-fields"></div>
+    </div>
+
+    <hr class="tpf-hr" />
+
+    <div class="tpf-section">
+      <div class="tpf-section-head">
+        <p class="tpf-section-title">Earning types displayed</p>
+        <p class="tpf-section-desc">Pick items from each earning type group to build your custom view. Everything is included by default.</p>
+      </div>
+      <div class="tpf-fields" id="tpf-earning-fields"></div>
+    </div>
+
+    <a href="#" class="tpf-clear" id="tpf-clear">Clear filters</a>
+  </div>
+</aside>
+
+<script>
+  HubstaffShell.init({ activeItem: 'financials', activeSubHref: 'payment-records.html', expanded: true });
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var COLORS = ['#059669','#7c3aed','#db2777','#d97706','#0891b2','#2563eb','#ca8a04','#0d9488'];
+  function initials(name){ var p=name.split(' '); return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase(); }
+
+  // 16 members across multiple currencies (2–3 per currency). Each amount is shown in the
+  // organization currency (USD, large) with the member's own pay currency beneath (small).
+  // rateUSD/totalUSD = org-currency (converted); rateMember/totalMember = member currency.
+  var MEMBERS = [
+    { name:'Ana Souza',     email:'ana.souza@example.com',     hours:'30:00:00', cur:'BRL', period:'hr',
+      rateUSD:'7.20', rateMember:'40.00', totalUSD:'216.00', totalMember:'1,200.00',
+      subs:[ {name:'Support Desk', type:'Project', hours:'30:00:00', period:'hr', rateUSD:'7.20', rateMember:'40.00', totalUSD:'216.00', totalMember:'1,200.00'} ] },
+    { name:'Andrew Park',   email:'andrew.park@example.com',   hours:'40:00:00', cur:'USD', period:'hr',
+      rateUSD:'20.00', rateMember:'20.00', totalUSD:'800.00', totalMember:'800.00',
+      subs:[ {name:'Website Redesign', type:'Project', hours:'30:00:00', period:'hr', rateUSD:'20.00', rateMember:'20.00', totalUSD:'600.00', totalMember:'600.00'},
+             {name:'Internal Tools',   type:'Project', hours:'10:00:00', period:'hr', rateUSD:'20.00', rateMember:'20.00', totalUSD:'200.00', totalMember:'200.00'} ] },
+    { name:'Bianca Rossi',  email:'bianca.rossi@example.com',  hours:'35:00:00', cur:'EUR', period:'hr', status:'Processing (Int)',
+      rateUSD:'19.44', rateMember:'18.00', totalUSD:'680.40', totalMember:'630.00',
+      subs:[ {name:'Mobile App',      type:'Project', hours:'15:00:00', period:'hr', rateUSD:'19.44', rateMember:'18.00', totalUSD:'291.60', totalMember:'270.00'},
+             {name:'Web Dashboard',   type:'Project', hours:'12:00:00', period:'hr', rateUSD:'19.44', rateMember:'18.00', totalUSD:'233.28', totalMember:'216.00'},
+             {name:'API Integration', type:'Project', hours:'8:00:00',  period:'hr', rateUSD:'19.44', rateMember:'18.00', totalUSD:'155.52', totalMember:'144.00'} ] },
+    { name:'Bruno Lima',    email:'bruno.lima@example.com',    hours:'20:00:00', cur:'BRL', period:'hr', status:'Pending',
+      rateUSD:'9.00', rateMember:'50.00', totalUSD:'180.00', totalMember:'1,000.00',
+      subs:[ {name:'QA Automation', type:'Project', hours:'20:00:00', period:'hr', rateUSD:'9.00', rateMember:'50.00', totalUSD:'180.00', totalMember:'1,000.00'} ] },
+    { name:'Chen Wei',      email:'chen.wei@example.com',      hours:'20:00:00', cur:'USD', period:'hr', status:'Error',
+      errorTitle:'Insufficient funds', errorAction:'Add funds to your account and Retry',
+      rateUSD:'25.00', rateMember:'25.00', totalUSD:'500.00', totalMember:'500.00',
+      subs:[ {name:'Data Platform', type:'Project', hours:'20:00:00', period:'hr', rateUSD:'25.00', rateMember:'25.00', totalUSD:'500.00', totalMember:'500.00'} ] },
+    { name:'Diego Martins', email:'diego.martins@example.com', hours:'-', cur:'BRL', period:'fixed',
+      rateUSD:'1,080.00', rateMember:'6,000.00', totalUSD:'1,080.00', totalMember:'6,000.00',
+      subs:[ {name:'Monthly retainer', type:'Fixed amount', hours:'-', period:'fixed', rateUSD:'1,080.00', rateMember:'6,000.00', totalUSD:'1,080.00', totalMember:'6,000.00'} ] },
+    { name:'Emma Schultz',  email:'emma.schultz@example.com',  hours:'15:00:00', cur:'GBP', period:'hr', status:'Pending',
+      rateUSD:'38.10', rateMember:'30.00', totalUSD:'571.50', totalMember:'450.00',
+      subs:[ {name:'Release Testing', type:'Project', hours:'15:00:00', period:'hr', rateUSD:'38.10', rateMember:'30.00', totalUSD:'571.50', totalMember:'450.00'} ] },
+    { name:'Farah Khan',    email:'farah.khan@example.com',    hours:'25:00:00', cur:'PHP', period:'hr', status:'Processing (Ext)',
+      rateUSD:'21.60', rateMember:'1,200.00', totalUSD:'540.00', totalMember:'30,000.00',
+      subs:[ {name:'Customer Support', type:'Project', hours:'25:00:00', period:'hr', rateUSD:'21.60', rateMember:'1,200.00', totalUSD:'540.00', totalMember:'30,000.00'} ] },
+    { name:'Giulia Conti',  email:'giulia.conti@example.com',  hours:'38:00:00', cur:'EUR', period:'hr', status:'Processing (Int)',
+      rateUSD:'23.76', rateMember:'22.00', totalUSD:'902.88', totalMember:'836.00',
+      subs:[ {name:'Marketing Site', type:'Project', hours:'20:00:00', period:'hr', rateUSD:'23.76', rateMember:'22.00', totalUSD:'475.20', totalMember:'440.00'},
+             {name:'Localization',   type:'Project', hours:'18:00:00', period:'hr', rateUSD:'23.76', rateMember:'22.00', totalUSD:'427.68', totalMember:'396.00'} ] },
+    { name:'Liza Santos',   email:'liza.santos@example.com',   hours:'18:00:00', cur:'PHP', period:'hr',
+      rateUSD:'16.20', rateMember:'900.00', totalUSD:'291.60', totalMember:'16,200.00',
+      subs:[ {name:'Content Ops', type:'Project', hours:'18:00:00', period:'hr', rateUSD:'16.20', rateMember:'900.00', totalUSD:'291.60', totalMember:'16,200.00'} ] },
+    { name:'Lukas Meyer',   email:'lukas.meyer@example.com',   hours:'40:00:00', cur:'EUR', period:'hr',
+      rateUSD:'27.00', rateMember:'25.00', totalUSD:'1,080.00', totalMember:'1,000.00',
+      subs:[ {name:'Platform Team', type:'Project', hours:'40:00:00', period:'hr', rateUSD:'27.00', rateMember:'25.00', totalUSD:'1,080.00', totalMember:'1,000.00'} ] },
+    { name:'Maria Garcia',  email:'maria.garcia@example.com',  hours:'36:00:00', cur:'USD', period:'hr',
+      rateUSD:'30.00', rateMember:'30.00', totalUSD:'1,080.00', totalMember:'1,080.00',
+      subs:[ {name:'Data Pipeline', type:'Project', hours:'36:00:00', period:'hr', rateUSD:'30.00', rateMember:'30.00', totalUSD:'1,080.00', totalMember:'1,080.00'} ] },
+    { name:'Mateo Reyes',   email:'mateo.reyes@example.com',   hours:'20:00:00', cur:'PHP', period:'hr', status:'Processing (Ext)',
+      rateUSD:'18.00', rateMember:'1,000.00', totalUSD:'360.00', totalMember:'20,000.00',
+      subs:[ {name:'Support Tier 2', type:'Project', hours:'20:00:00', period:'hr', rateUSD:'18.00', rateMember:'1,000.00', totalUSD:'360.00', totalMember:'20,000.00'} ] },
+    { name:'Noah Tremblay', email:'noah.tremblay@example.com', hours:'40:00:00', cur:'CAD', period:'hr',
+      rateUSD:'23.36', rateMember:'32.00', totalUSD:'934.40', totalMember:'1,280.00',
+      subs:[ {name:'Infrastructure', type:'Project', hours:'40:00:00', period:'hr', rateUSD:'23.36', rateMember:'32.00', totalUSD:'934.40', totalMember:'1,280.00'} ] },
+    { name:'Oliver Hughes', email:'oliver.hughes@example.com', hours:'32:00:00', cur:'GBP', period:'hr',
+      rateUSD:'44.45', rateMember:'35.00', totalUSD:'1,422.40', totalMember:'1,120.00',
+      subs:[ {name:'Frontend Guild', type:'Project', hours:'32:00:00', period:'hr', rateUSD:'44.45', rateMember:'35.00', totalUSD:'1,422.40', totalMember:'1,120.00'} ] },
+    { name:'Omar Hassan',   email:'omar.hassan@example.com',   hours:'32:00:00', cur:'CAD', period:'hr', status:'Pending',
+      rateUSD:'20.44', rateMember:'28.00', totalUSD:'654.08', totalMember:'896.00',
+      subs:[ {name:'Infrastructure', type:'Project', hours:'32:00:00', period:'hr', rateUSD:'20.44', rateMember:'28.00', totalUSD:'654.08', totalMember:'896.00'} ] },
+  ];
+
+  var tbody = document.getElementById('tp-tbody');
+  var html = '';
+
+  // Dual-currency cell: organization currency (USD, large) + member currency (small).
+  // The member line is omitted when the member is already paid in USD.
+  function rateStack(usd, memberAmt, cur, period) {  // pay rate shows the member's own (original) currency only — USD conversion fluctuates daily
+    return '<div class="tp-rate"><span>' + cur + ' ' + memberAmt + '/' + period + '</span></div>';
+  }
+  function amountStack(usd, memberAmt, cur) {
+    var inner = '<span>USD ' + usd + '</span>';
+    if (cur !== 'USD') inner += '<span class="tp-rate-unit">' + cur + ' ' + memberAmt + '</span>';
+    return '<div class="tp-rate">' + inner + '</div>';
+  }
+
+  MEMBERS.forEach(function (m, gi) {
+    var avatar = '<span class="tp-avatar" style="background:' + COLORS[gi % COLORS.length] + '">' + initials(m.name) + '</span>';
+    var isError = m.status === 'Error';
+    var STATUS_PILL = { 'Paid': 'tp-pill--paid', 'Error': 'tp-pill--error', 'Pending': 'tp-pill--pending', 'Processing (Int)': 'tp-pill--processing', 'Processing (Ext)': 'tp-pill--processing' };
+    var status = m.status || 'Paid';
+    var statusPill = '<span class="tp-pill ' + (STATUS_PILL[status] || 'tp-pill--paid') + '">' + status + '</span>';
+    var errCell = isError
+      ? '<td class="tp-td"><div class="tp-err-detail">' +
+          '<div class="tp-err-detail-title">' + m.errorTitle + ' <span class="material-symbols-rounded tp-err-info" title="' + m.errorAction + '">info</span></div>' +
+          '<div class="tp-err-detail-desc">' + m.errorAction + '</div>' +
+        '</div></td>'
+      : '<td class="tp-td"><span class="tp-err-detail--empty">—</span></td>';
+    var totalCell = isError
+      ? '<td class="tp-td tp-td--total"><div class="tp-amount-cell">' + amountStack(m.totalUSD, m.totalMember, m.cur) + '<button class="tp-mark-paid" type="button">Mark as paid <span class="material-symbols-rounded">info</span></button></div></td>'
+      : '<td class="tp-td tp-td--total">' + amountStack(m.totalUSD, m.totalMember, m.cur) + '</td>';
+    html +=
+      '<tr class="tp-grow" data-group="' + gi + '" data-cur="' + m.cur + '">' +
+        '<td class="tp-td tp-td--member">' +
+          '<span class="material-symbols-rounded tp-chevron">keyboard_arrow_right</span>' +
+          avatar +
+          '<span class="tp-member"><span class="tp-member-name">' + m.name + '</span><span class="tp-member-email">' + m.email + '</span></span>' +
+        '</td>' +
+        '<td class="tp-td"><span class="tp-dur">' + m.hours + '</span></td>' +
+        '<td class="tp-td tp-td--rate">' + rateStack(m.rateUSD, m.rateMember, m.cur, m.period) + '</td>' +
+        '<td class="tp-td">' + statusPill + '</td>' +
+        errCell +
+        totalCell +
+      '</tr>';
+    m.subs.forEach(function (s) {
+      html +=
+        '<tr class="tp-subrow" data-group="' + gi + '" data-cur="' + m.cur + '" hidden>' +
+          '<td class="tp-td tp-td--sub"><div class="tp-rate"><span>' + s.name + '</span><span class="tp-rate-unit">' + s.type + '</span></div></td>' +
+          '<td class="tp-td"><span class="tp-dur">' + s.hours + '</span></td>' +
+          '<td class="tp-td">' + rateStack(s.rateUSD, s.rateMember, m.cur, s.period) + '</td>' +
+          '<td class="tp-td">-</td>' +
+          '<td class="tp-td"></td>' +
+          '<td class="tp-td">' + amountStack(s.totalUSD, s.totalMember, m.cur) + '</td>' +
+        '</tr>';
+    });
+  });
+  tbody.innerHTML = html;
+
+  // Expand / collapse member groups
+  document.querySelectorAll('.tp-grow').forEach(function (row) {
+    row.addEventListener('click', function (e) {
+      if (e.target.closest('.tp-mark-paid')) return;
+      var gi = row.getAttribute('data-group');
+      var expanded = row.classList.toggle('is-expanded');
+      document.querySelectorAll('.tp-subrow[data-group="' + gi + '"]').forEach(function (sub) {
+        sub.hidden = !expanded;
+      });
+    });
+  });
+
+  // Payment details tabs
+  document.querySelectorAll('.tp-seg').forEach(function (seg) {
+    seg.addEventListener('click', function () {
+      document.querySelectorAll('.tp-seg').forEach(function (s) { s.classList.remove('is-active'); });
+      seg.classList.add('is-active');
+      var tab = seg.getAttribute('data-tab');
+      document.querySelectorAll('.tp-tabpanel').forEach(function (p) {
+        p.hidden = p.getAttribute('data-panel') !== tab;
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+/* ── Filters drawer ── */
+(function () {
+  'use strict';
+
+  var STATUS_FIELDS = [
+    { label: 'Payment statuses', placeholder: 'All payment statuses',
+      options: ['Pending', 'Processing', 'Error', 'Paid'], selected: ['Error'] },
+  ];
+  var EARNING_FIELDS = [
+    { label: 'Projects', placeholder: 'All projects',
+      options: ['0969 Ocean View Road', '2024 plan / List - change', 'App development', 'Content', 'DA1000', 'Test no restrictions'] },
+    { label: 'Time Off', placeholder: 'No time off', disabled: true, options: [] },
+    { label: 'Holidays', placeholder: 'All holidays', options: ['Half Christmas', 'Past'] },
+    { label: 'Additions', placeholder: 'All additions', options: ['123123123', 'ddd', 'mmm'] },
+    { label: 'Deductions', placeholder: 'All deductions', options: ['bbbb', 'wwww'] },
+  ];
+
+  var fields = [];
+
+  function closeAllMenus() {
+    document.querySelectorAll('.tpf-menu.is-open').forEach(function (m) { m.classList.remove('is-open'); });
+    document.querySelectorAll('.tpf-trigger.is-open').forEach(function (t) { t.classList.remove('is-open'); });
+  }
+
+  function makeSelect(cfg) {
+    var selected = {};
+    (cfg.selected || []).forEach(function (v) { selected[v] = true; });
+    var onlySelected = false;
+
+    var field = document.createElement('div');
+    field.className = 'tpf-field';
+
+    var label = document.createElement('span');
+    label.className = 'tpf-label';
+    label.textContent = cfg.label;
+    field.appendChild(label);
+
+    var trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'tpf-trigger';
+    if (cfg.disabled) { trigger.disabled = true; trigger.classList.add('is-disabled'); }
+    var triggerText = document.createElement('span');
+    triggerText.className = 'tpf-trigger-text';
+    var caret = document.createElement('i');
+    caret.className = 'material-symbols-rounded tpf-trigger-caret';
+    caret.textContent = 'expand_more';
+    trigger.appendChild(triggerText);
+    trigger.appendChild(caret);
+    field.appendChild(trigger);
+
+    var menu = document.createElement('div');
+    menu.className = 'tpf-menu';
+
+    var search = document.createElement('div');
+    search.className = 'tpf-menu-search';
+    search.innerHTML = '<span class="material-symbols-rounded">search</span><input type="search" placeholder="Search">';
+    menu.appendChild(search);
+
+    var actions = document.createElement('div');
+    actions.className = 'tpf-menu-actions';
+    var selectAll = document.createElement('button');
+    selectAll.type = 'button'; selectAll.className = 'tpf-menu-action'; selectAll.textContent = 'Select all';
+    var unselectAll = document.createElement('button');
+    unselectAll.type = 'button'; unselectAll.className = 'tpf-menu-action'; unselectAll.textContent = 'Unselect all';
+    actions.appendChild(selectAll); actions.appendChild(unselectAll);
+    menu.appendChild(actions);
+
+    var ul = document.createElement('ul');
+    ul.className = 'tpf-options';
+    (cfg.options || []).forEach(function (opt) {
+      var li = document.createElement('li');
+      li.className = 'tpf-option';
+      li.setAttribute('data-value', opt);
+      li.textContent = opt;
+      ul.appendChild(li);
+    });
+    menu.appendChild(ul);
+
+    var foot = document.createElement('div');
+    foot.className = 'tpf-menu-foot';
+    var sw = document.createElement('button');
+    sw.type = 'button'; sw.className = 'tpf-switch'; sw.setAttribute('role', 'switch'); sw.setAttribute('aria-checked', 'false');
+    var swLabel = document.createElement('span');
+    swLabel.className = 'tpf-switch-label'; swLabel.textContent = 'Show only selected';
+    foot.appendChild(sw); foot.appendChild(swLabel);
+    menu.appendChild(foot);
+
+    field.appendChild(menu);
+
+    function count() { return Object.keys(selected).length; }
+
+    function applyVisibility() {
+      var q = (search.querySelector('input').value || '').toLowerCase();
+      ul.querySelectorAll('.tpf-option').forEach(function (li) {
+        var v = li.getAttribute('data-value');
+        var matchesSearch = v.toLowerCase().indexOf(q) !== -1;
+        var matchesToggle = !onlySelected || selected[v];
+        li.classList.toggle('is-hidden', !(matchesSearch && matchesToggle));
+      });
+    }
+
+    function render() {
+      var n = count();
+      if (n === 0) { triggerText.textContent = cfg.placeholder; trigger.classList.remove('is-active'); }
+      else if (n === 1) { triggerText.textContent = Object.keys(selected)[0]; trigger.classList.add('is-active'); }
+      else { triggerText.textContent = n + ' selected'; trigger.classList.add('is-active'); }
+      ul.querySelectorAll('.tpf-option').forEach(function (li) {
+        li.classList.toggle('is-selected', !!selected[li.getAttribute('data-value')]);
+      });
+      unselectAll.disabled = n === 0;
+      applyVisibility();
+    }
+
+    if (!cfg.disabled) {
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = menu.classList.contains('is-open');
+        closeAllMenus();
+        if (!open) { menu.classList.add('is-open'); trigger.classList.add('is-open'); }
+      });
+      menu.addEventListener('click', function (e) { e.stopPropagation(); });
+      ul.addEventListener('click', function (e) {
+        var li = e.target.closest('.tpf-option');
+        if (!li) return;
+        var v = li.getAttribute('data-value');
+        if (selected[v]) delete selected[v]; else selected[v] = true;
+        render();
+      });
+      selectAll.addEventListener('click', function () { (cfg.options || []).forEach(function (o) { selected[o] = true; }); render(); });
+      unselectAll.addEventListener('click', function () { selected = {}; render(); });
+      search.querySelector('input').addEventListener('input', applyVisibility);
+      sw.addEventListener('click', function () {
+        onlySelected = !onlySelected;
+        sw.classList.toggle('is-on', onlySelected);
+        sw.setAttribute('aria-checked', onlySelected ? 'true' : 'false');
+        applyVisibility();
+      });
+    }
+
+    field._reset = function () { selected = {}; onlySelected = false; sw.classList.remove('is-on'); sw.setAttribute('aria-checked', 'false'); search.querySelector('input').value = ''; render(); };
+    render();
+    return field;
+  }
+
+  var statusContainer = document.getElementById('tpf-status-fields');
+  var earningContainer = document.getElementById('tpf-earning-fields');
+  STATUS_FIELDS.forEach(function (cfg) { var f = makeSelect(cfg); fields.push(f); statusContainer.appendChild(f); });
+  EARNING_FIELDS.forEach(function (cfg) { var f = makeSelect(cfg); fields.push(f); earningContainer.appendChild(f); });
+
+  // Open / close
+  var backdrop = document.getElementById('tpf-backdrop');
+  var drawer = document.getElementById('tpf-drawer');
+  function openDrawer() { backdrop.classList.add('is-open'); drawer.classList.add('is-open'); }
+  function closeDrawer() { backdrop.classList.remove('is-open'); drawer.classList.remove('is-open'); closeAllMenus(); }
+
+  document.querySelector('.tp-filters-btn').addEventListener('click', openDrawer);
+  document.getElementById('tpf-close').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.getElementById('tpf-clear').addEventListener('click', function (e) {
+    e.preventDefault();
+    fields.forEach(function (f) { if (f._reset) f._reset(); });
+  });
+  document.addEventListener('click', closeAllMenus);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+})();
+</script>
+
+<script>
+/* ── Currency breakdown dialog + currency filter ── */
+(function () {
+  'use strict';
+  var FX = { BRL: 0.18, CAD: 0.73, EUR: 1.08, GBP: 1.27, PHP: 0.018, USD: 1 };
+  var COLS = ['BRL', 'CAD', 'EUR', 'GBP', 'PHP', 'USD'];  // currencies in this payment, alphabetical
+  var ROW_DOT = { 'Pending': 'pending', 'Processing (Int)': 'int', 'Processing (Ext)': 'ext', 'Error': 'error', 'Paid': 'paid' };  // matches the summary balance dots
+  // native amount per metric, per currency (org-currency USD derived via FX)
+  var METRIC_CUR = {
+    'Total Worked': { BRL: 8200, CAD: 2176, EUR: 2466, GBP: 1570, PHP: 66200, USD: 2380 },
+    'PTO': { EUR: 200, USD: 150 },
+    'Holidays': { GBP: 100, USD: 100 },
+    'Additions': { USD: 300, PHP: 5000 },
+    'Deductions': { USD: 120, EUR: 50 },
+    'Pending': { BRL: 1000, CAD: 896, GBP: 450 },
+    'Processing (Int)': { EUR: 1466 },
+    'Processing (Ext)': { PHP: 50000 },
+    'Error': { USD: 500 },
+    'Paid': { BRL: 7200, CAD: 1280, EUR: 1150, GBP: 1220, PHP: 21200, USD: 2310 }
+  };
+  var SECTIONS = [
+    { label: 'Earning Breakdown', rows: ['Total Worked', 'PTO', 'Holidays'] },
+    { label: 'Adjustment Breakdown', rows: ['Additions', 'Deductions'] },
+    { label: 'Balance Breakdown', rows: ['Pending', 'Processing (Int)', 'Processing (Ext)', 'Error', 'Paid'] }
+  ];
+
+  function fmt(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function usdOf(cur) { var s = 0; for (var k in cur) s += cur[k] * FX[k]; return s; }
+  function sumCur(rows) { var o = {}; rows.forEach(function (n) { var c = METRIC_CUR[n] || {}; for (var k in c) o[k] = (o[k] || 0) + c[k]; }); return o; }
+  function totalCur() {  // earnings + additions − deductions
+    var o = sumCur(['Total Worked', 'PTO', 'Holidays', 'Additions']);
+    var d = METRIC_CUR['Deductions'] || {};
+    for (var k in d) o[k] = (o[k] || 0) - d[k];
+    return o;
+  }
+
+  /* ── Summary: org currency, or filtered to one currency ── */
+  function metricValueHTML(name, cur) {
+    var m = METRIC_CUR[name] || {};
+    if (cur === 'all') return 'USD ' + fmt(usdOf(m));
+    var native = m[cur] || 0;
+    return 'USD ' + fmt(native * (FX[cur] || 1)) + '<span class="tp-cur-sub">' + cur + ' ' + fmt(native) + '</span>';
+  }
+  function renderSummary(cur) {
+    document.querySelectorAll('.tp-summary .tp-metric').forEach(function (m) {
+      var label = m.querySelector('.tp-metric-label').textContent.trim();
+      if (METRIC_CUR.hasOwnProperty(label)) m.querySelector('.tp-metric-value').innerHTML = metricValueHTML(label, cur);
+    });
+    var totalEl = document.querySelector('.tp-total');
+    var tc = totalCur();
+    if (cur === 'all') {
+      totalEl.innerHTML = 'Total: USD ' + fmt(usdOf(tc));
+    } else {
+      var native = tc[cur] || 0;
+      totalEl.innerHTML = 'Filtered Total: USD ' + fmt(native * (FX[cur] || 1)) +
+        ' <span class="tp-total-sub">(' + cur + ' ' + fmt(native) + ')</span>';
+    }
+  }
+
+  /* ── Currency filter + pagination: summary + member rows ── */
+  var pgState = { page: 1, perPage: 10, cur: 'all' };
+  var groupBy = 'members';  // 'members' (flat, paginated) | 'currency' (grouped by pay currency)
+  function renderTable() {
+    if (groupBy === 'currency') { renderGrouped(); return; }
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#tp-tbody tr.tp-grow'));
+    var matching = rows.filter(function (r) { return pgState.cur === 'all' || r.getAttribute('data-cur') === pgState.cur; });
+    var totalPages = Math.max(1, Math.ceil(matching.length / pgState.perPage));
+    if (pgState.page > totalPages) pgState.page = totalPages;
+    var start = (pgState.page - 1) * pgState.perPage, end = start + pgState.perPage;
+    rows.forEach(function (r) {
+      var idx = matching.indexOf(r);
+      var onPage = idx >= start && idx < end;
+      r.style.display = onPage ? '' : 'none';
+      var gi = r.getAttribute('data-group');
+      document.querySelectorAll('.tp-subrow[data-group="' + gi + '"]').forEach(function (sub) { sub.style.display = onPage ? '' : 'none'; });  // `hidden` (expand) still applies when on-page
+    });
+    var count = document.querySelector('.tp-foot-count');
+    if (count) count.textContent = 'Showing ' + matching.length + (matching.length === 1 ? ' item' : ' items');
+    var foot = document.querySelector('.tp-foot-right');
+    if (foot) {
+      var h = '';
+      for (var p = 1; p <= totalPages; p++) h += '<button class="tp-page-link' + (p === pgState.page ? ' is-active' : '') + '" type="button" data-page="' + p + '">' + p + '</button>';
+      foot.innerHTML = h;
+      foot.querySelectorAll('.tp-page-link').forEach(function (b) {
+        b.addEventListener('click', function () { pgState.page = parseInt(b.getAttribute('data-page'), 10); renderTable(); });
+      });
+    }
+  }
+  function applyCurrency(cur) { pgState.cur = cur; pgState.page = 1; renderSummary(cur); renderTable(); }
+
+  /* ── Group by currency ── */
+  var CUR_ORDER = ['BRL', 'CAD', 'EUR', 'GBP', 'PHP', 'USD'];
+  var CUR_NAME = { BRL: 'Brazilian Real', CAD: 'Canadian Dollar', EUR: 'Euro', GBP: 'British Pound', PHP: 'Philippine Peso', USD: 'US Dollar' };
+  function gbHToSec(s) { if (!s || s.replace(/\s/g, '') === '-') return 0; var p = s.split(':'); return (+p[0] || 0) * 3600 + (+p[1] || 0) * 60 + (+p[2] || 0); }
+  function gbSecToHrs(sec) { if (!sec) return '-'; var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), ss = sec % 60; return h + ':' + (m < 10 ? '0' + m : m) + ':' + (ss < 10 ? '0' + ss : ss); }
+  function gbUsd(s) { return parseFloat(String(s).replace(/[^0-9.]/g, '')) || 0; }
+  function gbFmtUsd(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function gbClearHeaders(tb) { Array.prototype.slice.call(tb.querySelectorAll('.tp-cur-group')).forEach(function (h) { h.remove(); }); }
+  function gbSubs(tb, gi) { return Array.prototype.slice.call(tb.querySelectorAll('.tp-subrow[data-group="' + gi + '"]')); }
+
+  // restore the flat MEMBERS order (used when leaving currency grouping)
+  function ungroup() {
+    var tb = document.getElementById('tp-tbody');
+    gbClearHeaders(tb);
+    var grows = Array.prototype.slice.call(tb.querySelectorAll('tr.tp-grow'));
+    grows.sort(function (a, b) { return (+a.getAttribute('data-group')) - (+b.getAttribute('data-group')); });
+    grows.forEach(function (r) { tb.appendChild(r); gbSubs(tb, r.getAttribute('data-group')).forEach(function (s) { tb.appendChild(s); }); });
+  }
+
+  // group member rows under alphabetical currency headers (BRL, CAD, EUR, GBP, PHP, USD)
+  function renderGrouped() {
+    var tb = document.getElementById('tp-tbody');
+    gbClearHeaders(tb);
+    var rows = Array.prototype.slice.call(tb.querySelectorAll('tr.tp-grow'));
+    var shown = 0;
+    CUR_ORDER.forEach(function (cur) {
+      if (pgState.cur !== 'all' && pgState.cur !== cur) return;  // honour an active currency filter
+      var curRows = rows.filter(function (r) { return r.getAttribute('data-cur') === cur; });
+      if (!curRows.length) return;
+      var secs = 0, usd = 0;
+      curRows.forEach(function (r) {
+        var d = r.querySelector('.tp-dur'); secs += gbHToSec(d ? d.textContent : '');
+        var t = r.querySelector('.tp-td--total .tp-rate > span'); usd += gbUsd(t ? t.textContent : '0');
+      });
+      var header = document.createElement('tr');
+      header.className = 'tp-cur-group';
+      header.innerHTML =
+        '<td class="tp-td tp-cur-group-cell">' + cur + ' &ndash; ' + CUR_NAME[cur] +
+          '<span class="tp-cur-group-count">' + curRows.length + '</span></td>' +
+        '<td class="tp-td tp-cur-group-num">' + gbSecToHrs(secs) + '</td>' +
+        '<td class="tp-td tp-cur-group-num">&ndash;</td>' +
+        '<td class="tp-td tp-cur-group-num">&ndash;</td>' +
+        '<td class="tp-td"></td>' +
+        '<td class="tp-td tp-td--total tp-cur-group-num">USD ' + gbFmtUsd(usd) + '</td>';
+      tb.appendChild(header);
+      curRows.forEach(function (r) {
+        tb.appendChild(r); r.style.display = '';
+        gbSubs(tb, r.getAttribute('data-group')).forEach(function (s) { tb.appendChild(s); s.style.display = ''; });
+        shown++;
+      });
+    });
+    // hide any rows excluded by an active currency filter
+    rows.forEach(function (r) {
+      if (pgState.cur !== 'all' && r.getAttribute('data-cur') !== pgState.cur) {
+        r.style.display = 'none';
+        gbSubs(tb, r.getAttribute('data-group')).forEach(function (s) { s.style.display = 'none'; });
+      }
+    });
+    var count = document.querySelector('.tp-foot-count');
+    if (count) count.textContent = 'Showing ' + shown + (shown === 1 ? ' item' : ' items');
+    var foot = document.querySelector('.tp-foot-right');
+    if (foot) foot.innerHTML = '';  // grouped view shows everyone — no pagination
+  }
+
+  var perSelect = document.querySelector('.tp-per-select');
+  if (perSelect) perSelect.addEventListener('change', function () { pgState.perPage = parseInt(this.value, 10) || 10; pgState.page = 1; renderTable(); });
+
+  /* ── Breakdown matrix dialog ── */
+  var modal = document.createElement('div');
+  modal.className = 'tpb-overlay';
+  document.body.appendChild(modal);
+
+  function cellHTML(name, col) { var c = METRIC_CUR[name] || {}; return c[col] ? fmt(c[col]) : '<span class="tpb-empty">—</span>'; }
+  function buildModal() {
+    var head = '<th class="tpb-th tpb-th--cat"></th>' +
+      COLS.map(function (c) { return '<th class="tpb-th tpb-th--num">' + c + '</th>'; }).join('') +
+      '<th class="tpb-th tpb-th--num tpb-th--usd">Total (USD)</th>';
+    var body = SECTIONS.map(function (sec) {
+      var rows = sec.rows.map(function (name) {
+        var cells = COLS.map(function (c) { return '<td class="tpb-td tpb-td--num">' + cellHTML(name, c) + '</td>'; }).join('');
+        var dot = ROW_DOT[name] ? '<span class="tp-dot tp-dot--' + ROW_DOT[name] + '"></span>' : '';
+        return '<tr><td class="tpb-td tpb-td--cat"><span class="tpb-cat">' + dot + name + '</span></td>' + cells +
+          '<td class="tpb-td tpb-td--num tpb-td--usd">USD ' + fmt(usdOf(METRIC_CUR[name] || {})) + '</td></tr>';
+      }).join('');
+      var sub;
+      if (sec.label === 'Adjustment Breakdown') {  // net = Additions − Deductions
+        sub = {}; var add = METRIC_CUR['Additions'] || {}, ded = METRIC_CUR['Deductions'] || {};
+        for (var ak in add) sub[ak] = (sub[ak] || 0) + add[ak];
+        for (var dk in ded) sub[dk] = (sub[dk] || 0) - ded[dk];
+      } else { sub = sumCur(sec.rows); }
+      var subCells = COLS.map(function (c) { return '<td class="tpb-td tpb-td--num">' + (sub[c] ? fmt(sub[c]) : '<span class="tpb-empty">—</span>') + '</td>'; }).join('');
+      var subLabel = sec.label.replace(' Breakdown', '') + ' total';
+      var subRow = '<tr class="tpb-subtotal"><td class="tpb-td tpb-td--cat">' + subLabel + '</td>' + subCells +
+        '<td class="tpb-td tpb-td--num tpb-td--usd">USD ' + fmt(usdOf(sub)) + '</td></tr>';
+      return '<tr class="tpb-section"><td class="tpb-section-label" colspan="' + (COLS.length + 2) + '">' + sec.label + '</td></tr>' + rows + subRow;
+    }).join('');
+    modal.innerHTML =
+      '<div class="tpb-dialog" role="dialog" aria-modal="true" aria-label="Breakdown by currency">' +
+        '<div class="tpb-head"><h3 class="tpb-title">Breakdown by currency</h3>' +
+          '<button class="tpb-close" id="tpb-close" type="button" aria-label="Close"><span class="material-symbols-rounded">close</span></button></div>' +
+        '<div class="tpb-sub">Amounts shown in each member\'s pay currency; the last column is the organization-currency (USD) equivalent.</div>' +
+        '<div class="tpb-table-wrap"><table class="tpb-table"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>' +
+        '<div class="tpb-foot"><span class="tpb-foot-label">Total (org currency)</span><span class="tpb-foot-value">USD ' + fmt(usdOf(totalCur())) + '</span></div>' +
+        '<div class="tpb-meta">Exchange rates · Jun 16, 2026 · Open Exchange Rates. Converted amounts are estimated and may differ from amounts received.</div>' +
+      '</div>';
+  }
+  function openModal() { if (!modal.querySelector('.tpb-dialog')) buildModal(); modal.classList.add('is-open'); }
+  function closeModal() { modal.classList.remove('is-open'); }
+
+  /* ── Wiring ── */
+  var openLink = document.getElementById('tp-bd-open');
+  if (openLink) openLink.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+  modal.addEventListener('click', function (e) { if (e.target === modal || e.target.closest('#tpb-close')) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  var curSelect = document.getElementById('tpf-currency');
+  if (curSelect) curSelect.addEventListener('change', function () { applyCurrency(this.value); });
+  var clearBtn = document.getElementById('tpf-clear');
+  if (clearBtn) clearBtn.addEventListener('click', function () { if (curSelect) curSelect.value = 'all'; applyCurrency('all'); });
+
+  var gbSelect = document.getElementById('tp-groupby-select');
+  if (gbSelect) gbSelect.addEventListener('change', function () {
+    groupBy = this.value;
+    if (groupBy !== 'currency') ungroup();  // restore flat order before paginating
+    pgState.page = 1;
+    renderTable();
+  });
+
+  renderSummary('all');  // initial (organization currency)
+  renderTable();         // initial pagination (10 per page)
+})();
+</script>
+
+<script>
+  DesignAnnotations.init({
+    page: 'Team payment record',
+    required: [
+      { text: 'Show the currency code, not the symbol', target: '.tp-total', sub: [
+        'Display every monetary value with the ISO currency code (e.g. "USD 20.00"), never the bare symbol ("$20.00")',
+        'Applies to the Total, the Earning / Adjustment / Balance breakdowns, and every amount in the members table (pay rate, total amount, and expanded sub-rows)',
+        'Keeps amounts unambiguous across currencies — consistent with the member pay-rate and payroll screens',
+      ]},
+      { text: 'Pay rate — member\'s own currency only', target: '.tp-td--rate', sub: [
+        'Shows the rate the member is actually paid — e.g. "EUR 18.00/hr", "BRL 40.00/hr", "USD 2,000.00/fixed"',
+        'No USD conversion here: the rate is fixed in the member\'s currency, while the USD equivalent fluctuates daily — showing it would be misleading',
+        'The USD equivalent belongs on the Total amount (what you actually pay out), not on the rate',
+      ]},
+      { text: 'Total amount — organization currency, then member currency', target: '.tp-td--total', sub: [
+        'Large line: the total in the organization currency (USD) — e.g. "USD 680.40" — this is what you actually pay out',
+        'Small line beneath: the total in the member\'s own pay currency — e.g. "EUR 630.00"',
+        'Members already paid in USD show a single line',
+      ]},
+    ],
+    suggestions: [
+      { text: 'Group by currency (idea — to review with Olga)', target: '.tp-groupby', sub: [
+        'Add "Currency" as a Group By option, alongside "Members"',
+        'Groups members by their pay currency — e.g. everyone paid in PHP together, everyone in BRL together',
+        'Currency groups ordered alphabetically by ISO code — BRL, then CAD, EUR, GBP, PHP, USD…',
+        'Not requested — a feature idea to validate with Olga before building',
+      ]},
+    ],
+  });
+</script>
+
+</body>
+</html>

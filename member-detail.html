@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alice Johnson — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="member-detail.css">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+<body>
+<script src="hubstaff-shell.js"></script>
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+
+<div id="shell-content">
+  <div class="md-page">
+
+    <!-- ── Breadcrumb ─────────────────────────────────────────── -->
+    <a href="members.html" class="md-breadcrumb">
+      <span class="material-symbols-rounded">chevron_left</span>
+      Members
+    </a>
+
+    <!-- ── Page header ────────────────────────────────────────── -->
+    <div class="md-header">
+      <h2 class="md-title">Alice Johnson</h2>
+      <div class="md-header__actions">
+        <div class="md-dropdown" id="md-actions-dropdown">
+          <button class="md-btn md-btn--outline" id="md-actions-btn">
+            Actions
+            <span class="material-symbols-rounded">expand_more</span>
+          </button>
+          <div class="md-dropdown__menu md-dropdown__menu--right" id="md-actions-menu">
+            <div class="md-dropdown__item"><span class="material-symbols-rounded">mail</span>Send invite</div>
+            <div class="md-dropdown__item"><span class="material-symbols-rounded">lock_reset</span>Reset password</div>
+            <div class="md-dropdown__divider"></div>
+            <div class="md-dropdown__item md-dropdown__item--danger"><span class="material-symbols-rounded">delete</span>Remove member</div>
+          </div>
+        </div>
+        <button class="md-btn md-btn--primary" id="md-save-btn">Save Changes</button>
+      </div>
+    </div>
+
+    <!-- ── Tabs ───────────────────────────────────────────────── -->
+    <div class="md-tabs">
+      <button class="md-tab" data-tab="info">Info</button>
+      <button class="md-tab" data-tab="employment">Employment</button>
+      <button class="md-tab" data-tab="roles">Roles</button>
+      <button class="md-tab is-active" data-tab="pay-bill">Pay / Bill</button>
+      <button class="md-tab" data-tab="limits">Work Time &amp; Limits</button>
+      <button class="md-tab" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         INFO tab
+    ══════════════════════════════════════════════════════════════ -->
+    <div class="md-tab-content" id="md-tab-info" hidden>
+
+      <div class="md-member-card">
+        <div class="md-avatar"><span class="material-symbols-rounded">person</span></div>
+        <div class="md-member-card__meta">
+          <div class="md-member-card__row"><span class="material-symbols-rounded md-meta-icon">mail</span><span>alice.johnson@company.com</span></div>
+          <div class="md-member-card__row"><span class="material-symbols-rounded md-meta-icon">schedule</span><span>(GMT-05:00) America/New_York</span></div>
+          <div class="md-member-card__row"><span class="md-status-dot md-status-dot--active"></span><span>Last tracked time 2 hours ago</span></div>
+          <div class="md-member-card__joined">Joined<br>Mon, Jan 15, 2024</div>
+        </div>
+      </div>
+
+      <div class="md-form-layout">
+        <div class="md-form-col md-form-col--main">
+
+          <div class="md-section">
+            <div class="md-section__title">Identity</div>
+            <div class="md-field"><label class="md-label">First name</label><input type="text" class="md-input" value="Alice"></div>
+            <div class="md-field"><label class="md-label">Last name</label><input type="text" class="md-input" value="Johnson"></div>
+            <div class="md-field"><label class="md-label">OS username</label><input type="text" class="md-input" placeholder="No OS username"></div>
+            <div class="md-field"><label class="md-label">Employee ID</label><input type="text" class="md-input" placeholder="No employee ID"></div>
+            <div class="md-field">
+              <label class="md-label">Birthday</label>
+              <div class="md-birthday">
+                <div class="md-select-wrap">
+                  <select class="md-select"><option value="">Select a month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+                  <span class="material-symbols-rounded md-select-arrow">expand_more</span>
+                </div>
+                <div class="md-select-wrap">
+                  <select class="md-select"><option value="">Select a day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+                  <span class="material-symbols-rounded md-select-arrow">expand_more</span>
+                </div>
+                <div class="md-select-wrap">
+                  <select class="md-select"><option value="">Select a year</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1985</option><option>1980</option><option>1975</option><option>1970</option></select>
+                  <span class="material-symbols-rounded md-select-arrow">expand_more</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md-section">
+            <div class="md-section__title">Contact</div>
+            <div class="md-field">
+              <div class="md-label-row"><label class="md-label">Work address <span class="material-symbols-rounded md-label-icon">info</span></label><a href="#" class="md-link">Edit work address</a></div>
+              <input type="text" class="md-input md-input--disabled" value="No address" disabled>
+            </div>
+            <div class="md-field">
+              <div class="md-label-row"><label class="md-label">Home address <span class="material-symbols-rounded md-label-icon">info</span></label><a href="#" class="md-link">Mailing address</a></div>
+              <input type="text" class="md-input md-input--disabled" placeholder="Search for an address" disabled>
+            </div>
+            <div class="md-field">
+              <label class="md-label">Country</label>
+              <div class="md-select-wrap">
+                <select class="md-select" id="pb-country-select">
+                  <!-- populated by JS -->
+                </select>
+                <span class="material-symbols-rounded md-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="md-field"><label class="md-label">Work email</label><input type="email" class="md-input" value="alice.johnson@company.com"></div>
+            <div class="md-field"><label class="md-label">Personal email</label><input type="email" class="md-input" placeholder="name@example.com"></div>
+            <div class="md-field">
+              <label class="md-label">Work phone</label>
+              <div class="md-phone"><button class="md-phone__flag" type="button">🇺🇸 <span class="material-symbols-rounded">expand_more</span></button><input type="tel" class="md-input md-input--phone" placeholder="+1 201-555-0123"></div>
+            </div>
+            <div class="md-field">
+              <label class="md-label">Personal phone</label>
+              <div class="md-phone"><button class="md-phone__flag" type="button">🇺🇸 <span class="material-symbols-rounded">expand_more</span></button><input type="tel" class="md-input md-input--phone" placeholder="+1 201-555-0123"></div>
+            </div>
+          </div>
+
+          <div class="md-section">
+            <div class="md-section__title-row">
+              <span class="md-section__title">Custom fields</span>
+              <span class="material-symbols-rounded md-label-icon">info</span>
+              <a href="#" class="md-link md-link--right">Manage custom fields</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="md-form-col md-form-col--side">
+          <div class="md-field">
+            <div class="md-label-row"><label class="md-label">IP address <span class="material-symbols-rounded md-label-icon">info</span></label></div>
+            <input type="text" class="md-input md-input--disabled" value="No IP address" disabled>
+          </div>
+          <div class="md-field">
+            <div class="md-label-row"><label class="md-label">Date <span class="material-symbols-rounded md-label-icon">info</span></label></div>
+            <input type="text" class="md-input md-input--disabled" value="No sign-in date" disabled>
+          </div>
+          <div class="md-people-card">
+            <div class="md-people-card__header">
+              <div class="md-people-card__logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#2AA7FF"/><path d="M8 8h4a2 2 0 0 1 0 4H8V8zm0 6h5a2 2 0 0 1 0 4H8v-4z" fill="#fff"/></svg>
+                <span class="md-people-card__name">Hubstaff People</span>
+              </div>
+              <span class="md-people-card__badge">BETA</span>
+            </div>
+            <p class="md-people-card__desc">Try these new features for free while Hubstaff People is in BETA</p>
+            <ul class="md-people-card__list"><li>View IP addresses</li><li>Create and manage custom fields</li></ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /md-tab-info -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         PAY/BILL tab
+    ══════════════════════════════════════════════════════════════ -->
+    <div class="md-tab-content" id="md-tab-pay-bill">
+
+      <!-- Member card -->
+      <div class="md-member-card">
+        <div class="md-avatar"><span class="material-symbols-rounded">person</span></div>
+        <div class="md-member-card__meta">
+          <div class="md-member-card__row"><span class="material-symbols-rounded md-meta-icon">mail</span><span>alice.johnson@company.com</span></div>
+          <div class="md-member-card__row"><span class="material-symbols-rounded md-meta-icon">schedule</span><span>(GMT-05:00) America/New_York</span></div>
+          <div class="md-member-card__row"><span class="md-status-dot md-status-dot--active"></span><span>Last tracked time 2 hours ago</span></div>
+          <div class="md-member-card__joined">Joined<br>Mon, Jan 15, 2024</div>
+        </div>
+      </div>
+
+      <!-- ── Pay periods — always visible ──────────────────────── -->
+      <div class="pb-section" id="pb-pay-periods">
+        <div class="pb-section__head">
+          <h3 class="pb-section__title">Pay periods</h3>
+          <p class="pb-section__sub">Set how worked hours are grouped into timesheets.</p>
+        </div>
+
+        <div class="pb-row pb-row--period">
+          <div class="pb-field pb-field--flex">
+            <div class="pb-label-group">
+              <label class="pb-label">Frequency</label>
+              <p class="pb-hint">How often timesheets reset.</p>
+            </div>
+            <div class="pb-select-wrap">
+              <select class="pb-select" id="pb-freq-select">
+                <option>Twice per month</option>
+                <option>Weekly</option>
+                <option>Biweekly</option>
+                <option selected>Monthly</option>
+              </select>
+              <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+            </div>
+          </div>
+
+          <div class="pb-field pb-field--flex">
+            <div class="pb-label-group">
+              <label class="pb-label">Period start</label>
+              <p class="pb-hint">The day each timesheet period begins.</p>
+            </div>
+            <div class="pb-select-wrap">
+              <select class="pb-select" id="pb-period-select">
+                <option selected>1st</option>
+                <option>2nd</option>
+                <option>3rd</option>
+                <option>4th</option>
+                <option>5th</option>
+                <option>6th</option>
+                <option>7th</option>
+                <option>8th</option>
+                <option>9th</option>
+                <option>10th</option>
+                <option>11th</option>
+                <option>12th</option>
+                <option>13th</option>
+                <option>14th</option>
+                <option>15th</option>
+                <option>16th</option>
+                <option>17th</option>
+                <option>18th</option>
+                <option>19th</option>
+                <option>20th</option>
+                <option>21st</option>
+                <option>22nd</option>
+                <option>23rd</option>
+                <option>24th</option>
+                <option>25th</option>
+                <option>26th</option>
+                <option>27th</option>
+                <option>28th</option>
+              </select>
+              <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-banner">
+          <span class="material-symbols-rounded pb-banner__icon">info</span>
+          <p id="pb-banner-text" class="pb-banner__text">
+            When saved, timesheets will run <strong>monthly</strong>, starting every <strong>1st</strong>. First period begins <strong id="pb-next-date">calculating…</strong>.
+          </p>
+        </div>
+
+        <div class="pb-row">
+          <div class="pb-field">
+            <label class="pb-label">Past timesheets</label>
+            <button class="pb-btn pb-btn--outline" type="button">Edit timesheets</button>
+          </div>
+          <div class="pb-field">
+            <label class="pb-label">Require timesheet approval</label>
+            <div class="pb-toggle-row">
+              <button class="pb-toggle pb-toggle--on" id="pb-approval-toggle" type="button" role="switch" aria-checked="true"></button>
+              <span class="pb-toggle-label" id="pb-approval-label">Yes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="pb-divider">
+
+      <!-- ── Member Rates ───────────────────────────────────────── -->
+      <div class="pb-section">
+        <div class="pb-section__head">
+          <h3 class="pb-section__title">Member Rates</h3>
+          <p class="pb-section__sub" id="pb-rates-sub">Set how worked hours are grouped into timesheets.</p>
+        </div>
+
+        <!-- TYPE pill toggle — hugs content -->
+        <div class="pb-type-row">
+          <div class="pb-label-row">
+            <label class="pb-label">Type</label>
+            <span class="material-symbols-rounded pb-info-icon">info</span>
+          </div>
+          <div class="pb-pill-toggle" id="pb-type-toggle">
+            <button class="pb-pill is-active" data-panel="pay">Pay rate</button>
+            <button class="pb-pill" data-panel="bill">Bill rate</button>
+            <button class="pb-pill" data-panel="project">Project rate</button>
+          </div>
+        </div>
+
+        <!-- Pay rate fields -->
+        <div id="pb-fields-pay">
+          <div class="pb-fields-row">
+            <div class="pb-field pb-field--narrow">
+              <label class="pb-label">Pay type</label>
+              <div class="pb-select-wrap">
+                <select class="pb-select" id="pb-pay-type-select">
+                  <option>Fixed</option>
+                </select>
+                <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label">Currency</label>
+              <div class="pb-curr-wrap" id="pb-currency-pay" data-value="USD">
+                <button type="button" class="pb-curr-btn" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="pb-curr-btn-text">USD — US Dollar</span>
+                  <span class="material-symbols-rounded pb-curr-chevron">expand_more</span>
+                </button>
+                <div class="pb-curr-panel" hidden>
+                  <div class="pb-curr-search-row">
+                    <span class="material-symbols-rounded pb-curr-search-icon">search</span>
+                    <input type="text" class="pb-curr-search" placeholder="Search currencies…" autocomplete="off">
+                  </div>
+                  <ul class="pb-curr-list" role="listbox" aria-label="Currency"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="pb-field pb-field--wide">
+              <div class="pb-label-row">
+                <label class="pb-label">Fixed amount</label>
+                <span class="material-symbols-rounded pb-info-icon">info</span>
+              </div>
+              <div class="pb-split-field">
+                <input type="text" class="pb-split-input" value="2500.00">
+                <span class="pb-split-suffix" id="pb-pay-suffix">USD/monthly</span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <div class="pb-label-row">
+                <label class="pb-label">Effective date</label>
+                <span class="material-symbols-rounded pb-info-icon">info</span>
+              </div>
+              <div class="pb-date-readonly">Mon, May 1, 2026</div>
+            </div>
+          </div>
+          <button class="pb-add-note" type="button"><span class="material-symbols-rounded">edit_square</span>Add note</button>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+             Bill rate fields — SIMPLIFIED (current state)
+             Shows: bill rate + effective date + add note button.
+             No client selector, no currency, no per-row delete.
+        ══════════════════════════════════════════════════════════ -->
+        <div id="pb-fields-bill" hidden>
+          <div class="pb-fields-row">
+            <div class="pb-field">
+              <label class="pb-label">Bill rate</label>
+              <div class="pb-split-field">
+                <input type="text" class="pb-split-input" value="80.00">
+                <span class="pb-split-suffix">USD/hr</span>
+              </div>
+            </div>
+            <div class="pb-field pb-field--bill-date">
+              <label class="pb-label">Effective date</label>
+              <div class="pb-date-input-wrap">
+                <input type="date" class="pb-date-input" value="2026-04-27">
+              </div>
+            </div>
+          </div>
+          <button class="pb-add-note-simple-btn" type="button">
+            <span class="material-symbols-rounded">edit_square</span>
+            Add note
+          </button>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+             FUTURE — Per-client bill rates (preserved for later)
+             Full experience: client selector, currency field,
+             per-row note/delete, Add bill rate, multi-client history.
+             To restore: move contents of data-future div into
+             #pb-fields-bill and re-enable the JS sections tagged FUTURE.
+        ══════════════════════════════════════════════════════════ -->
+        <div data-future="bill-rates-per-client" style="display:none !important" aria-hidden="true">
+          <div class="pb-bill-section-head">
+            <span class="pb-history__title">Current bill rates</span>
+            <p class="pb-section__sub">Currency comes from the <a href="clients.html" class="cl-inv-note-link">client settings</a>. If no client currency is set, the <a href="index.html" class="cl-inv-note-link">organization currency</a> is used.</p>
+          </div>
+          <div class="pb-fields-row pb-fields-row--bill">
+            <div class="pb-field pb-field--bill-client">
+              <label class="pb-label">Client</label>
+              <a href="clients.html" class="pb-client-chip" data-client-name="Acme Corp">
+                <div class="pb-client-chip__avatar" style="background:#1d4ed8;">A</div>Acme Corp
+              </a>
+            </div>
+            <div class="pb-field pb-field--currency">
+              <label class="pb-label">Currency</label>
+              <div class="pb-select-wrap">
+                <select class="pb-select pb-bill-currency-sel" data-paytype="hr">
+                  <option value="USD" selected>Client default currency · USD — US Dollar</option>
+                  <option value="USD">Organization · USD — US Dollar</option>
+                </select>
+                <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label">Bill rate</label>
+              <div class="pb-split-field">
+                <input type="text" class="pb-split-input" value="80.00">
+                <span class="pb-split-suffix">USD/hr</span>
+              </div>
+            </div>
+            <div class="pb-field pb-field--bill-date">
+              <label class="pb-label">Effective date</label>
+              <div class="pb-date-input-wrap">
+                <input type="date" class="pb-date-input" value="2026-04-27">
+              </div>
+            </div>
+            <div class="pb-field pb-field--action">
+              <label class="pb-label" style="visibility:hidden" aria-hidden="true">​</label>
+              <div class="pb-icon-btn-group">
+                <button class="pb-icon-btn pb-icon-btn--note" type="button" title="Add note"><span class="material-symbols-rounded">edit_square</span></button>
+                <button class="pb-icon-btn pb-icon-btn--remove pb-remove-client-btn" type="button" title="Remove" data-client="Acme Corp" data-since="Apr 27, 2026" data-active="true"><span class="material-symbols-rounded">delete</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="pb-fields-row pb-fields-row--bill">
+            <div class="pb-field pb-field--bill-client">
+              <a href="clients.html" class="pb-client-chip" data-client-name="City of Chicago">
+                <div class="pb-client-chip__avatar" style="background:#4e4302;">C</div>City of Chicago
+              </a>
+            </div>
+            <div class="pb-field pb-field--currency">
+              <div class="pb-select-wrap">
+                <select class="pb-select pb-bill-currency-sel" data-paytype="hr">
+                  <option value="USD" selected>Client default currency · USD — US Dollar</option>
+                  <option value="USD">Organization · USD — US Dollar</option>
+                </select>
+                <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <div class="pb-split-field">
+                <input type="text" class="pb-split-input" value="95.00">
+                <span class="pb-split-suffix">USD/hr</span>
+              </div>
+            </div>
+            <div class="pb-field pb-field--bill-date">
+              <div class="pb-date-input-wrap">
+                <input type="date" class="pb-date-input" value="2026-03-01">
+              </div>
+            </div>
+            <div class="pb-field pb-field--action">
+              <div class="pb-icon-btn-group">
+                <button class="pb-icon-btn pb-icon-btn--note" type="button" title="Add note"><span class="material-symbols-rounded">edit_square</span></button>
+                <button class="pb-icon-btn pb-icon-btn--remove pb-remove-client-btn" type="button" title="Remove" data-client="City of Chicago" data-since="Mar 1, 2026" data-active="true"><span class="material-symbols-rounded">delete</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="pb-fields-row pb-fields-row--bill">
+            <div class="pb-field pb-field--bill-client">
+              <a href="clients.html" class="pb-client-chip" data-client-name="Meridian Health">
+                <div class="pb-client-chip__avatar" style="background:#0f766e;">M</div>Meridian Health
+              </a>
+            </div>
+            <div class="pb-field pb-field--currency">
+              <div class="pb-select-wrap">
+                <select class="pb-select pb-bill-currency-sel" data-paytype="fixed">
+                  <option value="GBP" selected>Client default currency · GBP — British Pound</option>
+                  <option value="USD">Organization · USD — US Dollar</option>
+                </select>
+                <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <div class="pb-split-field">
+                <input type="text" class="pb-split-input" value="2,500.00">
+                <span class="pb-split-suffix">GBP/fixed</span>
+              </div>
+            </div>
+            <div class="pb-field pb-field--bill-date">
+              <div class="pb-date-input-wrap">
+                <input type="date" class="pb-date-input" value="2025-05-01">
+              </div>
+            </div>
+            <div class="pb-field pb-field--action">
+              <div class="pb-icon-btn-group">
+                <button class="pb-icon-btn pb-icon-btn--note" type="button" title="Add note"><span class="material-symbols-rounded">edit_square</span></button>
+                <button class="pb-icon-btn pb-icon-btn--remove pb-remove-client-btn" type="button" title="Remove" data-client="Meridian Health" data-active="false"><span class="material-symbols-rounded">delete</span></button>
+              </div>
+            </div>
+          </div>
+          <button class="pb-bill-row-add-btn" type="button">
+            <span class="material-symbols-rounded">add</span>Add bill rate
+          </button>
+        </div>
+
+        <!-- Project rate tab -->
+        <div id="pb-fields-project" hidden>
+          <p class="pb-project-desc">Project rates take priority: if you track time to a project, the project rate is used. If not, the member rate is applied.</p>
+          <div class="pb-project-info-box">
+            <span class="material-symbols-rounded pb-project-info-icon">info</span>
+            <span class="pb-project-info-text">Members current Pay and Bill rates are USD 5.00 / USD 15.00</span>
+          </div>
+          <div class="pb-project-table-wrap">
+            <table class="pb-project-table">
+              <thead>
+                <tr>
+                  <th class="pb-project-th">Client</th>
+                  <th class="pb-project-th">Project</th>
+                  <th class="pb-project-th">Role</th>
+                  <th class="pb-project-th">Pay rate</th>
+                  <th class="pb-project-th">Bill rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="pb-project-tr">
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#2aa7ff;">A</div>
+                      <a href="clients.html" class="pb-project-link">Acme Corp</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#ff9725;">0</div>
+                      <a href="project-detail.html" class="pb-project-link">0969 Ocean View Road</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-role-wrap">
+                      <select class="pb-project-role-select">
+                        <option selected>User - via teams</option>
+                        <option>User</option>
+                        <option>Manager</option>
+                      </select>
+                      <span class="material-symbols-rounded pb-project-role-arrow">expand_more</span>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <span class="pb-project-rate">USD 10.00/hr</span>
+                  </td>
+                  <td class="pb-project-td pb-project-td--rate">
+                    <span class="pb-project-rate">USD 20.00/hr</span>
+                    <button class="pb-project-edit-btn" type="button" title="Edit rate"><span class="material-symbols-rounded">edit</span></button>
+                  </td>
+                </tr>
+                <tr class="pb-project-tr">
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#8b1dff;">C</div>
+                      <a href="clients.html" class="pb-project-link">City of Chicago</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#f43f5e;">A</div>
+                      <a href="project-detail.html" class="pb-project-link">App development</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-role-wrap">
+                      <select class="pb-project-role-select">
+                        <option selected>User - via teams</option>
+                        <option>User</option>
+                        <option>Manager</option>
+                      </select>
+                      <span class="material-symbols-rounded pb-project-role-arrow">expand_more</span>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <span class="pb-project-rate">USD 10.00/hr</span>
+                  </td>
+                  <td class="pb-project-td pb-project-td--rate">
+                    <span class="pb-project-rate">USD 20.00/hr</span>
+                    <button class="pb-project-edit-btn" type="button" title="Edit rate"><span class="material-symbols-rounded">edit</span></button>
+                  </td>
+                </tr>
+                <tr class="pb-project-tr">
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#8b1dff;">C</div>
+                      <a href="clients.html" class="pb-project-link">City of Chicago</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#0891b2;">5</div>
+                      <a href="project-detail.html" class="pb-project-link">55 Twin Lane</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-role-wrap">
+                      <select class="pb-project-role-select">
+                        <option selected>User - via teams</option>
+                        <option>User</option>
+                        <option>Manager</option>
+                      </select>
+                      <span class="material-symbols-rounded pb-project-role-arrow">expand_more</span>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <span class="pb-project-rate">USD 12.00/hr</span>
+                  </td>
+                  <td class="pb-project-td pb-project-td--rate">
+                    <span class="pb-project-rate">USD 25.00/hr</span>
+                    <button class="pb-project-edit-btn" type="button" title="Edit rate"><span class="material-symbols-rounded">edit</span></button>
+                  </td>
+                </tr>
+                <tr class="pb-project-tr">
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#2aa7ff;">A</div>
+                      <a href="clients.html" class="pb-project-link">Acme Corp</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-entity">
+                      <div class="pb-project-avatar" style="background:#15803d;">B</div>
+                      <a href="project-detail.html" class="pb-project-link">Bill's Windsurf Shop</a>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <div class="pb-project-role-wrap">
+                      <select class="pb-project-role-select">
+                        <option selected>User - via teams</option>
+                        <option>User</option>
+                        <option>Manager</option>
+                      </select>
+                      <span class="material-symbols-rounded pb-project-role-arrow">expand_more</span>
+                    </div>
+                  </td>
+                  <td class="pb-project-td">
+                    <span class="pb-project-rate">USD 10.00/hr</span>
+                  </td>
+                  <td class="pb-project-td pb-project-td--rate">
+                    <span class="pb-project-rate">USD 20.00/hr</span>
+                    <button class="pb-project-edit-btn" type="button" title="Edit rate"><span class="material-symbols-rounded">edit</span></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pay rate history -->
+      <div id="pb-history-pay" class="pb-history">
+        <div class="pb-history__header">
+          <span class="pb-history__title">Pay rate history</span>
+          <div class="pb-people-badge"><div class="pb-people-badge__logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#2AA7FF"/><path d="M8 8h4a2 2 0 0 1 0 4H8V8zm0 6h5a2 2 0 0 1 0 4H8v-4z" fill="#fff"/></svg><span>Hubstaff People</span></div><span class="pb-people-badge__beta">BETA</span></div>
+        </div>
+        <table class="pb-table">
+          <thead><tr>
+            <th style="width:70px">Status</th><th style="width:130px">Pay period</th><th style="width:70px">Pay type</th>
+            <th style="width:100px">Pay rate</th><th style="width:130px">Start date</th><th style="width:130px">End date</th><th>Note</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>Current</td><td>Monthly</td><td>Fixed</td><td>USD 2,500.00</td><td>Tue, Apr 28, 2026</td><td>Present</td><td class="pb-td--truncate">Rate updated due to promotion; approved by Finance and HR.</td></tr>
+            <tr class="pb-row--past"><td>Past</td><td>Monthly</td><td>Fixed</td><td>USD 2,000.00</td><td>Mon, Apr 25, 2024</td><td>Mon, Apr 27, 2026</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bill rate history -->
+      <div id="pb-history-bill" class="pb-history" hidden>
+        <div class="pb-history__header">
+          <div class="pb-history__title-group">
+            <span class="pb-history__title">Bill rate history</span>
+            <div class="pb-version-links" hidden>
+              <a href="#" class="pb-version-link is-active" data-version="1">v1</a>
+              <a href="#" class="pb-version-link" data-version="1b">v1b</a>
+              <a href="#" class="pb-version-link" data-version="2">v2</a>
+              <a href="#" class="pb-version-link" data-version="3">v3</a>
+            </div>
+          </div>
+          <div id="pb-bill-history-badge" class="pb-people-badge"><div class="pb-people-badge__logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#2AA7FF"/><path d="M8 8h4a2 2 0 0 1 0 4H8V8zm0 6h5a2 2 0 0 1 0 4H8v-4z" fill="#fff"/></svg><span>Hubstaff People</span></div><span class="pb-people-badge__beta">BETA</span></div>
+        </div>
+
+        <!-- ── V1: Simplified — no filter, no sort, no client column ─ -->
+        <div id="pb-bill-v1" class="pb-version-panel">
+          <table class="pb-table" id="pb-bill-v1-table">
+            <thead><tr>
+              <th style="width:100px">Status</th>
+              <th style="width:110px">Bill rate</th>
+              <th style="width:80px">Pay type</th>
+              <th style="width:140px">Start date</th>
+              <th style="width:140px">End date</th>
+              <th>Note</th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 80.00/hr</td><td>Hourly</td><td>Mon, Apr 27, 2026</td><td>Present</td><td class="pb-td--truncate">Rate updated due to promotion; approved by Finance and HR.</td></tr>
+              <tr class="pb-v1-past"><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 75.00/hr</td><td>Hourly</td><td>Mon, Jan 6, 2026</td><td>Sun, Apr 26, 2026</td><td class="pb-td--truncate">Annual rate review — 10% increase approved by Finance.</td></tr>
+              <tr class="pb-v1-past"><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 70.00/hr</td><td>Hourly</td><td>Mon, Feb 3, 2025</td><td>Sun, Jan 5, 2026</td><td class="pb-td--truncate">Rate adjusted following scope expansion on Q1 deliverables.</td></tr>
+              <tr class="pb-v1-past"><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 65.00/hr</td><td>Hourly</td><td>Mon, Aug 12, 2024</td><td>Sun, Feb 2, 2025</td><td class="pb-td--truncate">Starting rate on onboarding; set by account manager.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── FUTURE — V1 with filter + sortable headers + client column ─
+             Preserved below. To restore: replace the simplified v1 div
+             above with the contents of data-future="bill-v1-full".
+        ─────────────────────────────────────────────────────────────── -->
+        <div data-future="bill-v1-full" style="display:none !important" aria-hidden="true">
+          <div class="pb-bill-filter-row">
+            <div class="pb-select-wrap pb-bill-filter-wrap">
+              <select class="pb-select" id="pb-bill-client-filter">
+                <option value="">All clients</option>
+                <option value="Acme Corp">Acme Corp</option>
+                <option value="City of Chicago">City of Chicago</option>
+                <option value="Meridian Health">Meridian Health</option>
+              </select>
+              <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+            </div>
+          </div>
+          <table class="pb-table">
+            <thead><tr>
+              <th class="pb-th-sort" data-col="client" style="width:160px">Client <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="status" style="width:100px">Status <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="billrate" style="width:110px">Bill rate <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="paytype" style="width:80px">Pay type <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="date" style="width:150px">Start date <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="enddate" style="width:150px">End date <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th>Note</th>
+            </tr></thead>
+            <tbody>
+              <tr data-client="Acme Corp" data-sort-status="0" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="80" data-sort-paytype="hourly" data-sort-date="2026-04-27" data-sort-enddate="9999-12-31"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 80.00/hr</td><td>Hourly</td><td>Mon, Apr 27, 2026</td><td>Present</td><td class="pb-td--truncate">Rate updated due to promotion; approved by Finance and HR.</td></tr>
+              <tr data-client="City of Chicago" data-sort-status="0" data-sort-clientorder="1" data-sort-client="city of chicago" data-sort-billrate="95" data-sort-paytype="hourly" data-sort-date="2026-03-01" data-sort-enddate="9999-12-31"><td>City of Chicago</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 95.00/hr</td><td>Hourly</td><td>Mon, Mar 1, 2026</td><td>Present</td><td class="pb-td--truncate">New engagement with city; rate approved by account director.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="75" data-sort-paytype="hourly" data-sort-date="2026-01-06" data-sort-enddate="2026-04-26"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 75.00/hr</td><td>Hourly</td><td>Mon, Jan 6, 2026</td><td>Sun, Apr 26, 2026</td><td class="pb-td--truncate">Annual rate review — 10% increase approved by Finance.</td></tr>
+              <tr class="pb-v1-past" data-client="City of Chicago" data-sort-status="1" data-sort-clientorder="1" data-sort-client="city of chicago" data-sort-billrate="85" data-sort-paytype="hourly" data-sort-date="2025-10-01" data-sort-enddate="2026-02-28"><td>City of Chicago</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 85.00/hr</td><td>Hourly</td><td>Wed, Oct 1, 2025</td><td>Sat, Feb 28, 2026</td><td class="pb-td--truncate">Initial rate for City of Chicago engagement.</td></tr>
+              <tr data-client="Meridian Health" data-sort-status="0" data-sort-clientorder="2" data-sort-client="meridian health" data-sort-billrate="2500" data-sort-paytype="fixed" data-sort-date="2025-09-15" data-sort-enddate="9999-12-31"><td>Meridian Health</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>GBP 2,500.00</td><td>Fixed</td><td>Mon, Sep 15, 2025</td><td>Present</td><td class="pb-td--truncate">Project-based engagement; fixed rate per contract terms.</td></tr>
+              <tr class="pb-v1-past" data-client="Meridian Health" data-sort-status="1" data-sort-clientorder="2" data-sort-client="meridian health" data-sort-billrate="2000" data-sort-paytype="fixed" data-sort-date="2025-06-02" data-sort-enddate="2025-09-14"><td>Meridian Health</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>GBP 2,000.00</td><td>Fixed</td><td>Mon, Jun 2, 2025</td><td>Sun, Sep 14, 2025</td><td class="pb-td--truncate">Initial rate for Meridian Health contract.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="70" data-sort-paytype="hourly" data-sort-date="2025-02-03" data-sort-enddate="2026-01-05"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 70.00/hr</td><td>Hourly</td><td>Mon, Feb 3, 2025</td><td>Sun, Jan 5, 2026</td><td class="pb-td--truncate">Rate adjusted following scope expansion on Q1 deliverables.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="65" data-sort-paytype="hourly" data-sort-date="2024-08-12" data-sort-enddate="2025-02-02"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 65.00/hr</td><td>Hourly</td><td>Mon, Aug 12, 2024</td><td>Sun, Feb 2, 2025</td><td class="pb-td--truncate">Starting rate on onboarding; set by account manager.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── V1b: Same table + Add bill rate dialog ──────────── -->
+        <div id="pb-bill-v1b" class="pb-version-panel" hidden>
+          <div class="pb-bill-filter-row">
+            <div class="pb-select-wrap pb-bill-filter-wrap">
+              <select class="pb-select" id="pb-bill-client-filter-v1b">
+                <option value="">All clients</option>
+                <option value="Acme Corp">Acme Corp</option>
+                <option value="City of Chicago">City of Chicago</option>
+                <option value="Meridian Health">Meridian Health</option>
+              </select>
+              <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+            </div>
+            <button class="pb-add-rate-btn" id="pb-add-rate-btn">
+              <span class="material-symbols-rounded">add</span>Add bill rate
+            </button>
+          </div>
+          <table class="pb-table" id="pb-bill-v1b-table">
+            <thead><tr>
+              <th class="pb-th-sort" data-col="client" style="width:160px">Client <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="status" style="width:100px">Status <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="billrate" style="width:110px">Bill rate <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="paytype" style="width:80px">Pay type <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="date" style="width:150px">Start date <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th class="pb-th-sort" data-col="enddate" style="width:150px">End date <span class="material-symbols-rounded pb-sort-icon">unfold_more</span></th>
+              <th>Note</th>
+            </tr></thead>
+            <tbody>
+              <tr data-client="Acme Corp" data-sort-status="0" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="80" data-sort-paytype="hourly" data-sort-date="2026-04-27" data-sort-enddate="9999-12-31"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 80.00/hr</td><td>Hourly</td><td>Mon, Apr 27, 2026</td><td>Present</td><td class="pb-td--truncate">Rate updated due to promotion; approved by Finance and HR.</td></tr>
+              <tr data-client="City of Chicago" data-sort-status="0" data-sort-clientorder="1" data-sort-client="city of chicago" data-sort-billrate="95" data-sort-paytype="hourly" data-sort-date="2026-03-01" data-sort-enddate="9999-12-31"><td>City of Chicago</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 95.00/hr</td><td>Hourly</td><td>Mon, Mar 1, 2026</td><td>Present</td><td class="pb-td--truncate">New engagement with city; rate approved by account director.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="75" data-sort-paytype="hourly" data-sort-date="2026-01-06" data-sort-enddate="2026-04-26"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 75.00/hr</td><td>Hourly</td><td>Mon, Jan 6, 2026</td><td>Sun, Apr 26, 2026</td><td class="pb-td--truncate">Annual rate review — 10% increase approved by Finance.</td></tr>
+              <tr class="pb-v1-past" data-client="City of Chicago" data-sort-status="1" data-sort-clientorder="1" data-sort-client="city of chicago" data-sort-billrate="85" data-sort-paytype="hourly" data-sort-date="2025-10-01" data-sort-enddate="2026-02-28"><td>City of Chicago</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 85.00/hr</td><td>Hourly</td><td>Wed, Oct 1, 2025</td><td>Sat, Feb 28, 2026</td><td class="pb-td--truncate">Initial rate for City of Chicago engagement.</td></tr>
+              <tr data-client="Meridian Health" data-sort-status="0" data-sort-clientorder="2" data-sort-client="meridian health" data-sort-billrate="2500" data-sort-paytype="fixed" data-sort-date="2025-09-15" data-sort-enddate="9999-12-31"><td>Meridian Health</td><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>GBP 2,500.00</td><td>Fixed</td><td>Mon, Sep 15, 2025</td><td>Present</td><td class="pb-td--truncate">Project-based engagement; fixed rate per contract terms.</td></tr>
+              <tr class="pb-v1-past" data-client="Meridian Health" data-sort-status="1" data-sort-clientorder="2" data-sort-client="meridian health" data-sort-billrate="2000" data-sort-paytype="fixed" data-sort-date="2025-06-02" data-sort-enddate="2025-09-14"><td>Meridian Health</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>GBP 2,000.00</td><td>Fixed</td><td>Mon, Jun 2, 2025</td><td>Sun, Sep 14, 2025</td><td class="pb-td--truncate">Initial rate for Meridian Health contract.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="70" data-sort-paytype="hourly" data-sort-date="2025-02-03" data-sort-enddate="2026-01-05"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 70.00/hr</td><td>Hourly</td><td>Mon, Feb 3, 2025</td><td>Sun, Jan 5, 2026</td><td class="pb-td--truncate">Rate adjusted following scope expansion on Q1 deliverables.</td></tr>
+              <tr class="pb-v1-past" data-client="Acme Corp" data-sort-status="1" data-sort-clientorder="0" data-sort-client="acme corp" data-sort-billrate="65" data-sort-paytype="hourly" data-sort-date="2024-08-12" data-sort-enddate="2025-02-02"><td>Acme Corp</td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 65.00/hr</td><td>Hourly</td><td>Mon, Aug 12, 2024</td><td>Sun, Feb 2, 2025</td><td class="pb-td--truncate">Starting rate on onboarding; set by account manager.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── V2: Accordion grouped by client ──────────────────── -->
+        <div id="pb-bill-v2" class="pb-version-panel" hidden>
+          <table class="pb-table pb-accordion-table">
+            <thead><tr>
+              <th style="width:190px">Client</th><th style="width:90px">Status</th><th style="width:95px">Bill rate</th><th style="width:70px">Pay type</th><th style="width:120px">Start date</th><th style="width:120px">End date</th><th>Note</th>
+            </tr></thead>
+            <tbody>
+              <tr class="pb-accordion-header" data-client="acme">
+                <td>
+                  <strong>Acme Corp</strong>
+                  <br><a href="#" class="pb-view-history-link" data-client="acme">View history <span class="material-symbols-rounded pb-link-chevron">chevron_right</span></a>
+                </td>
+                <td><span class="pb-pill-status pb-pill-status--current">Current</span></td>
+                <td>USD 80.00/hr</td><td>Hourly</td><td>Mon, Apr 27, 2026</td><td>Present</td>
+                <td class="pb-td--truncate">Rate updated due to promotion; approved by Finance and HR.</td>
+              </tr>
+              <tr class="pb-accordion-sub-row" data-parent="acme" hidden><td></td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 75.00/hr</td><td>Hourly</td><td>Mon, Jan 6, 2026</td><td>Sun, Apr 26, 2026</td><td class="pb-td--truncate">Annual rate review — 10% increase approved by Finance.</td></tr>
+              <tr class="pb-accordion-sub-row" data-parent="acme" hidden><td></td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 70.00/hr</td><td>Hourly</td><td>Mon, Feb 3, 2025</td><td>Sun, Jan 5, 2026</td><td class="pb-td--truncate">Rate adjusted following scope expansion on Q1 deliverables.</td></tr>
+              <tr class="pb-accordion-sub-row" data-parent="acme" hidden><td></td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 65.00/hr</td><td>Hourly</td><td>Mon, Aug 12, 2024</td><td>Sun, Feb 2, 2025</td><td class="pb-td--truncate">Starting rate on onboarding; set by account manager.</td></tr>
+
+              <tr class="pb-accordion-header" data-client="chicago">
+                <td>
+                  <strong>City of Chicago</strong>
+                  <br><a href="#" class="pb-view-history-link" data-client="chicago">View history <span class="material-symbols-rounded pb-link-chevron">chevron_right</span></a>
+                </td>
+                <td><span class="pb-pill-status pb-pill-status--current">Current</span></td>
+                <td>USD 95.00/hr</td><td>Hourly</td><td>Mon, Mar 1, 2026</td><td>Present</td>
+                <td class="pb-td--truncate">New engagement with city; rate approved by account director.</td>
+              </tr>
+              <tr class="pb-accordion-sub-row" data-parent="chicago" hidden><td></td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 85.00/hr</td><td>Hourly</td><td>Wed, Oct 1, 2025</td><td>Sat, Feb 28, 2026</td><td class="pb-td--truncate">Initial rate for City of Chicago engagement.</td></tr>
+
+              <tr class="pb-accordion-header" data-client="meridian">
+                <td>
+                  <strong>Meridian Health</strong>
+                  <br><a href="#" class="pb-view-history-link" data-client="meridian">View history <span class="material-symbols-rounded pb-link-chevron">chevron_right</span></a>
+                </td>
+                <td><span class="pb-pill-status pb-pill-status--current">Current</span></td>
+                <td>GBP 2,500.00</td><td>Fixed</td><td>Mon, Sep 15, 2025</td><td>Present</td>
+                <td class="pb-td--truncate">Project-based engagement; fixed rate per contract terms.</td>
+              </tr>
+              <tr class="pb-accordion-sub-row" data-parent="meridian" hidden><td></td><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>GBP 2,000.00</td><td>Fixed</td><td>Mon, Jun 2, 2025</td><td>Sun, Sep 14, 2025</td><td class="pb-td--truncate">Initial rate for Meridian Health contract.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── V3: Client cards + dialog ────────────────────────── -->
+        <div id="pb-bill-v3" class="pb-version-panel" hidden>
+          <div class="pb-client-cards">
+            <div class="pb-client-card">
+              <div class="pb-client-card__header">
+                <span class="pb-client-card__name">Acme Corp</span>
+                <span class="pb-pill-status pb-pill-status--current">Current</span>
+              </div>
+              <div class="pb-client-card__rate">USD 80.00<span class="pb-client-card__unit">/hr</span></div>
+              <div class="pb-client-card__meta">USD · Hourly · Since Apr 27, 2026</div>
+              <button class="pb-view-history-btn" data-client="acme">View history</button>
+            </div>
+            <div class="pb-client-card">
+              <div class="pb-client-card__header">
+                <span class="pb-client-card__name">City of Chicago</span>
+                <span class="pb-pill-status pb-pill-status--current">Current</span>
+              </div>
+              <div class="pb-client-card__rate">USD 95.00<span class="pb-client-card__unit">/hr</span></div>
+              <div class="pb-client-card__meta">USD · Hourly · Since Mar 1, 2026</div>
+              <button class="pb-view-history-btn" data-client="chicago">View history</button>
+            </div>
+            <div class="pb-client-card">
+              <div class="pb-client-card__header">
+                <span class="pb-client-card__name">Meridian Health</span>
+                <span class="pb-pill-status pb-pill-status--current">Current</span>
+              </div>
+              <div class="pb-client-card__rate">GBP 2,500.00</div>
+              <div class="pb-client-card__meta">GBP · Fixed · Last: Sep 15, 2025</div>
+              <button class="pb-view-history-btn" data-client="meridian">View history</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remove bill rate confirmation dialog — Figma matched -->
+      <div class="pb-history-dialog" id="pb-remove-client-dialog">
+        <div class="pb-remove-dialog__panel">
+          <div class="pb-remove-dialog__header">
+            <span class="pb-remove-dialog__title">Remove bill rate</span>
+            <button class="pb-remove-dialog__x pb-history-dialog__close" aria-label="Close">
+              <span class="material-symbols-rounded">close</span>
+            </button>
+          </div>
+          <div class="pb-remove-dialog__body">
+            <div class="pb-remove-dialog__icon">
+              <span class="material-symbols-rounded">warning</span>
+            </div>
+            <p id="pb-remove-client-msg"></p>
+          </div>
+          <div class="pb-remove-dialog__footer">
+            <button class="pb-remove-dialog__cancel pb-history-dialog__close">Cancel</button>
+            <button class="pb-remove-dialog__confirm pb-remove-client-confirm">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add / Edit note dialog -->
+      <div class="pb-history-dialog" id="pb-add-note-dialog">
+        <div class="pb-remove-dialog__panel">
+          <div class="pb-remove-dialog__header">
+            <span class="pb-remove-dialog__title" id="pb-add-note-dialog-title">Add note</span>
+            <button class="pb-remove-dialog__x pb-history-dialog__close" aria-label="Close">
+              <span class="material-symbols-rounded">close</span>
+            </button>
+          </div>
+
+          <!-- Phase 1: add / edit textarea -->
+          <div id="pb-note-form-phase">
+            <div class="pb-history-dialog__body pb-history-dialog__body--form" style="padding-bottom:0">
+              <div class="pb-field">
+                <label class="pb-label">Note</label>
+                <textarea class="pb-add-rate-note" id="pb-note-textarea" rows="4" placeholder="Add a note about this bill rate…"></textarea>
+              </div>
+            </div>
+            <div class="pb-add-rate-actions" style="padding:20px 24px;margin:0">
+              <button class="pb-note-remove-link" id="pb-note-remove-trigger" hidden>Remove note</button>
+              <button class="pb-remove-dialog__cancel pb-history-dialog__close">Cancel</button>
+              <button class="md-btn md-btn--primary pb-note-save-btn">Save note</button>
+            </div>
+          </div>
+
+          <!-- Phase 2: confirm remove -->
+          <div id="pb-note-confirm-phase" hidden>
+            <div class="pb-history-dialog__body pb-history-dialog__body--form" style="padding-bottom:0">
+              <div class="pb-note-confirm-content">
+                <div class="pb-remove-dialog__icon"><span class="material-symbols-rounded">delete_forever</span></div>
+                <p class="pb-note-confirm-msg">Remove the note from this bill rate? This can't be undone.</p>
+              </div>
+            </div>
+            <div class="pb-add-rate-actions" style="padding:20px 24px;margin:0">
+              <button class="pb-note-keep-btn" id="pb-note-keep-btn">Keep note</button>
+              <button class="pb-remove-dialog__confirm" id="pb-note-confirm-remove-btn">Remove note</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Add bill rate dialog (V1b) -->
+      <div class="pb-history-dialog" id="pb-add-rate-dialog">
+        <div class="pb-history-dialog__panel">
+          <div class="pb-history-dialog__header">
+            <span class="pb-history-dialog__title">Add bill rate</span>
+            <button class="pb-history-dialog__close pb-add-rate-dialog-close" aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="pb-history-dialog__body pb-history-dialog__body--form">
+            <div class="pb-field">
+              <label class="pb-label">Client <abbr title="required" style="color:#dc2626;text-decoration:none">*</abbr></label>
+              <div class="pb-select-wrap">
+                <select class="pb-select" id="pb-add-rate-client">
+                  <option value="">Select a client</option>
+                  <option value="acme">Acme Corp</option>
+                  <option value="chicago">City of Chicago</option>
+                  <option value="meridian">Meridian Health</option>
+                </select>
+                <span class="material-symbols-rounded pb-select-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pb-add-rate-form-row">
+              <div class="pb-field">
+                <label class="pb-label">Bill rate <abbr title="required" style="color:#dc2626;text-decoration:none">*</abbr></label>
+                <div class="pb-split-field">
+                  <input type="text" class="pb-split-input" id="pb-add-rate-amount" placeholder="0.00">
+                  <span class="pb-split-suffix" id="pb-add-rate-suffix">USD/hr</span>
+                </div>
+              </div>
+              <div class="pb-field">
+                <label class="pb-label">Effective date <abbr title="required" style="color:#dc2626;text-decoration:none">*</abbr></label>
+                <div class="pb-date-input-wrap">
+                  <input type="date" class="pb-date-input" id="pb-add-rate-date">
+                </div>
+              </div>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label">Note</label>
+              <textarea class="pb-add-rate-note" rows="3" placeholder="Add a note about this rate change…"></textarea>
+            </div>
+            <div class="pb-add-rate-actions">
+              <button class="md-btn pb-add-rate-dialog-close">Cancel</button>
+              <button class="md-btn md-btn--primary pb-add-rate-save">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialogs (V2 view history + V3 cards) -->
+      <div class="pb-history-dialog" id="pb-history-dialog-acme">
+        <div class="pb-history-dialog__panel">
+          <div class="pb-history-dialog__header">
+            <span class="pb-history-dialog__title">Bill rate history — Acme Corp</span>
+            <button class="pb-history-dialog__close" aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="pb-history-dialog__body">
+            <table class="pb-table">
+              <thead><tr><th style="width:90px">Status</th><th style="width:95px">Bill rate</th><th style="width:70px">Pay type</th><th style="width:120px">Start date</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 80.00/hr</td><td>Hourly</td><td>Mon, Apr 27, 2026</td><td>Rate updated due to promotion; approved by Finance and HR.</td></tr>
+                <tr><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 75.00/hr</td><td>Hourly</td><td>Mon, Jan 6, 2026</td><td>Annual rate review — 10% increase approved by Finance.</td></tr>
+                <tr><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 70.00/hr</td><td>Hourly</td><td>Mon, Feb 3, 2025</td><td>Rate adjusted following scope expansion on Q1 deliverables.</td></tr>
+                <tr><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 65.00/hr</td><td>Hourly</td><td>Mon, Aug 12, 2024</td><td>Starting rate on onboarding; set by account manager.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="pb-history-dialog" id="pb-history-dialog-chicago">
+        <div class="pb-history-dialog__panel">
+          <div class="pb-history-dialog__header">
+            <span class="pb-history-dialog__title">Bill rate history — City of Chicago</span>
+            <button class="pb-history-dialog__close" aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="pb-history-dialog__body">
+            <table class="pb-table">
+              <thead><tr><th style="width:90px">Status</th><th style="width:95px">Bill rate</th><th style="width:70px">Pay type</th><th style="width:120px">Start date</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>USD 95.00/hr</td><td>Hourly</td><td>Mon, Mar 1, 2026</td><td>New engagement with city; rate approved by account director.</td></tr>
+                <tr><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>USD 85.00/hr</td><td>Hourly</td><td>Wed, Oct 1, 2025</td><td>Initial rate for City of Chicago engagement.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="pb-history-dialog" id="pb-history-dialog-meridian">
+        <div class="pb-history-dialog__panel">
+          <div class="pb-history-dialog__header">
+            <span class="pb-history-dialog__title">Bill rate history — Meridian Health</span>
+            <button class="pb-history-dialog__close" aria-label="Close"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="pb-history-dialog__body">
+            <table class="pb-table">
+              <thead><tr><th style="width:90px">Status</th><th style="width:95px">Bill rate</th><th style="width:70px">Pay type</th><th style="width:120px">Start date</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pb-pill-status pb-pill-status--current">Current</span></td><td>GBP 2,500.00</td><td>Fixed</td><td>Mon, Sep 15, 2025</td><td>Project-based engagement; fixed rate per contract terms.</td></tr>
+                <tr><td><span class="pb-pill-status pb-pill-status--past">Past</span></td><td>GBP 2,000.00</td><td>Fixed</td><td>Mon, Jun 2, 2025</td><td>Initial rate for Meridian Health contract.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /md-tab-pay-bill -->
+
+  </div>
+</div>
+
+<script>
+  HubstaffShell.init({ activeItem: 'people', expanded: true, activeSubHref: 'members.html' });
+
+  // ── Tab switching ─────────────────────────────────────────────
+  const TAB_MAP = { 'info': 'md-tab-info', 'pay-bill': 'md-tab-pay-bill' };
+
+  document.querySelectorAll('.md-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.md-tab').forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      Object.values(TAB_MAP).forEach(id => { const el = document.getElementById(id); if (el) el.hidden = true; });
+      const el = document.getElementById(TAB_MAP[tab.dataset.tab]);
+      if (el) el.hidden = false;
+    });
+  });
+
+  // ── Actions dropdown ──────────────────────────────────────────
+  const actionsBtn  = document.getElementById('md-actions-btn');
+  const actionsMenu = document.getElementById('md-actions-menu');
+  actionsBtn.addEventListener('click', e => { e.stopPropagation(); actionsMenu.classList.toggle('is-open'); actionsBtn.classList.toggle('is-open'); });
+  document.addEventListener('click', () => { actionsMenu.classList.remove('is-open'); actionsBtn.classList.remove('is-open'); });
+
+  // ── Helpers ───────────────────────────────────────────────────
+  var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DAYS_SHORT   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  function fmtDate(d) {
+    return DAYS_SHORT[d.getDay()] + ', ' + MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+
+  function ordinalToNum(s) { return parseInt(s.replace(/[^0-9]/g, ''), 10) || 0; }
+
+  function calcNextStart(chips, freq) {
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    var dayNums = chips.map(ordinalToNum).filter(function(n){ return n > 0; }).sort(function(a,b){ return a-b; });
+
+    if (freq === 'Twice per month' || freq === 'Monthly') {
+      if (!dayNums.length) return null;
+      for (var pass = 0; pass < 3; pass++) {
+        for (var i = 0; i < dayNums.length; i++) {
+          var d = dayNums[i];
+          var yr = today.getFullYear(), mo = today.getMonth() + pass;
+          var yr2 = yr + Math.floor(mo / 12); mo = mo % 12;
+          var candidate = new Date(yr2, mo, d);
+          if (candidate > today) return fmtDate(candidate);
+        }
+      }
+      return null;
+    }
+    if (freq === 'Weekly') {
+      var n = new Date(today); n.setDate(today.getDate() + 7); return fmtDate(n);
+    }
+    if (freq === 'Biweekly') {
+      var n = new Date(today); n.setDate(today.getDate() + 14); return fmtDate(n);
+    }
+    return null;
+  }
+
+  function getChipLabels() {
+    var sel = document.getElementById('pb-period-select');
+    return sel ? [sel.value] : ['1st'];
+  }
+
+  function getCurrencyCode() {
+    var el = document.getElementById('pb-currency-pay');
+    return el ? (el.dataset.value || 'USD') : 'USD';
+  }
+
+  function getFreqLabel(val) {
+    var map = { 'Twice per month': 'twice per month', 'Weekly': 'weekly', 'Biweekly': 'biweekly', 'Monthly': 'monthly' };
+    return map[val] || val.toLowerCase();
+  }
+
+  // ── Update banner text ────────────────────────────────────────
+  function updateBanner() {
+    var freqSel   = document.getElementById('pb-freq-select');
+    var freq      = freqSel ? freqSel.value : 'Twice per month';
+    var freqLabel = getFreqLabel(freq);
+    var chips     = getChipLabels();
+    var startStr  = chips.length ? chips.join(' and ') : '[day/date]';
+    var nextDate  = calcNextStart(chips, freq);
+    var nextStr   = nextDate || '[calculated date]';
+
+    var banner = document.getElementById('pb-banner-text');
+    if (banner) {
+      banner.innerHTML = 'When saved, timesheets will run <strong>' + freqLabel +
+        '</strong>, starting every <strong>' + startStr +
+        '</strong>. First period begins <strong>' + nextStr + '</strong>.';
+    }
+    updateSuffixes(freq);
+  }
+
+  // ── Update currency suffixes ──────────────────────────────────
+  function updateSuffixes(freq) {
+    if (!freq) {
+      var freqSel = document.getElementById('pb-freq-select');
+      freq = freqSel ? freqSel.value : 'Monthly';
+    }
+    var payCurrency = getCurrencyCode();
+    var paySuffix   = document.getElementById('pb-pay-suffix');
+    if (paySuffix) paySuffix.textContent = payCurrency + '/' + getFreqLabel(freq);
+    // Bill suffixes are now static per-client row and don't need dynamic updates
+  }
+
+  // currency changes are now fired by the custom dropdown via currencySelect()
+
+  // ── Frequency / period change → update banner + suffix ────────
+  var freqSelect   = document.getElementById('pb-freq-select');
+  var periodSelect = document.getElementById('pb-period-select');
+  if (freqSelect)   freqSelect.addEventListener('change', updateBanner);
+  if (periodSelect) periodSelect.addEventListener('change', updateBanner);
+
+  // ── Pill toggle ───────────────────────────────────────────────
+  var RATE_SUBTITLES = {
+    pay:     'Set how worked hours are grouped into timesheets.',
+    bill:    "Manage this member's pay, bill, and project rates.",
+    project: 'Set project-level rates for this member.'
+  };
+
+  document.getElementById('pb-type-toggle').querySelectorAll('.pb-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var panel = pill.dataset.panel;
+
+      // Update active pill
+      document.querySelectorAll('#pb-type-toggle .pb-pill').forEach(function(p) {
+        p.classList.toggle('is-active', p.dataset.panel === panel);
+      });
+
+      // Swap fields
+      ['pay','bill','project'].forEach(function(p) {
+        var el = document.getElementById('pb-fields-' + p);
+        if (el) el.hidden = (p !== panel);
+      });
+
+      // Swap history
+      ['pay','bill'].forEach(function(p) {
+        var el = document.getElementById('pb-history-' + p);
+        if (el) el.hidden = (p !== panel);
+      });
+
+      // Update subtitle
+      var sub = document.getElementById('pb-rates-sub');
+      if (sub) sub.textContent = RATE_SUBTITLES[panel] || '';
+
+      // Update design annotations context per tab
+      if (panel === 'project') {
+        DesignAnnotations.setContext({
+          page: 'Member detail — Project rate',
+          required: [
+            {
+              text: 'Project rate table — per-project overrides for this member',
+              target: '.pb-project-table',
+              sub: [
+                'Lists every project the member is assigned to',
+                'Edit pencil appears on row hover — opens the Edit project rates modal',
+                'When no project rate is set the member\'s org-level rate is used as the fallback'
+              ]
+            },
+            {
+              text: 'Priority rule label above the table',
+              target: '.pb-project-desc',
+              sub: [
+                'Explains that project rates override org-level rates when time is tracked to a project',
+                'Always visible when the Project rate tab is active'
+              ]
+            }
+          ],
+          suggestions: []
+        });
+      } else {
+        DesignAnnotations.clearContext();
+      }
+    });
+  });
+
+  // ── Approval toggle ───────────────────────────────────────────
+  var approvalToggle = document.getElementById('pb-approval-toggle');
+  var approvalLabel  = document.getElementById('pb-approval-label');
+  approvalToggle.addEventListener('click', function() {
+    var on = approvalToggle.classList.toggle('pb-toggle--on');
+    approvalToggle.setAttribute('aria-checked', String(on));
+    approvalLabel.textContent = on ? 'Yes' : 'No';
+  });
+
+  // ── Bill rate history version switcher ───────────────────────
+  document.querySelectorAll('.pb-version-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var v = this.dataset.version;
+      document.querySelectorAll('.pb-version-link').forEach(function(l) { l.classList.remove('is-active'); });
+      document.querySelectorAll('.pb-version-panel').forEach(function(p) { p.hidden = true; });
+      this.classList.add('is-active');
+      var panel = document.getElementById('pb-bill-v' + v);
+      if (panel) panel.hidden = false;
+      var badge = document.getElementById('pb-bill-history-badge');
+      if (badge) badge.hidden = (v === '3');
+      // V1b manages rates via dialog — hide the per-client edit rows above the table
+      var billFields = document.getElementById('pb-fields-bill');
+      if (billFields) billFields.hidden = (v === '1b');
+    });
+  });
+
+  // ── V1: client filter ────────────────────────────────────────
+  var billClientFilter = document.getElementById('pb-bill-client-filter');
+  if (billClientFilter) {
+    billClientFilter.addEventListener('change', function() {
+      var val = this.value;
+      document.querySelectorAll('#pb-bill-v1-table tbody tr').forEach(function(row) {
+        row.style.display = (!val || row.getAttribute('data-client') === val) ? '' : 'none';
+      });
+    });
+  }
+
+  // ── Shared: generic table sort helper ────────────────────────
+  function makeSortHandler(tableId) {
+    var sortState = { col: null, dir: 1 };
+    document.querySelectorAll('#' + tableId + ' .pb-th-sort').forEach(function(th) {
+      th.addEventListener('click', function() {
+        var col = this.dataset.col;
+        if (sortState.col === col) {
+          sortState.dir *= -1;
+        } else {
+          sortState.col = col;
+          sortState.dir = 1;
+        }
+        var dir = sortState.dir;
+        // Reset all icons
+        document.querySelectorAll('#' + tableId + ' .pb-th-sort').forEach(function(h) {
+          var icon = h.querySelector('.pb-sort-icon');
+          h.classList.remove('pb-th-sort--asc', 'pb-th-sort--desc');
+          icon.textContent = 'unfold_more';
+          icon.classList.remove('pb-sort-icon--active');
+        });
+        var activeIcon = this.querySelector('.pb-sort-icon');
+        activeIcon.classList.add('pb-sort-icon--active');
+        if (dir === 1) {
+          this.classList.add('pb-th-sort--asc');
+          activeIcon.textContent = 'arrow_upward';
+        } else {
+          this.classList.add('pb-th-sort--desc');
+          activeIcon.textContent = 'arrow_downward';
+        }
+        // Sort rows
+        var tbody = document.querySelector('#' + tableId + ' tbody');
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort(function(a, b) {
+          var aVal = a.getAttribute('data-sort-' + col) || '';
+          var bVal = b.getAttribute('data-sort-' + col) || '';
+          var result = (col === 'billrate')
+            ? parseFloat(aVal) - parseFloat(bVal)
+            : aVal.localeCompare(bVal);
+          return result * dir;
+        });
+        rows.forEach(function(r) { tbody.appendChild(r); });
+      });
+    });
+  }
+
+  // ── V1 & V1b column sort ──────────────────────────────────────
+  makeSortHandler('pb-bill-v1-table');
+  makeSortHandler('pb-bill-v1b-table');
+
+  // ── Default sort: status ASC → clientorder ASC → date DESC ───
+  function applyDefaultSort(tableId) {
+    var tbody = document.querySelector('#' + tableId + ' tbody');
+    if (!tbody) return;
+    var rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort(function(a, b) {
+      var aStatus = parseInt(a.getAttribute('data-sort-status') || '0', 10);
+      var bStatus = parseInt(b.getAttribute('data-sort-status') || '0', 10);
+      if (aStatus !== bStatus) return aStatus - bStatus;
+      var aOrder = parseInt(a.getAttribute('data-sort-clientorder') || '99', 10);
+      var bOrder = parseInt(b.getAttribute('data-sort-clientorder') || '99', 10);
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      // Same client — most recent start date first
+      var aDate = a.getAttribute('data-sort-date') || '';
+      var bDate = b.getAttribute('data-sort-date') || '';
+      return bDate.localeCompare(aDate);
+    });
+    rows.forEach(function(r) { tbody.appendChild(r); });
+  }
+  applyDefaultSort('pb-bill-v1-table');
+  applyDefaultSort('pb-bill-v1b-table');
+
+  // ── V2: accordion — row click or "View history" link expands rows
+  function toggleAccordion(key) {
+    var subRows = document.querySelectorAll('[data-parent="' + key + '"]');
+    var isOpen  = subRows.length > 0 && !subRows[0].hidden;
+    document.querySelectorAll('.pb-accordion-sub-row').forEach(function(r) { r.hidden = true; });
+    if (!isOpen) { subRows.forEach(function(r) { r.hidden = false; }); }
+  }
+  document.querySelectorAll('.pb-accordion-header').forEach(function(row) {
+    row.addEventListener('click', function(e) {
+      if (e.target.closest('a')) e.preventDefault();
+      toggleAccordion(this.dataset.client);
+    });
+  });
+
+  // ── Dialogs: open (V3 cards button only) ──────────────────────
+  document.querySelectorAll('.pb-view-history-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var dialog = document.getElementById('pb-history-dialog-' + this.dataset.client);
+      if (dialog) { dialog.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+    });
+  });
+  document.querySelectorAll('.pb-history-dialog__close').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.closest('.pb-history-dialog').classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.querySelectorAll('.pb-history-dialog').forEach(function(dialog) {
+    dialog.addEventListener('click', function(e) {
+      if (e.target === this) { this.classList.remove('is-open'); document.body.style.overflow = ''; }
+    });
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.pb-history-dialog.is-open').forEach(function(d) { d.classList.remove('is-open'); });
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ── V1: bill rate rows — client data ─────────────────────────
+  var ORG_CURRENCY = 'USD';
+  var AVAILABLE_CURRENCIES = ['USD', 'GBP', 'EUR', 'CAD', 'BRL', 'INR'];
+
+  var ALL_BILL_CLIENTS = [
+    { name: 'Acme Corp',          currency: 'USD', payType: 'hr',    suffix: 'USD/hr',    initial: 'A', color: '#1d4ed8' },
+    { name: 'City of Chicago',    currency: 'USD', payType: 'hr',    suffix: 'USD/hr',    initial: 'C', color: '#4e4302' },
+    { name: 'Meridian Health',    currency: 'GBP', payType: 'fixed', suffix: 'GBP/fixed', initial: 'M', color: '#0f766e' },
+    { name: 'Microsoft',          currency: 'CAD', payType: 'hr',    suffix: 'CAD/hr',    initial: 'M', color: '#7c3aed' },
+    { name: 'Shawn Williams',     currency: null,  payType: 'hr',    suffix: 'USD/hr',    initial: 'S', color: '#a4793e' },
+    { name: 'Jorge',              currency: 'USD', payType: 'hr',    suffix: 'USD/hr',    initial: 'J', color: '#c381a0' },
+    { name: 'TechBrasil',         currency: 'BRL', payType: 'hr',    suffix: 'BRL/hr',    initial: 'T', color: '#b45309' },
+    { name: 'Global Trading Ltd', currency: 'GBP', payType: 'hr',    suffix: 'GBP/hr',    initial: 'G', color: '#047857' },
+  ];
+
+  var CURRENCY_NAMES = {
+    USD: 'US Dollar', GBP: 'British Pound', EUR: 'Euro',
+    CAD: 'Canadian Dollar', BRL: 'Brazilian Real', INR: 'Indian Rupee'
+  };
+
+  function currencyShort(prefix, code) {
+    return prefix + ' · ' + code + ' — ' + (CURRENCY_NAMES[code] || code);
+  }
+
+  function renderCurrencyField(clientData) {
+    if (!clientData) {
+      return '<div class="pb-bill-cur-empty">—</div>';
+    }
+    if (clientData.currency) {
+      var clientOpt = '<option value="' + clientData.currency + '" selected>'
+        + currencyShort('Client default currency', clientData.currency) + '</option>';
+      var orgOpt = '<option value="' + ORG_CURRENCY + '">'
+        + currencyShort('Organization', ORG_CURRENCY) + '</option>';
+      return '<div class="pb-select-wrap">'
+        + '<select class="pb-select pb-bill-currency-sel" data-paytype="' + clientData.payType + '">'
+        + clientOpt + orgOpt
+        + '</select>'
+        + '<span class="material-symbols-rounded pb-select-arrow">expand_more</span>'
+        + '</div>';
+    }
+    // No currency — truncated readonly with tooltip + note link
+    var fullLabel = 'Organization · ' + ORG_CURRENCY + ' — ' + (CURRENCY_NAMES[ORG_CURRENCY] || ORG_CURRENCY);
+    var tooltip = 'Currency can’t be changed here. This client has no currency set, so the organization currency (' + ORG_CURRENCY + ') is applied by default. Update the client’s settings to use a different currency.';
+    return '<div class="pb-bill-cur-nocur">'
+      + '<div class="pb-bill-cur-readonly pb-bill-cur-readonly--tip" data-tooltip="' + tooltip + '">'
+      + '<span>' + fullLabel + '</span>'
+      + '</div>'
+      + '<p class="pb-bill-cur-note">No client currency set. <a href="clients.html" class="pb-bill-cur-note__link">Update settings</a></p>'
+      + '</div>';
+  }
+
+  function getSelectedBillClients() {
+    var names = [];
+    document.querySelectorAll('#pb-fields-bill .pb-client-chip').forEach(function(el) {
+      names.push(el.dataset.clientName);
+    });
+    document.querySelectorAll('#pb-fields-bill .pb-bill-new-client-sel').forEach(function(sel) {
+      if (sel.value) names.push(sel.value);
+    });
+    return names;
+  }
+
+  function refreshBillClientDropdowns() {
+    var selected = getSelectedBillClients();
+    document.querySelectorAll('#pb-fields-bill .pb-bill-new-client-sel').forEach(function(sel) {
+      var current = sel.value;
+      sel.innerHTML = '<option value="">— Select client —</option>';
+      ALL_BILL_CLIENTS.forEach(function(c) {
+        // Show if not selected elsewhere, or it's this select's own current value
+        var takenByOther = selected.indexOf(c.name) !== -1 && c.name !== current;
+        if (!takenByOther) {
+          var opt = document.createElement('option');
+          opt.value = c.name;
+          opt.textContent = c.name;
+          if (c.name === current) opt.selected = true;
+          sel.appendChild(opt);
+        }
+      });
+    });
+  }
+
+  function addBillRow() {
+    var selected = getSelectedBillClients();
+    var row = document.createElement('div');
+    row.className = 'pb-fields-row pb-fields-row--bill pb-bill-row--new';
+
+    // Client select
+    var selWrap = '<div class="pb-field pb-field--bill-client"><div class="pb-select-wrap">'
+      + '<select class="pb-select pb-bill-new-client-sel"><option value="">— Select client —</option>';
+    ALL_BILL_CLIENTS.forEach(function(c) {
+      if (selected.indexOf(c.name) === -1) {
+        selWrap += '<option value="' + c.name + '">' + c.name + '</option>';
+      }
+    });
+    selWrap += '</select><span class="material-symbols-rounded pb-select-arrow">expand_more</span></div></div>';
+
+    row.innerHTML = selWrap
+      + '<div class="pb-field pb-field--currency pb-bill-cur-field">'
+      + '<div class="pb-bill-cur-empty">—</div>'
+      + '</div>'
+      + '<div class="pb-field"><div class="pb-split-field">'
+      + '<input type="text" class="pb-split-input" placeholder="0.00">'
+      + '<span class="pb-split-suffix pb-bill-new-suffix">—</span>'
+      + '</div></div>'
+      + '<div class="pb-field pb-field--bill-date"><div class="pb-date-input-wrap">'
+      + '<input type="date" class="pb-date-input">'
+      + '</div></div>'
+      + '<div class="pb-field pb-field--action">'
+      + '<div class="pb-icon-btn-group">'
+      + '<button class="pb-icon-btn pb-icon-btn--note" type="button" title="Add note"><span class="material-symbols-rounded">edit_square</span></button>'
+      + '<button class="pb-icon-btn pb-icon-btn--remove pb-remove-new-row-btn" type="button" title="Remove"><span class="material-symbols-rounded">delete</span></button>'
+      + '</div>'
+      + '</div>';
+
+    // Wire client select → update currency field + suffix + refresh dropdowns
+    var newSel = row.querySelector('.pb-bill-new-client-sel');
+    newSel.addEventListener('change', function() {
+      var clientData = ALL_BILL_CLIENTS.find(function(c) { return c.name === newSel.value; });
+      var curField = row.querySelector('.pb-bill-cur-field');
+      var suffix = row.querySelector('.pb-bill-new-suffix');
+      // Update currency field
+      if (curField) curField.innerHTML = renderCurrencyField(clientData);
+      // Wire new currency select change → update suffix
+      var curSel = curField && curField.querySelector('.pb-bill-currency-sel');
+      if (curSel) {
+        curSel.addEventListener('change', function() {
+          if (suffix) suffix.textContent = this.value + '/' + (clientData ? clientData.payType : 'hr');
+        });
+      }
+      // Set initial suffix
+      if (suffix) {
+        suffix.textContent = clientData
+          ? (clientData.currency || ORG_CURRENCY) + '/' + clientData.payType
+          : '—';
+      }
+      refreshBillClientDropdowns();
+      checkBillRowLimit();
+    });
+
+    // Wire remove → discard new row
+    row.querySelector('.pb-remove-new-row-btn').addEventListener('click', function() {
+      row.remove();
+      refreshBillClientDropdowns();
+      checkBillRowLimit();
+    });
+
+    var addBtn = document.getElementById('pb-bill-add-row-btn');
+    addBtn.parentNode.insertBefore(row, addBtn);
+    refreshBillClientDropdowns();
+  }
+
+  // ── checkBillRowLimit: disable "Add bill rate" when all clients used ──
+  function checkBillRowLimit() {
+    var btn = document.getElementById('pb-bill-add-row-btn');
+    if (!btn) return;
+    var selected = getSelectedBillClients();
+    var allUsed = selected.length >= ALL_BILL_CLIENTS.length;
+    if (allUsed) {
+      btn.classList.add('is-disabled');
+      btn.setAttribute('data-tooltip', 'All available clients already have a bill rate.');
+    } else {
+      btn.classList.remove('is-disabled');
+      btn.removeAttribute('data-tooltip');
+    }
+  }
+
+  // "Add bill rate" row button
+  var billAddRowBtn = document.getElementById('pb-bill-add-row-btn');
+  if (billAddRowBtn) {
+    billAddRowBtn.addEventListener('click', function() {
+      if (this.classList.contains('is-disabled')) return;
+      addBillRow();
+      checkBillRowLimit();
+    });
+  }
+
+  // ── V1: remove client confirmation dialog ─────────────────────
+  var removeClientDialog = document.getElementById('pb-remove-client-dialog');
+  var removeTargetRow    = null;
+
+  document.querySelectorAll('.pb-remove-client-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var row      = this.closest('.pb-fields-row');
+      var isActive = this.dataset.active === 'true';
+      if (!isActive) {
+        row.remove();
+        return;
+      }
+      // Active client — show confirmation
+      removeTargetRow = row;
+      var since   = this.dataset.since;
+      var msgEl   = document.getElementById('pb-remove-client-msg');
+      if (msgEl) {
+        msgEl.innerHTML = 'The bill rate for <strong>' + this.dataset.client
+          + '</strong> ends effective today. This change doesn\'t impact the client settings.';
+      }
+      removeClientDialog.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  var removeConfirmBtn = document.querySelector('.pb-remove-client-confirm');
+  if (removeConfirmBtn) {
+    removeConfirmBtn.addEventListener('click', function() {
+      if (removeTargetRow) { removeTargetRow.remove(); removeTargetRow = null; }
+      removeClientDialog.classList.remove('is-open');
+      document.body.style.overflow = '';
+      checkBillRowLimit();
+    });
+  }
+
+  // ── Success toast ─────────────────────────────────────────────
+  var successToast  = document.getElementById('pb-success-toast');
+  var toastCloseBtn = document.getElementById('pb-success-toast-close');
+  var _toastTimer   = null;
+
+  function showSuccessToast() {
+    if (!successToast) return;
+    successToast.classList.add('is-visible');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(function() {
+      successToast.classList.remove('is-visible');
+    }, 4000);
+  }
+  if (toastCloseBtn) {
+    toastCloseBtn.addEventListener('click', function() {
+      successToast.classList.remove('is-visible');
+      clearTimeout(_toastTimer);
+    });
+  }
+
+  // ── Save Changes → lock new bill rows + toast + rewire remove ──
+  var mdSaveBtn = document.getElementById('md-save-btn');
+  if (mdSaveBtn) {
+    mdSaveBtn.addEventListener('click', function() {
+      var today = new Date();
+      var todayStr = MONTHS_SHORT[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
+
+      document.querySelectorAll('#pb-fields-bill .pb-bill-row--new').forEach(function(row) {
+        var sel = row.querySelector('.pb-bill-new-client-sel');
+        if (!sel || !sel.value) return;
+        var clientName = sel.value;
+
+        // Lock client field to read-only label
+        var field = sel.closest('.pb-field');
+        field.innerHTML = '<div class="pb-date-readonly">' + clientName + '</div>';
+
+        // Remove new-row class markers
+        var suffix = row.querySelector('.pb-bill-new-suffix');
+        if (suffix) suffix.classList.remove('pb-bill-new-suffix');
+        row.classList.remove('pb-bill-row--new');
+
+        // Upgrade remove button: was "discard unsaved row" → now "active client, requires dialog"
+        var removeBtn = row.querySelector('.pb-remove-new-row-btn');
+        if (removeBtn) {
+          removeBtn.classList.remove('pb-remove-new-row-btn');
+          removeBtn.classList.add('pb-remove-client-btn');
+          removeBtn.dataset.active = 'true';
+          removeBtn.dataset.since  = todayStr;
+          removeBtn.dataset.client = clientName;
+          removeBtn.addEventListener('click', function() {
+            removeTargetRow = this.closest('.pb-fields-row');
+            var msgEl = document.getElementById('pb-remove-client-msg');
+            if (msgEl) {
+              msgEl.innerHTML = 'The bill rate for <strong>' + clientName
+                + '</strong> ends effective today. This change doesn\'t impact the client settings.';
+            }
+            removeClientDialog.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        // ── Insert into bill rate history tables as Current ──────────
+        var rateInput  = row.querySelector('.pb-split-input');
+        var suffixEl   = row.querySelector('.pb-split-suffix');
+        var dateInput  = row.querySelector('.pb-date-input');
+        var rateAmt    = parseFloat((rateInput  ? rateInput.value  : '') || 0) || 0;
+        var suffixTx   = (suffixEl  ? suffixEl.textContent  : '').trim();
+        var dateVal    = (dateInput ? dateInput.value : '').trim();
+
+        if (rateAmt && dateVal && suffixTx && suffixTx !== '—') {
+          var sParts   = suffixTx.split('/');
+          var currency = sParts[0] || 'USD';
+          var paytype  = ((sParts[1] || 'hr').toLowerCase() === 'hr') ? 'Hourly' : 'Fixed';
+          var dParts   = dateVal.split('-');
+          var yr2 = parseInt(dParts[0]), mo2 = parseInt(dParts[1]) - 1, dy2 = parseInt(dParts[2]);
+          var WDAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+          var MONS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          var d2 = new Date(yr2, mo2, dy2);
+          var fmtDate = WDAYS[d2.getDay()] + ', ' + MONS[d2.getMonth()] + ' ' + dy2 + ', ' + yr2;
+          var fmtAmt  = rateAmt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          var rateDisp = currency + ' ' + fmtAmt + (paytype === 'Hourly' ? '/hr' : '');
+          var cIdx     = ALL_BILL_CLIENTS.findIndex(function(c) { return c.name === clientName; });
+          var sortOrd  = cIdx >= 0 ? cIdx : ALL_BILL_CLIENTS.length;
+
+          ['pb-bill-v1-table', 'pb-bill-v1b-table'].forEach(function(tId) {
+            // Retire existing Current row for this client → Past
+            document.querySelectorAll('#' + tId + ' tbody tr[data-client="' + clientName + '"]').forEach(function(r) {
+              if (r.getAttribute('data-sort-status') === '0') {
+                r.setAttribute('data-sort-status', '1');
+                r.setAttribute('data-sort-enddate', dateVal);
+                r.classList.add('pb-v1-past');
+                var badge = r.querySelector('.pb-pill-status');
+                if (badge) { badge.className = 'pb-pill-status pb-pill-status--past'; badge.textContent = 'Past'; }
+                var cells = r.querySelectorAll('td');
+                if (cells[5]) cells[5].textContent = fmtDate;
+              }
+            });
+            // Prepend new Current row
+            var newRow = document.createElement('tr');
+            newRow.setAttribute('data-client', clientName);
+            newRow.setAttribute('data-sort-status', '0');
+            newRow.setAttribute('data-sort-clientorder', sortOrd);
+            newRow.setAttribute('data-sort-client', clientName.toLowerCase());
+            newRow.setAttribute('data-sort-billrate', rateAmt);
+            newRow.setAttribute('data-sort-paytype', paytype.toLowerCase());
+            newRow.setAttribute('data-sort-date', dateVal);
+            newRow.setAttribute('data-sort-enddate', '9999-12-31');
+            newRow.innerHTML =
+              '<td>' + clientName + '</td>'
+              + '<td><span class="pb-pill-status pb-pill-status--current">Current</span></td>'
+              + '<td>' + rateDisp + '</td>'
+              + '<td>' + paytype + '</td>'
+              + '<td>' + fmtDate + '</td>'
+              + '<td>Present</td>'
+              + '<td class="pb-td--truncate"></td>';
+            var tbody2 = document.querySelector('#' + tId + ' tbody');
+            if (tbody2) tbody2.insertBefore(newRow, tbody2.firstChild);
+          });
+        }
+      });
+
+      showSuccessToast();
+    });
+  }
+
+  // ── V1b: dialog client → currency suffix ─────────────────────
+  var CLIENT_BILL_SUFFIXES = {
+    'acme':     'USD/hr',
+    'chicago':  'USD/hr',
+    'meridian': 'GBP/fixed'
+  };
+  var addRateClientSel = document.getElementById('pb-add-rate-client');
+  var addRateSuffixEl  = document.getElementById('pb-add-rate-suffix');
+  if (addRateClientSel && addRateSuffixEl) {
+    addRateClientSel.addEventListener('change', function() {
+      addRateSuffixEl.textContent = CLIENT_BILL_SUFFIXES[this.value] || 'USD/hr';
+    });
+  }
+
+  // ── V1b: Add bill rate dialog ─────────────────────────────────
+  var addRateDialog = document.getElementById('pb-add-rate-dialog');
+  var addRateBtn    = document.getElementById('pb-add-rate-btn');
+
+  if (addRateBtn) {
+    addRateBtn.addEventListener('click', function() {
+      addRateDialog.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  // Cancel button closes the dialog (X is already handled by pb-history-dialog__close wiring above)
+  document.querySelectorAll('.pb-add-rate-dialog-close').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      addRateDialog.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Save — insert new row into history tables as Current
+  var saveBtn = addRateDialog && addRateDialog.querySelector('.pb-add-rate-save');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function() {
+      var clientVal = document.getElementById('pb-add-rate-client').value;
+      var amountVal = (document.getElementById('pb-add-rate-amount').value || '').trim();
+      var dateVal   = (document.getElementById('pb-add-rate-date').value || '').trim();
+      var noteVal   = (addRateDialog.querySelector('.pb-add-rate-note').value || '').trim();
+
+      if (!clientVal || !amountVal || !dateVal) {
+        addRateDialog.classList.remove('is-open');
+        document.body.style.overflow = '';
+        return;
+      }
+
+      var CLIENT_INFO = {
+        'acme':     { name: 'Acme Corp',       currency: 'USD', paytype: 'Hourly', sortOrder: 0, sortClient: 'acme corp' },
+        'chicago':  { name: 'City of Chicago', currency: 'USD', paytype: 'Hourly', sortOrder: 1, sortClient: 'city of chicago' },
+        'meridian': { name: 'Meridian Health', currency: 'GBP', paytype: 'Fixed',  sortOrder: 2, sortClient: 'meridian health' },
+      };
+      var info = CLIENT_INFO[clientVal];
+      if (!info) { addRateDialog.classList.remove('is-open'); document.body.style.overflow = ''; return; }
+
+      // Parse date safely (yyyy-mm-dd → no timezone shift)
+      var parts  = dateVal.split('-');
+      var yr = parseInt(parts[0]), mo = parseInt(parts[1]) - 1, dy = parseInt(parts[2]);
+      var DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var d = new Date(yr, mo, dy);
+      var formattedDate = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + dy + ', ' + yr;
+
+      // Format rate string
+      var amount     = parseFloat(amountVal) || 0;
+      var fmtAmt     = amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      var rateDisplay = info.currency + ' ' + fmtAmt + (info.paytype === 'Hourly' ? '/hr' : '');
+
+      // Retire any existing Current row for this client → Past, end date = effective date
+      ['pb-bill-v1-table', 'pb-bill-v1b-table'].forEach(function(tId) {
+        document.querySelectorAll('#' + tId + ' tbody tr[data-client="' + info.name + '"]').forEach(function(row) {
+          if (row.getAttribute('data-sort-status') === '0') {
+            row.setAttribute('data-sort-status', '1');
+            row.setAttribute('data-sort-enddate', dateVal);
+            row.classList.add('pb-v1-past');
+            var badge = row.querySelector('.pb-pill-status');
+            if (badge) { badge.className = 'pb-pill-status pb-pill-status--past'; badge.textContent = 'Past'; }
+            var cells = row.querySelectorAll('td');
+            if (cells[5]) cells[5].textContent = formattedDate;
+          }
+        });
+      });
+
+      // Prepend new Current row to both flat tables
+      ['pb-bill-v1-table', 'pb-bill-v1b-table'].forEach(function(tId) {
+        var newRow = document.createElement('tr');
+        newRow.setAttribute('data-client', info.name);
+        newRow.setAttribute('data-sort-status', '0');
+        newRow.setAttribute('data-sort-clientorder', info.sortOrder);
+        newRow.setAttribute('data-sort-client', info.sortClient);
+        newRow.setAttribute('data-sort-billrate', amount);
+        newRow.setAttribute('data-sort-paytype', info.paytype.toLowerCase());
+        newRow.setAttribute('data-sort-date', dateVal);
+        newRow.setAttribute('data-sort-enddate', '9999-12-31');
+        newRow.innerHTML =
+          '<td>' + info.name + '</td>'
+          + '<td><span class="pb-pill-status pb-pill-status--current">Current</span></td>'
+          + '<td>' + rateDisplay + '</td>'
+          + '<td>' + info.paytype + '</td>'
+          + '<td>' + formattedDate + '</td>'
+          + '<td>Present</td>'
+          + '<td class="pb-td--truncate">' + noteVal + '</td>';
+        var tbody = document.querySelector('#' + tId + ' tbody');
+        if (tbody) tbody.insertBefore(newRow, tbody.firstChild);
+      });
+
+      // Reset form fields
+      document.getElementById('pb-add-rate-client').value = '';
+      document.getElementById('pb-add-rate-amount').value = '';
+      document.getElementById('pb-add-rate-date').value   = '';
+      addRateDialog.querySelector('.pb-add-rate-note').value = '';
+      document.getElementById('pb-add-rate-suffix').textContent = 'USD/hr';
+
+      addRateDialog.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // ── V1b: client filter ────────────────────────────────────────
+  var billClientFilterV1b = document.getElementById('pb-bill-client-filter-v1b');
+  if (billClientFilterV1b) {
+    billClientFilterV1b.addEventListener('change', function() {
+      var val = this.value;
+      document.querySelectorAll('#pb-bill-v1b-table tbody tr').forEach(function(row) {
+        row.style.display = (!val || row.getAttribute('data-client') === val) ? '' : 'none';
+      });
+    });
+  }
+
+  // ── Add / Edit note dialog ────────────────────────────────────
+  var addNoteDialog        = document.getElementById('pb-add-note-dialog');
+  var noteDialogTitle      = document.getElementById('pb-add-note-dialog-title');
+  var noteTextarea         = document.getElementById('pb-note-textarea');
+  var noteFormPhase        = document.getElementById('pb-note-form-phase');
+  var noteConfirmPhase     = document.getElementById('pb-note-confirm-phase');
+  var noteRemoveTrigger    = document.getElementById('pb-note-remove-trigger');
+  var noteKeepBtn          = document.getElementById('pb-note-keep-btn');
+  var noteConfirmRemoveBtn = document.getElementById('pb-note-confirm-remove-btn');
+  var noteTargetBtn        = null;
+
+  function noteDialogReset() {
+    // Always open in phase 1
+    noteFormPhase.hidden    = false;
+    noteConfirmPhase.hidden = true;
+    noteDialogTitle.textContent = 'Add note';
+  }
+
+  function applyNoteToBtn(btn, text) {
+    btn.dataset.note = text;
+    // Button is icon-only — no text node to update
+    if (text) {
+      btn.classList.add('pb-icon-btn--has-note');
+    } else {
+      btn.classList.remove('pb-icon-btn--has-note');
+    }
+  }
+
+  // Event delegation: works for existing rows + dynamically added rows
+  // Currency dropdown → suffix reactivity (static rows)
+  var billFieldsEl = document.getElementById('pb-fields-bill');
+  if (billFieldsEl) {
+    billFieldsEl.addEventListener('change', function(e) {
+      var sel = e.target.closest('.pb-bill-currency-sel');
+      if (!sel) return;
+      var row = sel.closest('.pb-fields-row--bill');
+      var suffix = row && row.querySelector('.pb-split-suffix');
+      if (!suffix) return;
+      suffix.textContent = sel.value + '/' + (sel.dataset.paytype || 'hr');
+    });
+  }
+
+  if (billFieldsEl) {
+    billFieldsEl.addEventListener('click', function(e) {
+      var btn = e.target.closest('.pb-icon-btn--note');
+      if (!btn) return;
+      noteTargetBtn = btn;
+      var existing = btn.dataset.note || '';
+      noteTextarea.value = existing;
+      noteDialogReset();
+      noteDialogTitle.textContent = existing ? 'Edit note' : 'Add note';
+      // Show "Remove note" link only when there's already a saved note
+      if (noteRemoveTrigger) noteRemoveTrigger.hidden = !existing;
+      addNoteDialog.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() { noteTextarea.focus(); }, 80);
+    });
+  }
+
+  // Save note
+  var noteSaveBtn = document.querySelector('.pb-note-save-btn');
+  if (noteSaveBtn) {
+    noteSaveBtn.addEventListener('click', function() {
+      if (noteTargetBtn) {
+        applyNoteToBtn(noteTargetBtn, noteTextarea.value.trim());
+      }
+      addNoteDialog.classList.remove('is-open');
+      document.body.style.overflow = '';
+      noteTargetBtn = null;
+    });
+  }
+
+  // "Remove note" link → switch to confirm phase
+  if (noteRemoveTrigger) {
+    noteRemoveTrigger.addEventListener('click', function() {
+      noteFormPhase.hidden    = true;
+      noteConfirmPhase.hidden = false;
+      noteDialogTitle.textContent = 'Remove note';
+    });
+  }
+
+  // "Keep note" → back to edit phase
+  if (noteKeepBtn) {
+    noteKeepBtn.addEventListener('click', function() {
+      noteFormPhase.hidden    = false;
+      noteConfirmPhase.hidden = true;
+      noteDialogTitle.textContent = noteTargetBtn && noteTargetBtn.dataset.note ? 'Edit note' : 'Add note';
+    });
+  }
+
+  // Confirm remove → clear note
+  if (noteConfirmRemoveBtn) {
+    noteConfirmRemoveBtn.addEventListener('click', function() {
+      if (noteTargetBtn) applyNoteToBtn(noteTargetBtn, '');
+      addNoteDialog.classList.remove('is-open');
+      document.body.style.overflow = '';
+      noteDialogReset();
+      noteTargetBtn = null;
+    });
+  }
+
+  // ── Design annotations (right-click anywhere) ────────────────
+  DesignAnnotations.init({
+    page: 'Member detail',
+    required: [
+      {
+        text: 'Country field — Info tab → Contact section',
+        target: '#pb-country-select',
+        sub: [
+          'Positioned after Home address in the Contact section of the Info tab',
+          'Uses the same md-select styling as the Birthday dropdowns on the same tab',
+          'Selecting a country auto-surfaces that country\'s currency at the top of the Pay / Bill currency dropdown',
+          '~48 countries; list is alphabetically sorted'
+        ]
+      },
+      {
+        text: 'Searchable currency dropdown — Pay / Bill tab → Pay rate',
+        target: '#pb-currency-pay',
+        sub: [
+          'Replaces the native <select> with a custom dropdown that includes a live search input',
+          'When a country is set on the Info tab, the matching currency floats to the top above a divider',
+          'All remaining currencies follow alphabetically below the divider',
+          'Selecting a currency updates the Fixed amount suffix in real time (e.g. USD/monthly → EUR/monthly)'
+        ]
+      },
+      {
+        text: 'Country → currency linking across tabs',
+        target: '#pb-country-select',
+        sub: [
+          'The country field (Info tab) and currency dropdown (Pay / Bill tab) are connected via shared JS state',
+          'Changing country on Info tab immediately reorders the currency list — no page reload needed',
+          'The currency does not change automatically; the country only influences ordering and suggestion'
+        ]
+      }
+    ],
+    suggestions: []
+  });
+
+  // ── Country + searchable currency dropdown ────────────────────
+  (function() {
+    var CURRENCIES = [
+      { code:'AED', name:'UAE Dirham' },
+      { code:'ARS', name:'Argentine Peso' },
+      { code:'AUD', name:'Australian Dollar' },
+      { code:'BDT', name:'Bangladeshi Taka' },
+      { code:'BGN', name:'Bulgarian Lev' },
+      { code:'BRL', name:'Brazilian Real' },
+      { code:'CAD', name:'Canadian Dollar' },
+      { code:'CHF', name:'Swiss Franc' },
+      { code:'CLP', name:'Chilean Peso' },
+      { code:'CNY', name:'Chinese Yuan' },
+      { code:'COP', name:'Colombian Peso' },
+      { code:'CZK', name:'Czech Koruna' },
+      { code:'DKK', name:'Danish Krone' },
+      { code:'EGP', name:'Egyptian Pound' },
+      { code:'EUR', name:'Euro' },
+      { code:'GBP', name:'British Pound' },
+      { code:'HKD', name:'Hong Kong Dollar' },
+      { code:'HUF', name:'Hungarian Forint' },
+      { code:'IDR', name:'Indonesian Rupiah' },
+      { code:'ILS', name:'Israeli Shekel' },
+      { code:'INR', name:'Indian Rupee' },
+      { code:'JPY', name:'Japanese Yen' },
+      { code:'KRW', name:'South Korean Won' },
+      { code:'MAD', name:'Moroccan Dirham' },
+      { code:'MXN', name:'Mexican Peso' },
+      { code:'MYR', name:'Malaysian Ringgit' },
+      { code:'NGN', name:'Nigerian Naira' },
+      { code:'NOK', name:'Norwegian Krone' },
+      { code:'NZD', name:'New Zealand Dollar' },
+      { code:'PEN', name:'Peruvian Sol' },
+      { code:'PHP', name:'Philippine Peso' },
+      { code:'PKR', name:'Pakistani Rupee' },
+      { code:'PLN', name:'Polish Zloty' },
+      { code:'RON', name:'Romanian Leu' },
+      { code:'SAR', name:'Saudi Riyal' },
+      { code:'SEK', name:'Swedish Krona' },
+      { code:'SGD', name:'Singapore Dollar' },
+      { code:'THB', name:'Thai Baht' },
+      { code:'TRY', name:'Turkish Lira' },
+      { code:'TWD', name:'Taiwan Dollar' },
+      { code:'UAH', name:'Ukrainian Hryvnia' },
+      { code:'USD', name:'US Dollar' },
+      { code:'VND', name:'Vietnamese Dong' },
+      { code:'ZAR', name:'South African Rand' },
+    ];
+
+    var COUNTRIES = [
+      { code:'AE', name:'United Arab Emirates', currency:'AED' },
+      { code:'AR', name:'Argentina',             currency:'ARS' },
+      { code:'AU', name:'Australia',             currency:'AUD' },
+      { code:'BD', name:'Bangladesh',            currency:'BDT' },
+      { code:'BG', name:'Bulgaria',              currency:'BGN' },
+      { code:'BR', name:'Brazil',                currency:'BRL' },
+      { code:'CA', name:'Canada',                currency:'CAD' },
+      { code:'CH', name:'Switzerland',           currency:'CHF' },
+      { code:'CL', name:'Chile',                 currency:'CLP' },
+      { code:'CN', name:'China',                 currency:'CNY' },
+      { code:'CO', name:'Colombia',              currency:'COP' },
+      { code:'CZ', name:'Czech Republic',        currency:'CZK' },
+      { code:'DE', name:'Germany',               currency:'EUR' },
+      { code:'DK', name:'Denmark',               currency:'DKK' },
+      { code:'EG', name:'Egypt',                 currency:'EGP' },
+      { code:'ES', name:'Spain',                 currency:'EUR' },
+      { code:'FR', name:'France',                currency:'EUR' },
+      { code:'GB', name:'United Kingdom',        currency:'GBP' },
+      { code:'HK', name:'Hong Kong',             currency:'HKD' },
+      { code:'HU', name:'Hungary',               currency:'HUF' },
+      { code:'ID', name:'Indonesia',             currency:'IDR' },
+      { code:'IL', name:'Israel',                currency:'ILS' },
+      { code:'IN', name:'India',                 currency:'INR' },
+      { code:'IT', name:'Italy',                 currency:'EUR' },
+      { code:'JP', name:'Japan',                 currency:'JPY' },
+      { code:'KR', name:'South Korea',           currency:'KRW' },
+      { code:'MA', name:'Morocco',               currency:'MAD' },
+      { code:'MX', name:'Mexico',                currency:'MXN' },
+      { code:'MY', name:'Malaysia',              currency:'MYR' },
+      { code:'NG', name:'Nigeria',               currency:'NGN' },
+      { code:'NL', name:'Netherlands',           currency:'EUR' },
+      { code:'NO', name:'Norway',                currency:'NOK' },
+      { code:'NZ', name:'New Zealand',           currency:'NZD' },
+      { code:'PE', name:'Peru',                  currency:'PEN' },
+      { code:'PH', name:'Philippines',           currency:'PHP' },
+      { code:'PK', name:'Pakistan',              currency:'PKR' },
+      { code:'PL', name:'Poland',                currency:'PLN' },
+      { code:'RO', name:'Romania',               currency:'RON' },
+      { code:'SA', name:'Saudi Arabia',          currency:'SAR' },
+      { code:'SE', name:'Sweden',                currency:'SEK' },
+      { code:'SG', name:'Singapore',             currency:'SGD' },
+      { code:'TH', name:'Thailand',              currency:'THB' },
+      { code:'TR', name:'Turkey',                currency:'TRY' },
+      { code:'TW', name:'Taiwan',                currency:'TWD' },
+      { code:'UA', name:'Ukraine',               currency:'UAH' },
+      { code:'US', name:'United States',         currency:'USD' },
+      { code:'VN', name:'Vietnam',               currency:'VND' },
+      { code:'ZA', name:'South Africa',          currency:'ZAR' },
+    ];
+
+    var selectedCurrency = 'USD';
+    var activeDropdown   = null;
+
+    // Populate country <select>
+    var countryEl = document.getElementById('pb-country-select');
+    COUNTRIES.slice().sort(function(a, b) { return a.name.localeCompare(b.name); })
+      .forEach(function(c) {
+        var o = document.createElement('option');
+        o.value = c.code;
+        o.textContent = c.name;
+        if (c.code === 'US') o.selected = true;
+        countryEl.appendChild(o);
+      });
+
+    function getCountryCurrency() {
+      var c = COUNTRIES.find(function(x) { return x.code === countryEl.value; });
+      return c ? c.currency : null;
+    }
+
+    function makeCurrLi(c) {
+      var li = document.createElement('li');
+      li.className = 'pb-curr-item' + (c.code === selectedCurrency ? ' is-selected' : '');
+      li.textContent = c.code + ' — ' + c.name;
+      li.dataset.code = c.code;
+      li.addEventListener('mousedown', function(e) { e.preventDefault(); currencySelect(c.code); });
+      return li;
+    }
+
+    function renderList(query) {
+      var q = (query || '').toLowerCase();
+      var list = document.querySelector('#pb-currency-pay .pb-curr-list');
+      list.innerHTML = '';
+
+      if (q) {
+        // While searching: flat alphabetical, no pinning
+        var filtered = CURRENCIES.filter(function(c) {
+          return c.code.toLowerCase().indexOf(q) !== -1 || c.name.toLowerCase().indexOf(q) !== -1;
+        }).sort(function(a, b) { return a.name.localeCompare(b.name); });
+        if (!filtered.length) {
+          var empty = document.createElement('li');
+          empty.className = 'pb-curr-empty';
+          empty.textContent = 'No currencies found';
+          list.appendChild(empty);
+        } else {
+          filtered.forEach(function(c) { list.appendChild(makeCurrLi(c)); });
+        }
+        return;
+      }
+
+      var countryCurrCode = getCountryCurrency();
+      var exclude = new Set([ORG_CURRENCY]);
+      if (countryCurrCode) exclude.add(countryCurrCode);
+
+      // 1. Organization currency
+      var orgCurr = CURRENCIES.find(function(c) { return c.code === ORG_CURRENCY; });
+      if (orgCurr) {
+        var orgLabel = document.createElement('li');
+        orgLabel.className = 'pb-curr-section-label';
+        orgLabel.textContent = 'Organization currency';
+        list.appendChild(orgLabel);
+        list.appendChild(makeCurrLi(orgCurr));
+        var div1 = document.createElement('li');
+        div1.className = 'pb-curr-divider';
+        list.appendChild(div1);
+      }
+
+      // 2. Country currency (if different from org)
+      if (countryCurrCode && countryCurrCode !== ORG_CURRENCY) {
+        var countryCurr = CURRENCIES.find(function(c) { return c.code === countryCurrCode; });
+        if (countryCurr) {
+          var countryLabel = document.createElement('li');
+          countryLabel.className = 'pb-curr-section-label';
+          countryLabel.textContent = 'Country currency';
+          list.appendChild(countryLabel);
+          list.appendChild(makeCurrLi(countryCurr));
+          var div2 = document.createElement('li');
+          div2.className = 'pb-curr-divider';
+          list.appendChild(div2);
+        }
+      }
+
+      // 3. All other currencies
+      var allLabel = document.createElement('li');
+      allLabel.className = 'pb-curr-section-label';
+      allLabel.textContent = 'All currencies';
+      list.appendChild(allLabel);
+      var rest = CURRENCIES.filter(function(c) { return !exclude.has(c.code); })
+        .sort(function(a, b) { return a.name.localeCompare(b.name); });
+      rest.forEach(function(c) { list.appendChild(makeCurrLi(c)); });
+    }
+
+    function currencySelect(code) {
+      selectedCurrency = code;
+      var curr = CURRENCIES.find(function(c) { return c.code === code; });
+      var label = curr ? code + ' — ' + curr.name : code;
+      document.querySelector('#pb-currency-pay .pb-curr-btn-text').textContent = label;
+      document.getElementById('pb-currency-pay').dataset.value = code;
+      closeAll();
+      updateSuffixes();
+    }
+
+    function openPanel(wrapper) {
+      closeAll();
+      var panel = wrapper.querySelector('.pb-curr-panel');
+      panel.removeAttribute('hidden');
+      wrapper.querySelector('.pb-curr-btn').setAttribute('aria-expanded', 'true');
+      var search = panel.querySelector('.pb-curr-search');
+      search.value = '';
+      renderList('');
+      search.focus();
+      activeDropdown = wrapper;
+    }
+
+    function closeAll() {
+      document.querySelectorAll('.pb-curr-panel').forEach(function(p) { p.setAttribute('hidden', ''); });
+      document.querySelectorAll('.pb-curr-btn').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+      activeDropdown = null;
+    }
+
+    // Trigger button toggle
+    document.querySelectorAll('.pb-curr-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var wrapper = btn.closest('.pb-curr-wrap');
+        if (wrapper.querySelector('.pb-curr-panel').hasAttribute('hidden')) {
+          openPanel(wrapper);
+        } else {
+          closeAll();
+        }
+      });
+    });
+
+    // Live search filter
+    document.querySelectorAll('.pb-curr-search').forEach(function(inp) {
+      inp.addEventListener('input', function() { renderList(inp.value); });
+    });
+
+    // Close on outside click
+    document.addEventListener('mousedown', function(e) {
+      if (activeDropdown && !activeDropdown.contains(e.target)) closeAll();
+    });
+
+    // Country change → re-order list and pre-select matching currency
+    countryEl.addEventListener('change', function() {
+      var cc = getCountryCurrency();
+      if (cc) currencySelect(cc);
+    });
+
+    // Init with US / USD
+    currencySelect('USD');
+  })();
+
+  // ── Init ──────────────────────────────────────────────────────
+  updateBanner();
+  checkBillRowLimit();
+</script>
+  <!-- Success toast -->
+  <div class="pb-success-toast" id="pb-success-toast" role="status" aria-live="polite">
+    <div class="pb-success-toast__body">
+      <div class="pb-success-toast__header">
+        <span class="material-symbols-rounded pb-success-toast__icon">check_circle</span>
+        <span class="pb-success-toast__title">Changes saved</span>
+      </div>
+      <p class="pb-success-toast__msg">Bill rates updated successfully.</p>
+    </div>
+    <button class="pb-success-toast__close" id="pb-success-toast-close" aria-label="Dismiss">
+      <span class="material-symbols-rounded">close</span>
+    </button>
+  </div>
+  <!-- ── Edit project rates modal (shared with project-detail) ── -->
+  <div class="pd-modal-backdrop" id="md-rate-modal" hidden>
+    <div class="pd-modal" role="dialog" aria-modal="true" aria-labelledby="md-modal-title">
+      <div class="pd-modal-header">
+        <h4 class="pd-modal-title" id="md-modal-title">Edit project rates</h4>
+        <button type="button" class="pd-modal-close" id="md-modal-close" aria-label="Close">×</button>
+      </div>
+      <p class="pd-modal-desc">
+        View and edit rates for <span id="md-modal-project">this project</span>.
+        If no project rates are entered, the organization level rates listed on the member's profile will apply.
+        <a href="https://support.hubstaff.com/set-separate-pay-rates-bill-rates-user-different-projects/" target="_blank" rel="noopener noreferrer" class="pd-modal-link">Learn more</a>
+      </p>
+      <div class="pd-modal-body">
+        <div class="pd-modal-field-row">
+          <span class="pd-modal-field-label">CLIENT</span>
+          <span class="pd-modal-field-value" id="md-modal-client">Acme Corp</span>
+        </div>
+
+        <div class="pd-modal-section">
+          <label class="pd-modal-section-label">Pay rate</label>
+          <p class="pd-modal-section-desc">The amount used to pay this member for their work on the project.</p>
+          <div class="pd-modal-input-group">
+            <input type="text" class="pd-modal-input" id="md-modal-pay-rate" placeholder="Enter amount" />
+            <span class="pd-modal-input-addon" id="md-pay-rate-addon">CAD/hr</span>
+          </div>
+        </div>
+
+        <hr class="pd-modal-section-divider">
+
+        <div class="pd-modal-section">
+          <label class="pd-modal-section-label">Bill rate</label>
+          <p class="pd-modal-section-desc">The amount used to bill clients for this member's work on the project.</p>
+          <div class="pd-modal-rate-row">
+            <div class="pd-modal-currency-row">
+              <label class="pd-modal-currency-label">Currency</label>
+              <div class="pd-modal-currency-select-wrap">
+                <select class="pd-modal-currency-sel" id="md-bill-currency-sel">
+                  <option value="CAD" selected>Client currency · CAD — Canadian Dollar</option>
+                  <option value="USD">Organization currency · USD — US Dollar</option>
+                </select>
+                <span class="material-symbols-rounded pd-modal-currency-arrow">expand_more</span>
+              </div>
+            </div>
+            <div class="pd-modal-amount-col">
+              <label class="pd-modal-currency-label">Amount</label>
+              <div class="pd-modal-input-group">
+                <input type="text" class="pd-modal-input" id="md-modal-bill-rate" placeholder="Enter amount" />
+                <span class="pd-modal-input-addon" id="md-bill-rate-addon">CAD/hr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pd-modal-footer">
+        <button type="button" class="pd-modal-cancel" id="md-modal-cancel">Cancel</button>
+        <button type="button" class="pd-modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var modal = document.getElementById('md-rate-modal');
+      function openModal(projectName, clientName) {
+        if (projectName) document.getElementById('md-modal-project').textContent = projectName;
+        if (clientName)  document.getElementById('md-modal-client').textContent  = clientName;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        DesignAnnotations.setContext({
+          page: 'Edit project rates modal',
+          required: [
+            {
+              text: 'Modal shows project and client context',
+              target: '#md-modal-project',
+              sub: [
+                'Title and client name are populated from the row that triggered the open',
+                'Fallback note below the rates: "If no project rates are entered, the member\'s org-level rates apply."'
+              ]
+            },
+            {
+              text: 'Pay rate — static currency suffix, no dropdown',
+              target: '#md-pay-rate-addon',
+              sub: [
+                'Currency suffix is derived from the member\'s Pay / Bill currency setting',
+                'Format: "{CODE}/hr" — never a symbol (no $, £, €)'
+              ]
+            },
+            {
+              text: 'Bill rate — currency dropdown updates suffix live',
+              target: '#md-bill-currency-sel',
+              sub: [
+                'Options: "Client currency · [CODE]" and "Organization currency · [CODE]"',
+                'Selecting a currency immediately updates the amount-field suffix',
+                'When no client currency is set, show a read-only field with an explanatory note'
+              ]
+            }
+          ],
+          suggestions: []
+        });
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        DesignAnnotations.clearContext();
+      }
+      document.getElementById('md-modal-close').addEventListener('click', closeModal);
+      document.getElementById('md-modal-cancel').addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+      document.querySelectorAll('.pb-project-edit-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var row = this.closest('.pb-project-tr');
+          var projectEl = row ? row.querySelectorAll('.pb-project-link')[1] : null;
+          var clientEl  = row ? row.querySelectorAll('.pb-project-link')[0] : null;
+          openModal(
+            projectEl ? projectEl.textContent.trim() : 'Project',
+            clientEl  ? clientEl.textContent.trim()  : 'Client'
+          );
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

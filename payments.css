@@ -1,0 +1,211 @@
+/* =============================================================
+   Payments report — prefix: pmt-
+   Replicates Hubstaff Reports → Payments (group by member)
+   ============================================================= */
+
+html, body { background: #ffffff; }
+
+.pmt-page,
+.pmt-page *:not(.material-symbols-rounded) {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.pmt-page {
+  padding: 20px 28px 48px;
+  color: #1f2937;
+}
+
+/* ── Back link ── */
+.pmt-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  color: #0168dd;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.pmt-back:hover { text-decoration: underline; }
+.pmt-back .material-symbols-rounded { font-size: 18px; }
+
+/* ── Title ── */
+.pmt-title {
+  margin: 0 0 18px;
+  font-size: 28px;
+  font-weight: 300;
+  color: #374151;
+  line-height: 1.2;
+}
+
+/* ── Toolbar ── */
+.pmt-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.pmt-tabs { display: flex; align-items: center; gap: 26px; }
+.pmt-tab {
+  position: relative;
+  background: none; border: none;
+  padding: 6px 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  cursor: pointer;
+}
+.pmt-tab:hover { color: #374151; }
+.pmt-tab.is-active { color: #0168dd; }
+.pmt-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px; background: #0168dd; border-radius: 2px 2px 0 0;
+}
+
+.pmt-daterange { display: flex; align-items: center; gap: 8px; }
+.pmt-nav-btn {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #d6dbe6; border-radius: 6px; background: #fff;
+  color: #374151; cursor: pointer; transition: background 120ms ease;
+}
+.pmt-nav-btn:hover { background: #f9fafb; }
+.pmt-nav-btn .material-symbols-rounded { font-size: 18px; }
+.pmt-date-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  height: 36px; padding: 0 12px;
+  border: 1px solid #d6dbe6; border-radius: 6px; background: #fff;
+  font-size: 14px; color: #1f2937; white-space: nowrap;
+}
+.pmt-cal-icon { font-size: 18px; color: #2aa7ff; }
+.pmt-today-btn {
+  height: 36px; padding: 0 16px;
+  border: 1px solid #d6dbe6; border-radius: 6px; background: #fff;
+  font-size: 14px; color: #374151; cursor: pointer; transition: background 120ms ease;
+}
+.pmt-today-btn:hover { background: #f9fafb; }
+
+.pmt-filters { display: inline-flex; align-items: stretch; }
+.pmt-filters-btn {
+  height: 36px; padding: 0 16px;
+  border: none; border-radius: 6px 0 0 6px;
+  background: #5b9bf8; color: #fff; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 120ms ease;
+}
+.pmt-filters-btn:hover { background: #4f8ef0; }
+.pmt-filters-caret {
+  width: 34px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; border-left: 1px solid rgba(255,255,255,0.35);
+  border-radius: 0 6px 6px 0; background: #4a89e8; color: #fff;
+  cursor: pointer; transition: background 120ms ease;
+}
+.pmt-filters-caret:hover { background: #3f7cd8; }
+.pmt-filters-caret .material-symbols-rounded { font-size: 20px; }
+
+/* ── Summary cards ── */
+.pmt-summary {
+  display: flex; align-items: stretch;
+  border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;
+  margin-bottom: 28px;
+}
+.pmt-card { flex: 1; padding: 16px 24px; min-width: 0; }
+.pmt-card-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #9ca3af; margin-bottom: 4px;
+}
+.pmt-card-value { font-size: 26px; font-weight: 300; color: #31c48d; line-height: 1.2; }
+.pmt-chart-toggle {
+  flex: 0 0 auto; width: 56px;
+  border: none; background: #5b9bf8; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 120ms ease;
+}
+.pmt-chart-toggle:hover { background: #4f8ef0; }
+.pmt-chart-toggle .material-symbols-rounded { font-size: 22px; }
+
+/* ── Chart ── */
+.pmt-chart-title { margin: 0 0 12px; font-size: 18px; font-weight: 500; color: #1f2937; }
+.pmt-chart { width: 100%; margin-bottom: 36px; }
+.pmt-chart-svg { width: 100%; height: 300px; display: block; }
+.pmt-grid { stroke: #eef0f2; stroke-width: 1; }
+.pmt-axis { fill: #9ca3af; font-size: 11px; font-family: 'Roboto', sans-serif; }
+.pmt-area { fill: rgba(115,101,255,0.2); stroke: none; }
+.pmt-line { fill: none; stroke: #7365ff; stroke-width: 2; stroke-linejoin: round; }
+.pmt-dot { fill: #7365ff; }
+
+/* ── Org section header ── */
+.pmt-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.pmt-company { display: flex; align-items: baseline; gap: 10px; }
+.pmt-company-name { font-size: 19px; font-weight: 500; color: #1f2937; }
+.pmt-company-tz { font-size: 13px; color: #9ca3af; }
+.pmt-section-actions { display: flex; align-items: center; gap: 22px; }
+.pmt-action {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: none; font-size: 14px; color: #374151; cursor: pointer;
+}
+.pmt-action:hover { color: #0168dd; }
+.pmt-action .material-symbols-rounded { font-size: 18px; color: #2aa7ff; }
+
+/* ── Group-by bar ── */
+.pmt-groupbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 4px;
+}
+.pmt-groupby {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: none; border: none; padding: 6px 0;
+  font-size: 14px; color: #374151; cursor: pointer;
+}
+.pmt-groupby-icon { font-size: 18px; color: #6b7280; }
+.pmt-groupby-value { color: #0168dd; font-weight: 500; }
+.pmt-groupby-caret { font-size: 18px; color: #6b7280; }
+.pmt-gear {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; border-radius: 6px;
+  color: #6b7280; cursor: pointer; transition: background 120ms ease;
+}
+.pmt-gear:hover { background: #f3f4f6; }
+.pmt-gear .material-symbols-rounded { font-size: 20px; }
+
+/* ── Table ── */
+.pmt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.pmt-th {
+  padding: 14px 16px; text-align: left;
+  font-size: 14px; font-weight: 400; color: #6b7280;
+  border-bottom: 1px solid #e5e7eb; white-space: nowrap;
+}
+.pmt-th--r { text-align: right; }
+
+/* Member group row */
+.pmt-member td { border-top: 1px solid #e5e7eb; padding: 14px 16px; }
+.pmt-table tbody .pmt-member:first-child td { border-top: none; }
+.pmt-member-cell { vertical-align: middle; }
+.pmt-member-name { font-size: 14px; font-weight: 500; color: #1f2937; vertical-align: middle; }
+.pmt-member-total { font-size: 14px; font-weight: 500; color: #1f2937; }
+
+.pmt-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 600;
+  margin-right: 12px; vertical-align: middle; flex-shrink: 0;
+}
+.pmt-avatar--default { background: #7ea8e0; }
+.pmt-avatar--default .material-symbols-rounded {
+  font-size: 20px; color: #fff; font-variation-settings: 'FILL' 1;
+}
+
+/* Payment detail rows */
+.pmt-row { border-bottom: 1px solid #f3f4f6; }
+.pmt-td { padding: 11px 16px; color: #1f2937; white-space: nowrap; }
+.pmt-td--r { text-align: right; }
+.pmt-paid { color: #374151; }
+.pmt-muted { color: #9ca3af; }
+.pmt-amount { color: #1f2937; }

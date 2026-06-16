@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments report — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="payments.css" />
+</head>
+<body>
+<script src="hubstaff-shell.js"></script>
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+
+<div id="shell-content">
+  <div class="pmt-page">
+
+    <a href="#" class="pmt-back">
+      <span class="material-symbols-rounded">chevron_left</span>
+      Reports
+    </a>
+
+    <h1 class="pmt-title">Payments report</h1>
+
+    <div class="pmt-toolbar">
+      <div class="pmt-tabs">
+        <button class="pmt-tab">ME</button>
+        <button class="pmt-tab is-active">ALL</button>
+      </div>
+
+      <div class="pmt-daterange">
+        <button class="pmt-nav-btn" aria-label="Previous period"><span class="material-symbols-rounded">arrow_back</span></button>
+        <button class="pmt-nav-btn" aria-label="Next period"><span class="material-symbols-rounded">arrow_forward</span></button>
+        <div class="pmt-date-pill">
+          <span class="pmt-date-text">Sun, Mar 1, 2026 - Tue, Jun 30, 2026</span>
+          <span class="material-symbols-rounded pmt-cal-icon">calendar_today</span>
+        </div>
+        <button class="pmt-today-btn">Today</button>
+        <div class="pmt-filters">
+          <button class="pmt-filters-btn">Filters</button>
+          <button class="pmt-filters-caret" aria-label="Filter options"><span class="material-symbols-rounded">expand_more</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pmt-summary">
+      <div class="pmt-card">
+        <div class="pmt-card-label">Payments</div>
+        <div class="pmt-card-value" id="pmt-count">0</div>
+      </div>
+      <div class="pmt-card">
+        <div class="pmt-card-label">Amount</div>
+        <div class="pmt-card-value" id="pmt-total">$0.00</div>
+      </div>
+      <button class="pmt-chart-toggle" aria-label="Toggle chart">
+        <span class="material-symbols-rounded">monitoring</span>
+      </button>
+    </div>
+
+    <h2 class="pmt-chart-title">Total amount per day</h2>
+    <div class="pmt-chart" id="pmt-chart"></div>
+
+    <!-- Org section header -->
+    <div class="pmt-section-head">
+      <div class="pmt-company">
+        <span class="pmt-company-name">Epicii</span>
+        <span class="pmt-company-tz">Europe - Helsinki</span>
+      </div>
+      <div class="pmt-section-actions">
+        <button class="pmt-action"><span class="material-symbols-rounded">send</span> Send</button>
+        <button class="pmt-action"><span class="material-symbols-rounded">schedule</span> Schedule</button>
+        <button class="pmt-action"><span class="material-symbols-rounded">download</span> Export</button>
+      </div>
+    </div>
+
+    <!-- Group-by control + settings -->
+    <div class="pmt-groupbar">
+      <button class="pmt-groupby">
+        <span class="material-symbols-rounded pmt-groupby-icon">sort</span>
+        <span>Group by: <span class="pmt-groupby-value">Member</span></span>
+        <span class="material-symbols-rounded pmt-groupby-caret">expand_more</span>
+      </button>
+      <button class="pmt-gear" aria-label="Report settings"><span class="material-symbols-rounded">settings</span></button>
+    </div>
+
+    <!-- Payments table -->
+    <table class="pmt-table">
+      <thead>
+        <tr>
+          <th class="pmt-th">Payment type</th>
+          <th class="pmt-th">Paid on</th>
+          <th class="pmt-th pmt-th--r">Total Hours</th>
+          <th class="pmt-th pmt-th--r">Hourly pay</th>
+          <th class="pmt-th pmt-th--r">Fixed pay</th>
+          <th class="pmt-th pmt-th--r">PTO &amp; Holidays</th>
+          <th class="pmt-th pmt-th--r">Additions</th>
+          <th class="pmt-th pmt-th--r">Deductions</th>
+          <th class="pmt-th pmt-th--r">Bonus</th>
+          <th class="pmt-th pmt-th--r">Total Amount</th>
+        </tr>
+      </thead>
+      <tbody id="pmt-tbody"></tbody>
+    </table>
+
+  </div>
+</div>
+
+<script>
+  HubstaffShell.init({ activeItem: 'reports', activeSubHref: 'payments.html', expanded: true });
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var AVATAR_COLORS = ['#0168DD','#7c3aed','#db2777','#059669','#d97706','#dc2626','#0891b2','#2563eb'];
+  function initials(name){ var p = name.split(' '); return (p[0][0] + (p[1] ? p[1][0] : '')).toUpperCase(); }
+  function money(n){ return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  // Sample data — grouped by member (no real PII). Amounts are self-consistent.
+  var MEMBERS = [
+    { name: 'Marcus Bell', avatar: 0, payments: [
+      { type: 'Automatic payment', date: 'Wed, Mar 25, 2026', day: 24, fixed: 5000, add: 110 },
+    ]},
+    { name: 'Tara Nguyen', avatar: 'default', payments: [
+      { type: 'One-time payment', date: 'Tue, Mar 17, 2026', day: 16, bonus: 200 },
+    ]},
+    { name: 'Devon Pierce', avatar: 'default', payments: [
+      { type: 'Automatic payment', date: 'Mon, Mar 2, 2026',  day: 1,  fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, Mar 16, 2026', day: 15, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, Mar 30, 2026', day: 29, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, Apr 13, 2026', day: 43, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, Apr 27, 2026', day: 57, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, May 11, 2026', day: 71, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Mon, May 25, 2026', day: 85, fixed: 2700 },
+      { type: 'Automatic payment', date: 'Fri, Jun 5, 2026',  day: 96, fixed: 2700 },
+    ]},
+    { name: 'Lena Fischer', avatar: 2, payments: [
+      { type: 'Automatic payment', date: 'Tue, Mar 31, 2026', day: 30, hours: '90:00:00', hourly: 2700 },
+      { type: 'Automatic payment', date: 'Thu, Apr 30, 2026', day: 60, hours: '90:00:00', hourly: 2700 },
+      { type: 'Automatic payment', date: 'Sun, May 31, 2026', day: 91, hours: '90:00:00', hourly: 2700 },
+    ]},
+    { name: 'Omar Haddad', avatar: 3, payments: [
+      { type: 'Automatic payment', date: 'Sun, Mar 15, 2026', day: 14, fixed: 3000 },
+      { type: 'Automatic payment', date: 'Wed, Apr 15, 2026', day: 45, fixed: 3000 },
+    ]},
+  ];
+
+  function payTotal(p){ return (p.hourly||0) + (p.fixed||0) + (p.pto||0) + (p.add||0) + (p.bonus||0) - (p.ded||0); }
+
+  // ── Build table ──
+  var tbody = document.getElementById('pmt-tbody');
+  var html = '', count = 0, grand = 0, dayTotals = {};
+  MEMBERS.forEach(function (mem) {
+    var memTotal = mem.payments.reduce(function (s, p) { return s + payTotal(p); }, 0);
+    var avatar = mem.avatar === 'default'
+      ? '<span class="pmt-avatar pmt-avatar--default"><span class="material-symbols-rounded">person</span></span>'
+      : '<span class="pmt-avatar" style="background:' + AVATAR_COLORS[mem.avatar] + '">' + initials(mem.name) + '</span>';
+    html +=
+      '<tr class="pmt-member">' +
+        '<td class="pmt-member-cell" colspan="9">' + avatar + '<span class="pmt-member-name">' + mem.name + '</span></td>' +
+        '<td class="pmt-td--r pmt-member-total">' + money(memTotal) + '</td>' +
+      '</tr>';
+    mem.payments.forEach(function (p) {
+      count++; grand += payTotal(p);
+      dayTotals[p.day] = (dayTotals[p.day] || 0) + payTotal(p);
+      html +=
+        '<tr class="pmt-row">' +
+          '<td class="pmt-td">' + p.type + '</td>' +
+          '<td class="pmt-td pmt-paid">' + p.date + '</td>' +
+          '<td class="pmt-td pmt-td--r ' + (p.hours ? '' : 'pmt-muted') + '">' + (p.hours || '-') + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.hourly || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.fixed || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.pto || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.add || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.ded || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + money(p.bonus || 0) + '</td>' +
+          '<td class="pmt-td pmt-td--r pmt-amount">' + money(payTotal(p)) + '</td>' +
+        '</tr>';
+    });
+  });
+  tbody.innerHTML = html;
+  document.getElementById('pmt-count').textContent = count;
+  document.getElementById('pmt-total').textContent = money(grand);
+
+  // ── Area chart: Total amount per day (Mar 1 → Jun 30, 122 days) ──
+  var N = 122;
+  var values = new Array(N).fill(0);
+  Object.keys(dayTotals).forEach(function (d) { values[+d] = dayTotals[d]; });
+  var maxVal = Math.max.apply(null, values);
+  var MAX_Y = Math.max(6000, Math.ceil(maxVal / 1000) * 1000);
+  var STEP = MAX_Y / 6;
+
+  var W = 1000, H = 300, padL = 48, padR = 12, padT = 10, padB = 26;
+  var plotW = W - padL - padR, plotH = H - padT - padB;
+  function xAt(i){ return padL + (i / (N - 1)) * plotW; }
+  function yAt(v){ return padT + (1 - v / MAX_Y) * plotH; }
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function labelFor(i){ var d = new Date(2026, 2, 1 + i); return MONTHS[d.getMonth()] + ' ' + (d.getDate() < 10 ? '0' : '') + d.getDate(); }
+
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="pmt-chart-svg" role="img" aria-label="Total amount per day">';
+  for (var v = 0; v <= MAX_Y; v += STEP) {
+    var y = yAt(v);
+    svg += '<line class="pmt-grid" x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '"/>';
+    svg += '<text class="pmt-axis" x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + v + '</text>';
+  }
+  for (var i = 0; i < N; i += 13) {
+    svg += '<text class="pmt-axis" x="' + xAt(i) + '" y="' + (H - 8) + '" text-anchor="middle">' + labelFor(i) + '</text>';
+  }
+  var pts = values.map(function (val, i) { return xAt(i) + ',' + yAt(val); });
+  svg += '<path class="pmt-area" d="M' + padL + ',' + yAt(0) + ' L' + pts.join(' L') + ' L' + xAt(N - 1) + ',' + yAt(0) + ' Z"/>';
+  svg += '<polyline class="pmt-line" points="' + pts.join(' ') + '"/>';
+  values.forEach(function (val, i) { svg += '<circle class="pmt-dot" cx="' + xAt(i) + '" cy="' + yAt(val) + '" r="2.5"/>'; });
+  svg += '</svg>';
+  document.getElementById('pmt-chart').innerHTML = svg;
+})();
+</script>
+
+<script>
+  DesignAnnotations.init({ page: 'Payments report', required: [], suggestions: [] });
+</script>
+
+</body>
+</html>

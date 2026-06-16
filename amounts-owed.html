@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amounts owed report — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="amounts-owed.css" />
+</head>
+<body>
+<script src="hubstaff-shell.js"></script>
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+
+<div id="shell-content">
+  <div class="ao-page">
+
+    <!-- Back link -->
+    <a href="#" class="ao-back">
+      <span class="material-symbols-rounded">chevron_left</span>
+      Reports
+    </a>
+
+    <!-- Title -->
+    <h1 class="ao-title">Amounts owed report</h1>
+
+    <!-- Toolbar: ME/ALL tabs + date range + filters -->
+    <div class="ao-toolbar">
+      <div class="ao-tabs">
+        <button class="ao-tab">ME</button>
+        <button class="ao-tab is-active">ALL</button>
+      </div>
+
+      <div class="ao-daterange">
+        <button class="ao-nav-btn" aria-label="Previous period"><span class="material-symbols-rounded">arrow_back</span></button>
+        <button class="ao-nav-btn" aria-label="Next period"><span class="material-symbols-rounded">arrow_forward</span></button>
+        <div class="ao-date-pill">
+          <span class="ao-date-text">Sat, May 16, 2026 - Tue, Jun 16, 2026</span>
+          <span class="material-symbols-rounded ao-cal-icon">calendar_today</span>
+        </div>
+        <button class="ao-today-btn">Today</button>
+        <div class="ao-filters">
+          <button class="ao-filters-btn">Filters</button>
+          <button class="ao-filters-caret" aria-label="Filter options"><span class="material-symbols-rounded">expand_more</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary cards + chart toggle -->
+    <div class="ao-summary">
+      <div class="ao-card">
+        <div class="ao-card-label">Hours</div>
+        <div class="ao-card-value">497:00:00</div>
+        <div class="ao-card-sub" id="ao-hours-sub">Regular 466:00:00 &middot; Overtime 31:00:00</div>
+      </div>
+      <div class="ao-card">
+        <div class="ao-card-label">Amount</div>
+        <div class="ao-card-value">USD 13,227.88</div>
+        <button class="ao-bd-trigger" id="ao-bd-open" type="button">View breakdown<span class="material-symbols-rounded">keyboard_arrow_down</span></button>
+        <div class="ao-card-native" id="ao-card-native" style="display:none"></div>
+      </div>
+      <button class="ao-chart-toggle" aria-label="Toggle chart">
+        <span class="material-symbols-rounded">monitoring</span>
+      </button>
+    </div>
+
+    <!-- Chart -->
+    <h2 class="ao-chart-title">Total amount per day</h2>
+    <div class="ao-chart" id="ao-chart"></div>
+
+    <!-- Company / org section header -->
+    <div class="ao-section-head">
+      <div class="ao-company">
+        <span class="ao-company-name">Acme Corp Ltd</span>
+        <span class="ao-company-tz">America - New York</span>
+      </div>
+      <div class="ao-section-actions">
+        <button class="ao-action"><span class="material-symbols-rounded">send</span> Send</button>
+        <button class="ao-action"><span class="material-symbols-rounded">schedule</span> Schedule</button>
+        <button class="ao-action"><span class="material-symbols-rounded">download</span> Export</button>
+        <button class="ao-action"><span class="material-symbols-rounded">view_column</span> Columns</button>
+      </div>
+    </div>
+
+    <!-- Report table -->
+    <table class="ao-table">
+      <thead>
+        <tr>
+          <th class="ao-th ao-th--member">Member</th>
+          <th class="ao-th ao-th--r">Current rate</th>
+          <th class="ao-th ao-th--r">
+            <span class="ao-th-rate">Regular hours <span class="material-symbols-rounded ao-info" title="Regular hours includes work break time. Overtime calculations exclude work break time.">info</span></span>
+          </th>
+          <th class="ao-th ao-th--r">Overtime</th>
+          <th class="ao-th ao-th--r">Total hours</th>
+          <th class="ao-th ao-th--r">Amount</th>
+        </tr>
+      </thead>
+      <tbody id="ao-tbody">
+        <!-- rows injected by script -->
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- Filters drawer -->
+<div class="aof-backdrop" id="aof-backdrop"></div>
+<aside class="aof-drawer" id="aof-drawer" role="dialog" aria-modal="true" aria-label="Filters">
+  <button class="aof-close" id="aof-close" type="button" aria-label="Close sidebar">
+    <span class="material-symbols-rounded">close</span>
+  </button>
+
+  <div class="aof-tabs">
+    <button class="aof-tab is-active" id="aof-tab-filters" type="button">Filters</button>
+    <button class="aof-tab" id="aof-tab-saved" type="button">Saved Filters</button>
+  </div>
+
+  <!-- Filters tab -->
+  <div class="aof-pane is-active" id="aof-pane-filters">
+    <div class="aof-body">
+      <div class="aof-field">
+        <label class="aof-label" for="aof-currency">Currency</label>
+        <select class="aof-native-select" id="aof-currency">
+          <option value="all">All currencies</option>
+          <option value="BRL">BRL &mdash; Brazilian Real</option>
+          <option value="CAD">CAD &mdash; Canadian Dollar</option>
+          <option value="EUR">EUR &mdash; Euro</option>
+          <option value="GBP">GBP &mdash; British Pound</option>
+          <option value="PHP">PHP &mdash; Philippine Peso</option>
+          <option value="USD">USD &mdash; US Dollar</option>
+        </select>
+        <p class="aof-hint">Filters the report to a single currency. The <strong>Amount</strong> shows that currency&rsquo;s total in USD, with the original amount beneath.</p>
+      </div>
+
+      <div class="aof-field">
+        <label class="aof-label">Projects / Work orders</label>
+        <div class="aof-select" tabindex="0"><span class="aof-select-ph">All projects</span><span class="material-symbols-rounded aof-select-caret">expand_more</span></div>
+      </div>
+
+      <div class="aof-field">
+        <label class="aof-label">Teams</label>
+        <div class="aof-select" tabindex="0"><span class="aof-select-ph">All teams</span><span class="material-symbols-rounded aof-select-caret">expand_more</span></div>
+      </div>
+
+      <div class="aof-field">
+        <label class="aof-label">Members</label>
+        <div class="aof-select" tabindex="0"><span class="aof-select-ph">Select members</span><span class="material-symbols-rounded aof-select-caret">expand_more</span></div>
+      </div>
+
+      <label class="aof-toggle">
+        <input type="checkbox" id="aof-sum-ranges">
+        <span class="aof-toggle-track"></span>
+        <span class="aof-toggle-label">Sum date ranges</span>
+      </label>
+    </div>
+    <div class="aof-foot">
+      <button class="aof-btn aof-btn--info" type="button">Schedule report</button>
+      <button class="aof-btn aof-btn--outline" type="button">Save filters</button>
+      <button class="aof-btn aof-btn--default" id="aof-clear" type="button">Clear filters</button>
+    </div>
+  </div>
+
+  <!-- Saved Filters tab -->
+  <div class="aof-pane" id="aof-pane-saved">
+    <div class="aof-body">
+      <h6 class="aof-saved-title">Saved filters</h6>
+      <div class="aof-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" placeholder="Search saved filters">
+      </div>
+      <div class="aof-saved-list">
+        <div class="aof-saved-item">
+          <span class="aof-saved-name"><span class="material-symbols-rounded">menu</span>Filter A</span>
+          <span class="aof-saved-actions">
+            <button class="aof-saved-action" type="button" aria-label="Edit"><span class="material-symbols-rounded">edit</span></button>
+            <button class="aof-saved-action" type="button" aria-label="Delete"><span class="material-symbols-rounded">delete</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  HubstaffShell.init({ activeItem: 'reports', activeSubHref: 'amounts-owed.html', expanded: true });
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Area chart: Total amount per day ─────────────────────── */
+  // 32 daily points, May 16 → Jun 16. Mostly zero with a few peaks.
+  var MAX_Y = 7000, STEP = 1000, N = 32;
+  var values = new Array(N).fill(0);
+  values[10] = 2965;  // May 26 (group total, USD)
+  values[19] = 4052;  // Jun 04 (group total, USD)
+  values[26] = 6211;  // Jun 11 (group total, USD)
+
+  var W = 1000, H = 280, padL = 44, padR = 12, padT = 10, padB = 26;
+  var plotW = W - padL - padR, plotH = H - padT - padB;
+  function xAt(i) { return padL + (i / (N - 1)) * plotW; }
+  function yAt(v) { return padT + (1 - v / MAX_Y) * plotH; }
+
+  var xLabels = { 0:'May 16', 4:'May 20', 8:'May 24', 12:'May 28', 16:'Jun 01', 20:'Jun 05', 24:'Jun 09', 28:'Jun 13' };
+
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="ao-chart-svg" role="img" aria-label="Total amount per day">';
+
+  // horizontal gridlines + y labels
+  for (var v = 0; v <= MAX_Y; v += STEP) {
+    var y = yAt(v);
+    svg += '<line class="ao-grid" x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '"/>';
+    svg += '<text class="ao-axis" x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + v + '</text>';
+  }
+  // x labels + ticks
+  Object.keys(xLabels).forEach(function (k) {
+    var i = +k, x = xAt(i);
+    svg += '<text class="ao-axis" x="' + x + '" y="' + (H - 8) + '" text-anchor="middle">' + xLabels[k] + '</text>';
+  });
+
+  // area + line points
+  var pts = values.map(function (val, i) { return xAt(i) + ',' + yAt(val); });
+  var areaPath = 'M' + padL + ',' + yAt(0) + ' L' + pts.join(' L') + ' L' + xAt(N - 1) + ',' + yAt(0) + ' Z';
+  svg += '<path class="ao-area" d="' + areaPath + '"/>';
+  svg += '<polyline class="ao-line" points="' + pts.join(' ') + '"/>';
+  // dots
+  values.forEach(function (val, i) {
+    svg += '<circle class="ao-dot" cx="' + xAt(i) + '" cy="' + yAt(val) + '" r="3"/>';
+  });
+
+  svg += '</svg>';
+  document.getElementById('ao-chart').innerHTML = svg;
+
+  /* ── Table data (sample — no real member data). Amounts shown in the organization
+        currency (USD) with each member's own pay currency beneath. ───────────────── */
+  var FX = { USD: 1, EUR: 1.08, GBP: 1.27, BRL: 0.18, PHP: 0.018, CAD: 0.73 };
+  function parseHrs(s) { if (!s) return 0; var p = s.split(':'); return (+p[0]) + (+(p[1] || 0)) / 60 + (+(p[2] || 0)) / 3600; }
+  function fmtHrs(dec) { var h = Math.floor(dec + 1e-9); var m = Math.round((dec - h) * 60); if (m >= 60) { h += 1; m -= 60; } return h + ':' + (m < 10 ? '0' + m : m) + ':00'; }
+  function fmtMoney(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  var AVATAR_COLORS = ['#0168DD','#7c3aed','#db2777','#059669','#d97706','#dc2626','#0891b2','#2563eb','#c2410c','#0d9488'];
+  function initials(name){ var p=name.split(' '); return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase(); }
+
+  // rate:null = "No rate set" (no currency). period 'hr' | 'fixed'. reg/ot drive hours.
+  var GROUPS = [
+    { date: 'Tue, May 26, 2026', members: [
+      { name:'Alexandra Reyes', avatar:'default', cur:null,  rate:null,    reg:'12:00:00', ot:null },
+      { name:'Anatolie Stafie', avatar:0,         cur:'EUR', rate:18.00, period:'hr', reg:'30:00:00', ot:'2:00:00' },
+      { name:'Ben Olsen',       avatar:'default', cur:'GBP', rate:20.00, period:'hr', reg:'35:00:00', ot:null },
+      { name:'Ekaterina Salin', avatar:'default', cur:null,  rate:null,    reg:'8:00:00',  ot:null },
+      { name:'Emil Novak',      avatar:'default', cur:null,  rate:null,    reg:'6:00:00',  ot:null },
+      { name:'Emir Tasci',      avatar:'default', cur:null,  rate:null,    reg:'4:00:00',  ot:null },
+      { name:'Eric Lewis',      avatar:5,         cur:'BRL', rate:30.00, period:'hr', reg:'20:00:00', ot:'4:00:00' },
+      { name:'Everton Souza',   avatar:'default', cur:'BRL', rate:45.00, period:'hr', reg:'40:00:00', ot:null },
+      { name:'Guilherme Costa', avatar:'default', cur:null,  rate:null,    reg:'5:00:00',  ot:null },
+      { name:'Hana Kim',        avatar:2,         cur:'USD', rate:25.00, period:'hr', reg:'38:00:00', ot:'2:00:00' },
+    ]},
+    { date: 'Thu, Jun 4, 2026', members: [
+      { name:'Isabel Santos',   avatar:1,         cur:'PHP', rate:1200.00, period:'hr', reg:'25:00:00', ot:'5:00:00' },
+      { name:'Jamal Carter',    avatar:3,         cur:'USD', rate:30.00, period:'hr', reg:'40:00:00', ot:'6:00:00' },
+      { name:'Kavya Nair',      avatar:'default', cur:null,  rate:null,    reg:'10:00:00', ot:null },
+      { name:'Liam Walsh',      avatar:6,         cur:'GBP', rate:22.50, period:'hr', reg:'32:00:00', ot:null },
+      { name:'Mei Tanaka',      avatar:4,         cur:'CAD', rate:40.00, period:'hr', reg:'35:00:00', ot:'3:00:00' },
+    ]},
+    { date: 'Thu, Jun 11, 2026', members: [
+      { name:'Noah Berg',       avatar:7,         cur:'EUR', rate:15.00, period:'hr', reg:'30:00:00', ot:null },
+      { name:'Olga Petrova',    avatar:'default', cur:'USD', rate:2000.00, period:'fixed' },
+      { name:'Priya Shah',      avatar:8,         cur:'USD', rate:28.00, period:'hr', reg:'36:00:00', ot:'4:00:00' },
+      { name:'Quentin Roy',     avatar:9,         cur:'CAD', rate:12.00, period:'hr', reg:'20:00:00', ot:null },
+      { name:'Sofia Mendez',    avatar:0,         cur:'EUR', rate:50.00, period:'hr', reg:'40:00:00', ot:'5:00:00' },
+    ]},
+  ];
+
+  function compute(m) {
+    if (m.rate == null) return { hasRate: false, totalDec: parseHrs(m.reg) + parseHrs(m.ot), amtUSD: 0 };
+    if (m.period === 'fixed') return { hasRate: true, fixed: true, rateMember: m.rate, rateUSD: m.rate * FX[m.cur], totalDec: 0, amtMember: m.rate, amtUSD: m.rate * FX[m.cur] };
+    var totalDec = parseHrs(m.reg) + parseHrs(m.ot);
+    var amtMember = m.rate * totalDec;
+    return { hasRate: true, rateMember: m.rate, rateUSD: m.rate * FX[m.cur], totalDec: totalDec, amtMember: amtMember, amtUSD: amtMember * FX[m.cur] };
+  }
+  function rateCell(m, c) {  // current rate shows the member's own (original) currency only — USD conversion fluctuates daily
+    if (!c.hasRate) return '<td class="ao-td ao-td--r ao-norate">No rate set</td>';
+    var per = c.fixed ? 'fixed' : 'hr';
+    return '<td class="ao-td ao-td--r ao-rate">' + m.cur + ' ' + fmtMoney(c.rateMember) + '/' + per + '</td>';
+  }
+  function amountCell(m, c) {
+    var inner = '<span>USD ' + fmtMoney(c.amtUSD) + '</span>';
+    if (c.hasRate && m.cur !== 'USD') inner += '<span class="ao-sub">' + m.cur + ' ' + fmtMoney(c.amtMember) + '</span>';
+    return '<td class="ao-td ao-td--r ao-amount"><span class="ao-stack">' + inner + '</span></td>';
+  }
+
+  var tbody = document.getElementById('ao-tbody');
+  var cardVals = document.querySelectorAll('.ao-card-value');
+
+  // per-currency totals — computed once over ALL members; drives the breakdown popover and the currency filter
+  var byCur = {}, GRAND_USD = 0;
+  GROUPS.forEach(function (g) { g.members.forEach(function (m) {
+    var c = compute(m);
+    GRAND_USD += c.amtUSD;
+    if (c.hasRate) { byCur[m.cur] = byCur[m.cur] || { native: 0, usd: 0 }; byCur[m.cur].native += c.amtMember; byCur[m.cur].usd += c.amtUSD; }
+  }); });
+
+  function memberRow(m) {
+    var c = compute(m);
+    var avatar = m.avatar === 'default'
+      ? '<span class="ao-avatar ao-avatar--default"><span class="material-symbols-rounded">person</span></span>'
+      : '<span class="ao-avatar" style="background:' + AVATAR_COLORS[m.avatar] + '">' + initials(m.name) + '</span>';
+    var otVal = (m.ot && parseHrs(m.ot) > 0) ? m.ot : null;
+    var regCell = c.fixed || !m.reg
+      ? '<td class="ao-td ao-td--r ao-muted">&ndash;</td>'
+      : '<td class="ao-td ao-td--r">' + m.reg + '</td>';
+    var otCell = '<td class="ao-td ao-td--r' + (otVal ? '' : ' ao-muted') + '">' + (otVal || '&ndash;') + '</td>';
+    var totalCell = c.fixed
+      ? '<td class="ao-td ao-td--r ao-muted">&ndash;</td>'
+      : '<td class="ao-td ao-td--r"><span class="ao-hours"><span class="material-symbols-rounded ao-hours-info" title="Approved time">info</span>' + fmtHrs(c.totalDec) + '</span></td>';
+    return '<tr class="ao-row">' +
+        '<td class="ao-td ao-td--member">' + avatar + '<span class="ao-name">' + m.name + '</span></td>' +
+        rateCell(m, c) + regCell + otCell + totalCell + amountCell(m, c) +
+      '</tr>';
+  }
+
+  // Render the table + summary cards for a given currency ('all' or an ISO code).
+  function render(cur) {
+    var html = '', hrs = 0, usd = 0, native = 0, regH = 0, otH = 0;
+    GROUPS.forEach(function (g) {
+      var members = (cur === 'all') ? g.members : g.members.filter(function (m) { return m.cur === cur; });
+      if (!members.length) return;  // hide date groups with no members in this currency
+      html += '<tr class="ao-group"><td colspan="6">' + g.date + '</td></tr>';
+      members.forEach(function (m) {
+        var c = compute(m);
+        hrs += c.totalDec; usd += c.amtUSD; if (c.hasRate) native += c.amtMember;
+        regH += parseHrs(m.reg); otH += parseHrs(m.ot);
+        html += memberRow(m);
+      });
+    });
+    tbody.innerHTML = html;
+    if (cardVals[0]) cardVals[0].textContent = fmtHrs(hrs);
+    if (cardVals[1]) cardVals[1].textContent = 'USD ' + fmtMoney(usd);
+    // Hours card: Regular vs Overtime split — drop the OT term (hide the line) when there is no overtime
+    var hoursSub = document.getElementById('ao-hours-sub');
+    if (hoursSub) {
+      if (otH > 0) { hoursSub.textContent = 'Regular ' + fmtHrs(regH) + ' · Overtime ' + fmtHrs(otH); hoursSub.style.display = ''; }
+      else { hoursSub.style.display = 'none'; }
+    }
+    // "View breakdown" only makes sense in the multi-currency (All) view; when filtered
+    // to a single currency, swap it for that currency's own total (e.g. "BRL 2,520.00").
+    var bdBtn = document.getElementById('ao-bd-open');
+    var natLine = document.getElementById('ao-card-native');
+    if (cur === 'all') {
+      if (bdBtn) bdBtn.style.display = '';
+      if (natLine) natLine.style.display = 'none';
+    } else if (cur === 'USD') {
+      // org currency == member currency — no second line needed
+      if (bdBtn) bdBtn.style.display = 'none';
+      if (natLine) natLine.style.display = 'none';
+    } else {
+      if (bdBtn) bdBtn.style.display = 'none';
+      if (natLine) { natLine.style.display = ''; natLine.textContent = cur + ' ' + fmtMoney(native); }
+    }
+  }
+  render('all');
+
+  /* ── Amount → "View breakdown by currency" popover (same component as Payment records) ── */
+  var BD_ORDER = ['BRL', 'CAD', 'EUR', 'GBP', 'PHP', 'USD'];
+  var bdPanel = document.createElement('div');
+  bdPanel.className = 'ao-bd-panel';
+  document.body.appendChild(bdPanel);
+  function buildBd() {
+    var rows = BD_ORDER.filter(function (cur) { return byCur[cur]; }).map(function (cur) {
+      var rate = cur === 'USD' ? '' : '1 ' + cur + ' = ' + FX[cur].toFixed(4);
+      return '<div class="ao-bd-row ao-bd-col3">' +
+        '<span class="ao-bd-native">' + cur + ' ' + fmtMoney(byCur[cur].native) + '</span>' +
+        '<span class="ao-bd-rate">' + rate + '</span>' +
+        '<span class="ao-bd-usd">USD ' + fmtMoney(byCur[cur].usd) + '</span></div>';
+    }).join('');
+    bdPanel.innerHTML =
+      '<div class="ao-bd-title"><span>Breakdown by currency</span>' +
+        '<button type="button" class="ao-bd-close" aria-label="Close"><span class="material-symbols-rounded">close</span></button></div>' +
+      '<div class="ao-bd-header ao-bd-col3"><span class="ao-bd-header-col">Amount</span>' +
+        '<span class="ao-bd-header-col ao-bd-header-col--rate">Rate</span>' +
+        '<span class="ao-bd-header-col ao-bd-header-col--usd">USD</span></div>' +
+      rows +
+      '<div class="ao-bd-footer">' +
+        '<div class="ao-bd-footer-total"><span>Total (org currency)</span>' +
+          '<span class="ao-bd-footer-value">USD ' + fmtMoney(GRAND_USD) + '</span></div>' +
+        '<div class="ao-bd-footer-meta"><span class="ao-bd-footer-meta-title">Exchange rates &middot; Jun 16, 2026 &middot; Open Exchange Rates</span>' +
+          'Rates update daily. Converted USD amounts are estimates and may differ from amounts received.</div></div>';
+  }
+  function placeBd() {
+    var t = document.getElementById('ao-bd-open');
+    if (!t) return;
+    var r = t.getBoundingClientRect();
+    var pw = bdPanel.offsetWidth, ph = bdPanel.offsetHeight;
+    var left = Math.max(16, Math.min(r.left, window.innerWidth - pw - 16));
+    var top = r.bottom + 6;
+    if (top + ph > window.innerHeight - 16) top = Math.max(16, r.top - ph - 6);
+    bdPanel.style.left = left + 'px';
+    bdPanel.style.top = top + 'px';
+  }
+  function openBd() { buildBd(); bdPanel.classList.add('is-open'); placeBd(); }
+  function closeBd() { bdPanel.classList.remove('is-open'); }
+  var bdOpen = document.getElementById('ao-bd-open');
+  if (bdOpen) bdOpen.addEventListener('click', function (e) {
+    e.preventDefault(); e.stopPropagation();
+    if (bdPanel.classList.contains('is-open')) { closeBd(); } else { openBd(); }
+  });
+  bdPanel.addEventListener('click', function (e) { if (e.target.closest('.ao-bd-close')) closeBd(); });
+  document.addEventListener('click', function (e) {
+    if (bdPanel.classList.contains('is-open') && !bdPanel.contains(e.target) && !e.target.closest('#ao-bd-open')) closeBd();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBd(); });
+  window.addEventListener('resize', function () { if (bdPanel.classList.contains('is-open')) placeBd(); });
+
+  /* ── Filters drawer ── */
+  var aofBackdrop = document.getElementById('aof-backdrop');
+  var aofDrawer = document.getElementById('aof-drawer');
+  function openFilters() { aofBackdrop.classList.add('is-open'); aofDrawer.classList.add('is-open'); }
+  function closeFilters() { aofBackdrop.classList.remove('is-open'); aofDrawer.classList.remove('is-open'); }
+  var filtersBtn = document.querySelector('.ao-filters-btn');
+  if (filtersBtn) filtersBtn.addEventListener('click', openFilters);
+  var filtersCaret = document.querySelector('.ao-filters-caret');
+  if (filtersCaret) filtersCaret.addEventListener('click', openFilters);
+  var aofClose = document.getElementById('aof-close');
+  if (aofClose) aofClose.addEventListener('click', closeFilters);
+  aofBackdrop.addEventListener('click', closeFilters);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeFilters(); });
+
+  // tabs (Filters / Saved Filters)
+  var tabFilters = document.getElementById('aof-tab-filters');
+  var tabSaved = document.getElementById('aof-tab-saved');
+  var paneFilters = document.getElementById('aof-pane-filters');
+  var paneSaved = document.getElementById('aof-pane-saved');
+  function selectTab(isFilters) {
+    tabFilters.classList.toggle('is-active', isFilters);
+    tabSaved.classList.toggle('is-active', !isFilters);
+    paneFilters.classList.toggle('is-active', isFilters);
+    paneSaved.classList.toggle('is-active', !isFilters);
+  }
+  tabFilters.addEventListener('click', function () { selectTab(true); });
+  tabSaved.addEventListener('click', function () { selectTab(false); });
+
+  // currency filter → re-render table + summary cards
+  var curSelect = document.getElementById('aof-currency');
+  if (curSelect) curSelect.addEventListener('change', function () { render(this.value); });
+  var aofClear = document.getElementById('aof-clear');
+  if (aofClear) aofClear.addEventListener('click', function () {
+    if (curSelect) curSelect.value = 'all';
+    var sum = document.getElementById('aof-sum-ranges'); if (sum) sum.checked = false;
+    render('all');
+  });
+})();
+</script>
+
+<script>
+  DesignAnnotations.init({
+    page: 'Amounts owed report',
+    required: [
+      { text: 'Currency filter — filter the whole report to one currency', target: '.ao-filters-btn', sub: [
+        'Filters &rarr; Currency: pick a single currency (BRL, CAD, EUR, GBP, PHP, USD) or "All currencies"',
+        'Filtering narrows the table to that currency\'s members and retotals the Hours and Amount cards',
+        'The Amount then shows that currency\'s total in USD, with the original-currency total beneath',
+      ]},
+      { text: 'Hours — Regular vs Overtime split', target: '#ao-hours-sub', sub: [
+        'Below the total Hours, a secondary line splits it — e.g. "Regular 466:00:00 · Overtime 31:00:00"',
+        'Surfaces overtime exposure (premium-cost hours) at a glance and balances the Amount card\'s "View breakdown" line',
+        'Always visible (no click — just two values); re-totals when filtered by currency, and the Overtime term is dropped when there is none',
+      ]},
+      { text: 'View breakdown — per-currency popover below the Amount', target: '#ao-bd-open', sub: [
+        'The Amount (USD) carries a "View breakdown" link that opens a per-currency popover',
+        'Lists each currency: native amount, exchange rate, and converted USD value, plus the org-currency total',
+        'Shown only in the "All currencies" view; when filtered to one currency it is replaced by that currency\'s own total',
+      ]},
+      { text: 'Current rate — member\'s own (original) currency only', target: '.ao-rate', sub: [
+        'Shows the rate the member is actually paid — e.g. "EUR 18.00/hr", "BRL 30.00/hr", "USD 2,000.00/fixed"',
+        'No USD conversion here: the rate is fixed in the member\'s currency, while the USD equivalent fluctuates daily',
+        'Members without a rate show "No rate set"',
+      ]},
+      { text: 'Amount — organization currency, then original currency', target: '.ao-amount', sub: [
+        'Large line: the amount owed in the organization currency (USD) — what you actually pay out',
+        'Small line beneath: the same amount in the member\'s own (original) currency — e.g. "EUR 576.00"',
+        'Members already paid in USD show a single line',
+      ]},
+    ],
+    suggestions: [],
+  });
+</script>
+
+</body>
+</html>

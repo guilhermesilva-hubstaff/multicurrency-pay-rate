@@ -56,16 +56,9 @@
 
   <!-- Design Annotations — remove before shipping to production -->
   <script src="design-annotations.js"></script>
-  <script src="design-annotations.data.js"></script>
+  <script src="design-tasks.js"></script>
   <script>
-    DesignAnnotations.init({
-      pages:       window.DESIGN_ANNOTATIONS_DATA.pages,
-      annotations: window.DESIGN_ANNOTATIONS_DATA.annotations,
-      mount:       '#shell-content',
-      topOffset:   52,
-      trigger:     ['contextmenu', 'button'],
-      taskCenter:  { anchor: '#hs-topbar', position: 'after' },
-    });
+    DesignAnnotations.init({ page: 'Home', required: [], suggestions: [] });
   </script>
 </body>
 </html>

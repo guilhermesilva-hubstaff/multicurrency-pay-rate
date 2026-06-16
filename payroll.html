@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Payroll — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@18..48,100..700,0..1,-50..200&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="payroll.css" />
+  <link rel="stylesheet" href="epr.css" />
+</head>
+<body>
+
+<div id="shell-content">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-wrapper">
+      <div class="header-inner">
+        <h1 class="page-title">Manage payroll</h1>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="btn-support">Connect with Support</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-content">
+
+    <!-- ================== LEFT PANEL ================== -->
+    <div class="left-panel">
+      <div class="left-panel-title">Settings</div>
+
+      <!-- Vertical Tabs -->
+      <div style="
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        justify-content: center;
+        padding: 4px 0;
+        width: 100%;
+        position: relative;
+      ">
+        <!-- Tab 1: Payment workflow (inactive) -->
+        <div style="
+          height: 38px; display: flex; flex-direction: column;
+          align-items: flex-start; justify-content: center;
+          padding: 8px 16px; position: relative; cursor: pointer;
+        ">
+          <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
+            <span class="icon" style="font-size:18px;line-height:18px;color:#6b7280;">monetization_on</span>
+            <p style="font-family:'Roboto',sans-serif;font-weight:400;font-size:14px;line-height:20px;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px;">Payment workflow</p>
+          </div>
+        </div>
+
+        <!-- Tab 2: Organization level settings (inactive) -->
+        <div style="
+          height: 38px; display: flex; flex-direction: column;
+          align-items: flex-start; justify-content: center;
+          padding: 8px 16px; position: relative; cursor: pointer;
+        ">
+          <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
+            <span class="icon" style="font-size:18px;line-height:18px;color:#6b7280;">corporate_fare</span>
+            <p style="font-family:'Roboto',sans-serif;font-weight:400;font-size:14px;line-height:20px;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px;">Organization level settings</p>
+          </div>
+        </div>
+
+        <!-- Tab 3: Members settings (ACTIVE) -->
+        <div style="
+          height: 38px; display: flex; flex-direction: column;
+          align-items: flex-start; justify-content: center;
+          padding: 8px 16px; position: relative; cursor: pointer;
+        ">
+          <!-- Active left indicator bar -->
+          <div style="
+            position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            width: 3px; height: 24px; background: #0168dd; border-radius: 9999px;
+          "></div>
+          <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
+            <span class="icon" style="font-size:18px;line-height:18px;color:#0168dd;">account_circle</span>
+            <p style="font-family:'Roboto',sans-serif;font-weight:600;font-size:14px;line-height:20px;color:#0168dd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px;">Members settings</p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div><!-- end left-panel -->
+
+    <!-- ================== RIGHT PANEL ================== -->
+    <div class="right-panel">
+
+      <!-- Title row -->
+      <div style="display:flex;gap:12px;align-items:center;width:100%;margin-bottom:16px;flex-shrink:0;">
+        <div style="display:flex;flex:1 0 0;gap:4px;align-items:center;min-width:0;">
+          <div style="display:flex;gap:12px;align-items:center;flex-shrink:0;">
+            <p style="font-family:'Roboto',sans-serif;font-weight:500;font-size:20px;line-height:28px;color:#111827;white-space:nowrap;">Members settings</p>
+            <div style="display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:9999px;cursor:pointer;flex-shrink:0;">
+              <span class="icon" style="font-size:18px;line-height:18px;color:#6b7280;">history</span>
+            </div>
+          </div>
+        </div>
+        <!-- Next run pill -->
+        <div style="
+          background:#d4edff; border-radius:9999px; padding:4px 0;
+          display:flex; align-items:center; justify-content:center; flex-shrink:0;
+        ">
+          <div style="padding-left:6px;width:18px;display:flex;align-items:flex-start;flex-shrink:0;overflow:visible;">
+            <span class="icon" style="font-size:18px;line-height:18px;color:#0a4b96;">currency_exchange</span>
+          </div>
+          <div style="padding:0 8px;flex-shrink:0;">
+            <p style="font-size:0;line-height:0;white-space:nowrap;text-align:center;">
+              <span style="font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:20px;color:#0a4b96;">Next run:</span><span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:12px;line-height:16px;color:#0a4b96;"> Mon, 13 Oct, 2025</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div class="card">
+        <!-- Description -->
+        <div class="card-description">
+          <div class="card-desc-title">Select members and add the missing data below to get them ready for payroll</div>
+          <div class="card-desc-sub">To complete setup, define for each member the missing data.</div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="table-toolbar">
+          <div class="toolbar-left">
+            <div class="search-box">
+              <span class="icon" style="font-size:18px;color:#6B7280;">search</span>
+              <input class="search-input" type="text" placeholder="Search" />
+            </div>
+            <button class="btn-filter" onclick="openFilterDrawer()">
+              <span class="icon">filter_list</span>
+              Filters
+              <span class="filter-badge">1+</span>
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <div class="pill-filter active">All (85)</div>
+            <div class="pill-filter">Ready - manual (0)</div>
+            <div class="pill-filter">Ready - automatic (0)</div>
+            <div class="pill-filter">Missing data (10)</div>
+            <button class="btn-cols">
+              <span class="icon" style="font-size:18px;color:#6b7280;">view_column</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Batch bar -->
+        <div class="batch-bar" id="batch-bar" style="display:none">
+          <div class="batch-left">
+            <div class="batch-pill">
+              <span class="batch-pill__label" id="batch-count">2 selected</span>
+              <button class="batch-pill__close" onclick="clearSelection()" title="Deselect all">
+                <span class="icon">close</span>
+              </button>
+            </div>
+            <button class="batch-select-all" id="batch-select-all-btn" onclick="selectAll()">
+              Select all (30)
+            </button>
+          </div>
+          <div class="batch-right">
+            <button class="batch-action-btn" onclick="openEditPayRateModal()">Edit pay rate</button>
+            <button class="batch-action-btn">Edit pay period</button>
+            <button class="batch-action-btn">Manage primary payout method</button>
+            <button class="batch-more-btn" id="more-btn" onclick="toggleDropdown(event)">
+              <span class="icon">more_vert</span>
+            </button>
+          </div>
+          <div class="batch-dropdown" id="more-dropdown" style="display:none">
+            <button class="batch-dropdown__item">Manage backup payout method</button>
+            <button class="batch-dropdown__item">Remove primary payout method</button>
+            <button class="batch-dropdown__item">Remove backup payout method</button>
+            <button class="batch-dropdown__item">Manage timesheet approval</button>
+            <button class="batch-dropdown__item" onclick="openModal()">Set as no Wise update needed</button>
+            <button class="batch-dropdown__item">Manage payroll adjustments</button>
+            <button class="batch-dropdown__item">Manage overtime policy</button>
+            <button class="batch-dropdown__item">Manage time off policy</button>
+            <button class="batch-dropdown__item">Manage work breaks policy</button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+          <table>
+            <colgroup>
+              <col class="col-check" /><col class="col-member" /><col class="col-status" />
+              <col class="col-payinfo" /><col class="col-automation" /><col class="col-payout" />
+              <col class="col-wiseupdate" /><col class="col-backup" /><col class="col-lastpayment" />
+              <col class="col-timesheet" /><col class="col-adjustments" /><col class="col-overtime" />
+              <col class="col-timeoff" /><col class="col-workbreak" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="col-check" onclick="toggleAll()" style="cursor:pointer;padding:8px 12px;">
+                  <div class="checkbox-wrap">
+                    <div class="cb-box" id="cb-header" data-checked="false"></div>
+                  </div>
+                </th>
+                <th class="col-member">
+                  <div class="th-inner">Member <span class="icon th-sort">arrow_upward_alt</span></div>
+                </th>
+                <th class="col-status">
+                  <div class="th-inner">Payroll status <span class="icon th-sort">arrow_upward_alt</span></div>
+                </th>
+                <th class="col-payinfo">
+                  <div class="th-inner">Pay info <span class="icon th-sort">arrow_upward_alt</span></div>
+                </th>
+                <th class="col-automation">Payment automation</th>
+                <th class="col-payout">
+                  <div class="th-inner">Primary payout method <span class="icon th-info">info</span></div>
+                </th>
+                <th class="col-wiseupdate">
+                  <div class="th-inner">
+                    Wise update <span class="icon th-info">info</span>
+                  </div>
+                </th>
+                <th class="col-backup">
+                  <div class="th-inner">Backup payout method <span class="icon th-info">info</span></div>
+                </th>
+                <th class="col-lastpayment">Last Payment</th>
+                <th class="col-timesheet">Timesheet approval</th>
+                <th class="col-adjustments">Payroll Adjustments</th>
+                <th class="col-overtime">Overtime</th>
+                <th class="col-timeoff">Time off</th>
+                <th class="col-workbreak">Work break</th>
+              </tr>
+            </thead>
+            <tbody id="members-tbody">
+              <!-- Row 1: Liam Johnson -->
+              <tr data-row="0" data-currency="USD">
+                <td class="col-check" onclick="toggleRow(0)"><div class="checkbox-wrap"><div class="cb-box" id="cb-0" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#7C3AED;">LJ</div><span class="member-name">Liam Johnson</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">USD 1,500/wk · Every Friday</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Weekly</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate"><div class="status-cell"><span class="icon icon-status-updated">check</span><p class="label-status-updated">Updated</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="pill pill-gray">Yes</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">1 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">4 active</span></td>
+              </tr>
+              <!-- Row 2: Emma Davis -->
+              <tr data-row="1" data-currency="EUR">
+                <td class="col-check" onclick="toggleRow(1)"><div class="checkbox-wrap"><div class="cb-box" id="cb-1" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#2563EB;">ED</div><span class="member-name">Emma Davis</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (manual)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">EUR 5,000/mo · 4th of month</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Manual</span><span class="automation-sub">Monthly — 4th</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate"><div class="status-cell"><span class="icon icon-status-updated">check</span><p class="label-status-updated">Updated</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-timeoff"><span class="text-muted">—</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">3 active</span></td>
+              </tr>
+              <!-- Row 3: Ethan Smith -->
+              <tr data-row="2" data-currency="GBP">
+                <td class="col-check" onclick="toggleRow(2)"><div class="checkbox-wrap"><div class="cb-box" id="cb-2" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#059669;">ES</div><span class="member-name">Ethan Smith</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">GBP 5,200/mo · 4th of month</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Manual</span><span class="automation-sub">Monthly — 4th</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="pill pill-gray">Yes</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">1 active</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">4 active</span></td>
+              </tr>
+              <!-- Row 4: Noah Wilson -->
+              <tr data-row="3" data-currency="AUD">
+                <td class="col-check" onclick="toggleRow(3)"><div class="checkbox-wrap"><div class="cb-box" id="cb-3" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#DC2626;">NW</div><span class="member-name">Noah Wilson</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">AUD 2,800/bi-wk · Every other Mon</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Bi-weekly</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><span class="text-muted">—</span></td>
+                <td class="col-overtime"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">1 active</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">2 active</span></td>
+              </tr>
+              <!-- Row 5: Ava Martinez -->
+              <tr data-row="4" data-currency="USD">
+                <td class="col-check" onclick="toggleRow(4)"><div class="checkbox-wrap"><div class="cb-box" id="cb-4" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#D97706;">AM</div><span class="member-name">Ava Martinez</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Hourly</span><span class="cell-sub">USD 25.00/hr · Weekly · Fri</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Weekly</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="pill pill-gray">Yes</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-timeoff"><span class="text-muted">—</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">4 active</span></td>
+              </tr>
+              <!-- Row 6: Joseph Garcia -->
+              <tr data-row="5" data-currency="CAD">
+                <td class="col-check" onclick="toggleRow(5)"><div class="checkbox-wrap"><div class="cb-box" id="cb-5" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#7C3AED;">JG</div><span class="member-name">Joseph Garcia</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (manual)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">CAD 6,500/mo · 1st of month</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Monthly — 1st</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate"><div class="status-cell"><span class="icon icon-status-updated">check</span><p class="label-status-updated">Updated</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">2 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">4 active</span></td>
+              </tr>
+              <!-- Row 7: Mason Rodriguez -->
+              <tr data-row="6" data-currency="BRL">
+                <td class="col-check" onclick="toggleRow(6)"><div class="checkbox-wrap"><div class="cb-box" id="cb-6" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#1D4ED8;">MR</div><span class="member-name">Mason Rodriguez</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">BRL 1,800/wk · Every Friday</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Weekly</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="pill pill-gray">Yes</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">3 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-workbreak"><span class="text-muted">—</span></td>
+              </tr>
+              <!-- Row 8: Mia Hernandez -->
+              <tr data-row="7" data-currency="EUR">
+                <td class="col-check" onclick="toggleRow(7)"><div class="checkbox-wrap"><div class="cb-box" id="cb-7" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#BE185D;">MH</div><span class="member-name">Mia Hernandez</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (automatic)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">EUR 5,000/mo · 4th of month</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Manual</span><span class="automation-sub">Monthly — 4th</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;"><span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>
+                <td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div></td>
+                <td class="col-overtime"><span class="text-muted">—</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">2 active</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">4 active</span></td>
+              </tr>
+              <!-- Row 9: Lucas Lee (PayPal) -->
+              <tr data-row="8" data-currency="GBP">
+                <td class="col-check" onclick="toggleRow(8)"><div class="checkbox-wrap"><div class="cb-box" id="cb-8" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#0EA5E9;">LL</div><span class="member-name">Lucas Lee</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (manual)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">GBP 5,500/mo · 4th of month</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Manual</span><span class="automation-sub">Monthly — 4th</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><div style="position:relative;height:14px;width:56px;overflow:hidden;flex-shrink:0;"><div style="position:absolute;top:20.45%;right:57.92%;bottom:21.98%;left:28.76%;"><img src="https://www.figma.com/api/mcp/asset/7eea7480-c3d2-4d18-8ab4-09d70f561b3a" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:38.69%;right:45.79%;bottom:21.06%;left:41.26%;"><img src="https://www.figma.com/api/mcp/asset/8c6410a3-1d1e-4050-976b-b3f5eba18a75" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:39.62%;right:31.72%;bottom:8.55%;left:55.51%;"><img src="https://www.figma.com/api/mcp/asset/abb25397-9923-49da-99f9-dd61fdb854ca" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.45%;right:18.58%;bottom:21.98%;left:68.10%;"><img src="https://www.figma.com/api/mcp/asset/e9bebe7d-9143-497b-bb9c-69e92bfbedb7" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:38.69%;right:6.45%;bottom:21.06%;left:80.60%;"><img src="https://www.figma.com/api/mcp/asset/58ceae91-bbb9-43d0-8ab8-a1f104b489f4" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.45%;right:0.33%;bottom:21.98%;left:93.94%;"><img src="https://www.figma.com/api/mcp/asset/6726b065-2238-4e89-b5fc-cbcc9d19af4c" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:3.10%;right:80.20%;bottom:11.65%;left:0.86%;"><img src="https://www.figma.com/api/mcp/asset/35630e77-acf7-4bd0-a536-d0a7c7febadc" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:23.23%;right:79.37%;bottom:8.55%;left:4.99%;"><img src="https://www.figma.com/api/mcp/asset/e0f65df8-1753-45a2-b643-83ead6b5b848" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.32%;right:81.41%;bottom:45.78%;left:6.46%;"><img src="https://www.figma.com/api/mcp/asset/8c506b78-19f2-48af-9f93-3faa12ee5663" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:0%;right:81.30%;bottom:18.70%;left:0%;"><img src="https://www.figma.com/api/mcp/asset/2892a7df-1d3c-4ae2-8927-530fe507e067" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div></div><span style="background:#f3f4f6;border-radius:9999px;padding:2px 8px;font-size:12px;font-weight:400;color:#4b5563;white-space:nowrap;">Invited</span></div></td>
+                <td class="col-wiseupdate"><div class="status-cell"><span class="icon" style="font-size:18px;color:#6b7280;line-height:18px;">do_not_disturb_on</span><p class="label-status-na">Not applicable</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">—</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-timeoff"><span class="text-muted">—</span></td>
+                <td class="col-workbreak"><span class="pill pill-gray">1 active</span></td>
+              </tr>
+              <!-- Row 10: Adam Williams (PayPal) -->
+              <tr data-row="9" data-currency="USD">
+                <td class="col-check" onclick="toggleRow(9)"><div class="checkbox-wrap"><div class="cb-box" id="cb-9" data-checked="false"></div></div></td>
+                <td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:#6D28D9;">AW</div><span class="member-name">Adam Williams</span></div></td>
+                <td class="col-status"><span class="pill pill-green">Ready (manual)</span></td>
+                <td class="col-payinfo"><div class="cell-stack"><span class="cell-main">Fixed</span><span class="cell-sub">USD 3,200/bi-wk · Every other Mon</span></div></td>
+                <td class="col-automation"><div class="automation-cell"><span class="automation-main">Automatic</span><span class="automation-sub">Bi-weekly</span></div></td>
+                <td class="col-payout"><div class="payout-cell"><div style="position:relative;height:14px;width:56px;overflow:hidden;flex-shrink:0;"><div style="position:absolute;top:20.45%;right:57.92%;bottom:21.98%;left:28.76%;"><img src="https://www.figma.com/api/mcp/asset/7eea7480-c3d2-4d18-8ab4-09d70f561b3a" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:38.69%;right:45.79%;bottom:21.06%;left:41.26%;"><img src="https://www.figma.com/api/mcp/asset/8c6410a3-1d1e-4050-976b-b3f5eba18a75" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:39.62%;right:31.72%;bottom:8.55%;left:55.51%;"><img src="https://www.figma.com/api/mcp/asset/abb25397-9923-49da-99f9-dd61fdb854ca" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.45%;right:18.58%;bottom:21.98%;left:68.10%;"><img src="https://www.figma.com/api/mcp/asset/e9bebe7d-9143-497b-bb9c-69e92bfbedb7" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:38.69%;right:6.45%;bottom:21.06%;left:80.60%;"><img src="https://www.figma.com/api/mcp/asset/58ceae91-bbb9-43d0-8ab8-a1f104b489f4" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.45%;right:0.33%;bottom:21.98%;left:93.94%;"><img src="https://www.figma.com/api/mcp/asset/6726b065-2238-4e89-b5fc-cbcc9d19af4c" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:3.10%;right:80.20%;bottom:11.65%;left:0.86%;"><img src="https://www.figma.com/api/mcp/asset/35630e77-acf7-4bd0-a536-d0a7c7febadc" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:23.23%;right:79.37%;bottom:8.55%;left:4.99%;"><img src="https://www.figma.com/api/mcp/asset/e0f65df8-1753-45a2-b643-83ead6b5b848" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:20.32%;right:81.41%;bottom:45.78%;left:6.46%;"><img src="https://www.figma.com/api/mcp/asset/8c506b78-19f2-48af-9f93-3faa12ee5663" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div><div style="position:absolute;top:0%;right:81.30%;bottom:18.70%;left:0%;"><img src="https://www.figma.com/api/mcp/asset/2892a7df-1d3c-4ae2-8927-530fe507e067" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;"></div></div><span style="background:#f3f4f6;border-radius:9999px;padding:2px 8px;font-size:12px;font-weight:400;color:#4b5563;white-space:nowrap;">Invited</span></div></td>
+                <td class="col-wiseupdate"><div class="status-cell"><span class="icon" style="font-size:18px;color:#6b7280;line-height:18px;">do_not_disturb_on</span><p class="label-status-na">Not applicable</p></div></td>
+                <td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>
+                <td class="col-lastpayment"><span style="font-size:12px;color:#111827;">—</span></td>
+                <td class="col-timesheet"><span class="text-muted">No</span></td>
+                <td class="col-adjustments"><div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div></td>
+                <td class="col-overtime"><span class="pill pill-gray">3 active</span></td>
+                <td class="col-timeoff"><span class="pill pill-gray">4 active</span></td>
+                <td class="col-workbreak"><span class="text-muted">—</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <div class="pagination-info">
+            <span id="pagination-info-text">Showing 1–10 of 30</span>
+            <select class="per-page-select" id="per-page-select" onchange="changeRowsPerPage(this.value)">
+              <option value="10" selected>10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+            Per page
+          </div>
+          <div class="pagination-pages" id="pagination-pages"></div>
+        </div>
+      </div><!-- end .card -->
+    </div><!-- end right-panel -->
+  </div><!-- end body-content -->
+</div><!-- end #shell-content -->
+
+<!-- ======== FILTER DRAWER ======== -->
+<div class="filter-drawer-overlay hidden" id="filter-drawer-overlay" onclick="closeFilterDrawer()"></div>
+<aside class="filter-drawer hidden" id="filter-drawer">
+  <div class="drawer-heading">
+    <span class="drawer-heading-text">Filters</span>
+    <button class="drawer-close" onclick="closeFilterDrawer()" title="Close filters">
+      <span class="icon">close</span>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section">
+      <p class="drawer-section-title">General settings</p>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Pay period</span>
+        <div class="drawer-field"><span class="drawer-field-value">All pay periods</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Pay type</span>
+        <div class="drawer-field"><span class="drawer-field-value">All pay types</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Pay rate</span>
+        <div class="drawer-field"><span class="drawer-field-value">All</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Currency</span>
+        <div class="drawer-dropdown-wrapper" id="currency-filter-wrapper">
+          <div class="drawer-field" onclick="toggleCurrencyFilter(event)" style="cursor:pointer;">
+            <span class="drawer-field-value" id="currency-filter-value">All currencies</span>
+            <span class="icon drawer-field-chevron" id="currency-filter-chevron">expand_more</span>
+          </div>
+          <div class="drawer-dropdown-menu hidden" id="currency-filter-menu">
+            <div class="drawer-dropdown-item selected" onclick="selectCurrencyFilter(this, 'All currencies')">All currencies</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'USD')">USD — US Dollar</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'EUR')">EUR — Euro</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'GBP')">GBP — British Pound</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'AUD')">AUD — Australian Dollar</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'CAD')">CAD — Canadian Dollar</div>
+            <div class="drawer-dropdown-item" onclick="selectCurrencyFilter(this, 'BRL')">BRL — Brazilian Real</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-divider"></div>
+    <div class="drawer-section">
+      <p class="drawer-section-title">Payment details</p>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Primary payout method</span>
+        <div class="drawer-field"><span class="drawer-field-value">All statuses</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Primary payout method status</span>
+        <div class="drawer-field"><span class="drawer-field-value">All statuses</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Backup payout method</span>
+        <div class="drawer-field"><span class="drawer-field-value">All statuses</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Backup payout method status</span>
+        <div class="drawer-field"><span class="drawer-field-value">All statuses</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Wise update status</span>
+        <div class="drawer-dropdown-wrapper" id="wise-status-wrapper">
+          <div class="drawer-field" onclick="toggleWiseStatusDropdown(event)" style="cursor:pointer;">
+            <span class="drawer-field-value" id="wise-status-value">Show All</span>
+            <span class="icon drawer-field-chevron" id="wise-status-chevron">expand_more</span>
+          </div>
+          <div class="drawer-dropdown-menu hidden" id="wise-status-menu">
+            <div class="drawer-dropdown-item selected" onclick="selectWiseStatus(this, 'Show All')">Show All</div>
+            <div class="drawer-dropdown-item" onclick="selectWiseStatus(this, 'None')">None</div>
+            <div class="drawer-dropdown-item" onclick="selectWiseStatus(this, 'Pending')">Pending</div>
+            <div class="drawer-dropdown-item" onclick="selectWiseStatus(this, 'Updated')">Updated</div>
+            <div class="drawer-dropdown-item" onclick="selectWiseStatus(this, 'Expired')">Expired</div>
+            <div class="drawer-dropdown-item" onclick="selectWiseStatus(this, 'Not applicable')">Not applicable</div>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Payment automation</span>
+        <div class="drawer-field"><span class="drawer-field-value">All types</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Timesheet approval</span>
+        <div class="drawer-field"><span class="drawer-field-value">All</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+    </div>
+    <div class="drawer-divider"></div>
+    <div class="drawer-section">
+      <p class="drawer-section-title">Policies &amp; adjustments</p>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Payroll adjustments</span>
+        <div class="drawer-field"><span class="drawer-field-value">All payroll adjustments</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Overtime</span>
+        <div class="drawer-field"><span class="drawer-field-value">All</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Time off</span>
+        <div class="drawer-field"><span class="drawer-field-value">All</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+      <div class="drawer-field-group">
+        <span class="drawer-field-label">Work break</span>
+        <div class="drawer-field"><span class="drawer-field-value">All</span><span class="icon drawer-field-chevron">expand_more</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="drawer-btn-apply" onclick="applyFilters()">Apply filters</button>
+    <button class="drawer-btn-clear" onclick="clearAllFilters()">Clear filters</button>
+  </div>
+</aside>
+
+<!-- ======== MODAL: "Set as no Wise update needed?" ======== -->
+<div class="modal-overlay hidden" id="wise-modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Set as no Wise update needed?</h2>
+      <button class="modal-close" onclick="closeModal()" title="Close">
+        <span class="icon">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-members-strip" style="position:relative;">
+        <div class="modal-avatar-stack">
+          <div class="modal-avatar-frame"><div class="modal-avatar modal-avatar--green"></div></div>
+          <div class="modal-avatar-frame"><div class="modal-avatar modal-avatar--blue"></div></div>
+          <div class="modal-avatar-frame"><div class="modal-avatar modal-avatar--purple">RJ</div></div>
+        </div>
+        <button class="modal-members-count" id="modal-members-count" onclick="toggleMembersPopover(event)">
+          0 selected members
+        </button>
+        <div class="members-popover hidden" id="members-popover" style="position:absolute;top:calc(100% + 6px);right:0;left:auto;z-index:1200;min-width:220px;">
+          <div class="members-popover__header">Wise</div>
+          <ol class="members-popover__list" id="members-popover-list"></ol>
+        </div>
+      </div>
+      <ul class="modal-bullets">
+        <li>The selected members will be excluded from the Wise update.</li>
+        <li>They will stop receiving reminders and won't be able to receive payments via Wise.</li>
+        <li>To pay them with Wise again, you'll need to invite them back later.</li>
+      </ul>
+      <div class="modal-consent">
+        <div class="modal-consent-inner">
+          <div class="modal-consent-cb" id="modal-consent-cb" data-checked="false" onclick="toggleModalConsent()"></div>
+          <label class="modal-consent-label" onclick="toggleModalConsent()">
+            I understand these members won't receive payments via Wise unless re-added.
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn-confirm" id="modal-btn-confirm" disabled onclick="confirmModal()">Confirm change</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== MODAL: Edit pay rate ======== -->
+<div class="epr-overlay hidden" id="epr-overlay">
+  <div class="epr-dialog">
+    <!-- Header -->
+    <div class="epr-header">
+      <h2 class="epr-title" id="epr-title">Edit pay rate</h2>
+      <button class="epr-close" onclick="closeEditPayRateModal()" title="Close">
+        <span class="icon" style="font-size:16px;line-height:16px;color:#374151;">close</span>
+      </button>
+    </div>
+    <!-- Members breakdown card -->
+    <div class="epr-members-card">
+      <div class="epr-members-top">
+        <div class="epr-avatar-stack" id="epr-avatar-stack"></div>
+        <span class="epr-members-count" id="epr-members-count">0 selected members</span>
+      </div>
+      <div class="epr-members-breakdown" id="epr-members-breakdown"></div>
+    </div>
+    <!-- Full-width section divider -->
+    <div class="epr-section-divider"></div>
+    <!-- Section heading -->
+    <div class="epr-section-head">
+      <p class="epr-section-title">Define the new rate</p>
+      <p class="epr-section-sub">Choose a pay type and rate — we'll apply it to all selected members on the effective date you pick.</p>
+    </div>
+    <!-- Form -->
+    <div class="epr-body">
+      <!-- Row 1: Pay type + Currency -->
+      <div class="epr-row">
+        <!-- Pay type -->
+        <div class="epr-field">
+          <div class="epr-label-row">
+            <span class="epr-label">Pay type</span>
+            <span class="icon epr-info-icon">info</span>
+          </div>
+          <div class="epr-select-wrap">
+            <select class="epr-select" id="epr-pay-type" onchange="updateEprSuffix(); checkEprAlert();">
+              <option value="" disabled selected></option>
+              <option value="fixed">Fixed</option>
+              <option value="hourly">Hourly</option>
+            </select>
+            <span class="icon epr-select-arrow">keyboard_arrow_down</span>
+          </div>
+        </div>
+        <!-- Currency -->
+        <div class="epr-field">
+          <div class="epr-label-row">
+            <span class="epr-label">Currency</span>
+          </div>
+          <div class="epr-curr-wrap" id="epr-currency">
+            <button type="button" class="epr-curr-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="epr-curr-btn-text">USD — US Dollar</span>
+              <span class="icon epr-curr-chevron">keyboard_arrow_down</span>
+            </button>
+            <div class="epr-curr-panel" hidden>
+              <div class="epr-curr-search-row">
+                <span class="icon epr-curr-search-icon">search</span>
+                <input type="text" class="epr-curr-search" placeholder="Search currencies…" autocomplete="off" />
+              </div>
+              <ul class="epr-curr-list" role="listbox" aria-label="Currency"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row 2: Pay rate + Effective date -->
+      <div class="epr-row">
+        <!-- Pay rate -->
+        <div class="epr-field">
+          <div class="epr-label-row">
+            <span class="epr-label">Pay rate</span>
+            <span class="icon epr-info-icon">info</span>
+          </div>
+          <div class="epr-split-field">
+            <input type="text" class="epr-split-input" id="epr-rate-input" placeholder="0.00" oninput="checkEprAlert();" />
+            <span class="epr-split-suffix" id="epr-pay-suffix">USD/Monthly</span>
+          </div>
+        </div>
+        <!-- Effective date -->
+        <div class="epr-field">
+          <div class="epr-label-row">
+            <span class="epr-label">Effective date</span>
+            <span class="icon epr-info-icon">info</span>
+          </div>
+          <div class="epr-date-field">
+            <span class="icon epr-date-icon">calendar_today</span>
+            <span class="epr-date-text" id="epr-date-text">Fri, Oct 24, 2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Unusual currency warning -->
+    <div class="epr-alert epr-alert--warning" id="epr-currency-alert" style="display:none">
+      <span class="icon epr-alert-icon">warning</span>
+      <p class="epr-alert-body" id="epr-currency-alert-body"></p>
+      <button class="epr-alert-dismiss" onclick="this.closest('.epr-alert').style.display='none'" title="Dismiss">
+        <span class="icon">close</span>
+      </button>
+    </div>
+    <!-- Skipped members note -->
+    <div class="epr-alert" id="epr-skipped-alert">
+      <p class="epr-alert-body" id="epr-alert-body">1 member already at this rate — they'll be skipped. The new rate applies to the other 9 members.</p>
+      <button class="epr-alert-dismiss" onclick="this.closest('.epr-alert').style.display='none'" title="Dismiss">
+        <span class="icon">close</span>
+      </button>
+    </div>
+    <!-- Footer -->
+    <div class="epr-footer">
+      <button class="epr-btn-cancel" onclick="closeEditPayRateModal()">Cancel</button>
+      <button class="epr-btn-save" onclick="saveEditPayRate()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== Shell ======== -->
+<script src="hubstaff-shell.js"></script>
+<script>
+  HubstaffShell.init({
+    activeItem:    'financials',
+    expanded:      true,
+    activeSubHref: 'payroll.html'
+  });
+</script>
+
+<!-- ======== Page JS (ported from wise-integrations.html) ======== -->
+<script>
+  // ─── State ───────────────────────────────────────────────────────────────
+  const TOTAL_ROWS = 30;
+  const selected = new Set();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    generateAdditionalRows();
+    renderPage();
+    updateBatchBar();
+  });
+
+  // ─── Toggle a single row ─────────────────────────────────────────────────
+  function toggleRow(idx) {
+    if (selected.has(idx)) { selected.delete(idx); } else { selected.add(idx); }
+    renderCheckbox(idx, selected.has(idx));
+    updateBatchBar();
+  }
+
+  function selectAll() {
+    for (var i = 0; i < TOTAL_ROWS; i++) { selected.add(i); renderCheckbox(i, true); }
+    updateBatchBar();
+  }
+
+  function clearSelection() {
+    selected.clear();
+    for (var i = 0; i < TOTAL_ROWS; i++) { renderCheckbox(i, false); }
+    updateBatchBar();
+  }
+
+  function toggleAll() {
+    if (selected.size === TOTAL_ROWS) { clearSelection(); } else { selectAll(); }
+  }
+
+  function renderCheckbox(idx, checked) {
+    var box = document.getElementById('cb-' + idx);
+    if (!box) return;
+    box.setAttribute('data-checked', checked ? 'true' : 'false');
+    box.innerHTML = checked ? '<span class="icon" style="font-size:14px;color:#fff;line-height:1;">check_small</span>' : '';
+    var tr = box.closest('tr[data-row]');
+    if (tr) tr.classList.toggle('row-selected', checked);
+  }
+
+  function updateHeaderCheckbox() {
+    var hdr = document.getElementById('cb-header');
+    if (!hdr) return;
+    var allChecked  = selected.size === TOTAL_ROWS;
+    var someChecked = selected.size > 0 && !allChecked;
+    hdr.setAttribute('data-checked', allChecked ? 'true' : 'false');
+    if (allChecked) {
+      hdr.innerHTML = '<span class="icon" style="font-size:14px;color:#fff;line-height:1;">check_small</span>';
+      hdr.style.borderColor = '';
+    } else if (someChecked) {
+      hdr.innerHTML = '<span class="icon" style="font-size:14px;color:#0168DD;line-height:1;">remove</span>';
+      hdr.style.borderColor = '#0168DD';
+    } else {
+      hdr.innerHTML = '';
+      hdr.style.borderColor = '';
+    }
+  }
+
+  function updateBatchBar() {
+    var bar   = document.getElementById('batch-bar');
+    var count = document.getElementById('batch-count');
+    var n = selected.size;
+    if (n === 0) { bar.style.display = 'none'; }
+    else { bar.style.display = ''; count.textContent = n + ' selected'; }
+    updateHeaderCheckbox();
+  }
+
+  function toggleDropdown(evt) {
+    evt.stopPropagation();
+    var drop = document.getElementById('more-dropdown');
+    drop.style.display = drop.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function closeDropdown() {
+    var drop = document.getElementById('more-dropdown');
+    if (drop) drop.style.display = 'none';
+  }
+
+  document.addEventListener('click', function(evt) {
+    var bar  = document.getElementById('batch-bar');
+    var drop = document.getElementById('more-dropdown');
+    if (drop && bar && !bar.contains(evt.target)) { drop.style.display = 'none'; }
+  });
+
+  // ─── Modal ───────────────────────────────────────────────────────────────
+  function openModal() {
+    document.getElementById('more-dropdown').style.display = 'none';
+    var n = selected.size;
+    document.getElementById('modal-members-count').textContent = n + ' selected member' + (n !== 1 ? 's' : '');
+    var pop = document.getElementById('members-popover');
+    if (pop) pop.classList.add('hidden');
+    var cb = document.getElementById('modal-consent-cb');
+    cb.setAttribute('data-checked', 'false');
+    cb.innerHTML = '';
+    document.getElementById('modal-btn-confirm').disabled = true;
+    document.getElementById('wise-modal-overlay').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('wise-modal-overlay').classList.add('hidden');
+  }
+
+  function confirmModal() {
+    var newNA = 0, removedPending = 0, removedUpdated = 0, removedDeprecated = 0;
+    selected.forEach(function(idx) {
+      var tr = document.querySelector('tr[data-row="' + idx + '"]');
+      if (!tr) return;
+      var wiseCell = tr.querySelector('td.col-wiseupdate');
+      if (!wiseCell) return;
+      var prevStatus = wiseCell.dataset.wiseStatus || getWiseStatusFromCell(wiseCell);
+      if (prevStatus === 'pending')     removedPending++;
+      else if (prevStatus === 'deprecated') removedDeprecated++;
+      else if (prevStatus === 'updated')    removedUpdated++;
+      delete wiseCell.dataset.wiseStatus;
+      wiseCell.innerHTML = '<div class="status-cell"><span class="icon" style="font-size:18px;color:#6b7280;line-height:18px;">do_not_disturb_on</span><p class="label-status-na">Not applicable</p></div>';
+      newNA++;
+    });
+    closeModal();
+    clearSelection();
+    renderPage();
+  }
+
+  document.getElementById('wise-modal-overlay').addEventListener('click', function(evt) {
+    if (evt.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') closeModal();
+  });
+
+  function toggleModalConsent() {
+    var cb = document.getElementById('modal-consent-cb');
+    var nowChecked = cb.getAttribute('data-checked') !== 'true';
+    cb.setAttribute('data-checked', nowChecked ? 'true' : 'false');
+    cb.innerHTML = nowChecked ? '<span class="icon" style="font-size:12px;color:#fff;line-height:1;">check_small</span>' : '';
+    document.getElementById('modal-btn-confirm').disabled = !nowChecked;
+  }
+
+  // ─── Row names for members popover ───────────────────────────────────────
+  var ROW_NAMES = [
+    'Liam Johnson','Emma Davis','Ethan Smith','Noah Wilson','Ava Martinez',
+    'Joseph Garcia','Mason Rodriguez','Mia Hernandez','Lucas Lee','Adam Williams',
+    'Sophie Turner','Carlos Ramirez','Mei Li','James Patel','Fatima Hassan',
+    'David Kim','Priya Sharma','Tom Anderson','Isabella Rossi','Omar Abdullah',
+    'Yuki Tanaka','Ana Silva',
+    "Ryan O'Brien",'Layla Ahmed','Marcus Johnson','Elena Popescu',
+    'Felix Wagner','Aisha Osei','Nathan Lee','Sara Kovač'
+  ];
+
+  function toggleMembersPopover(evt) {
+    evt.stopPropagation();
+    var pop  = document.getElementById('members-popover');
+    var list = document.getElementById('members-popover-list');
+    if (pop.classList.contains('hidden')) {
+      var items = Array.from(selected).sort(function(a,b){return a-b;});
+      if (items.length === 0) {
+        list.innerHTML = '<li style="list-style:none;padding:0 0 8px 0;color:#6b7280;font-size:13px;">No members selected</li>';
+      } else {
+        list.innerHTML = items.map(function(idx) {
+          return '<li>' + (ROW_NAMES[idx] || 'Unknown') + '</li>';
+        }).join('');
+      }
+      pop.classList.remove('hidden');
+    } else {
+      pop.classList.add('hidden');
+    }
+  }
+
+  document.addEventListener('click', function(evt) {
+    var strip = document.querySelector('.modal-members-strip');
+    var pop   = document.getElementById('members-popover');
+    if (pop && strip && !strip.contains(evt.target)) { pop.classList.add('hidden'); }
+  });
+
+  // ─── Generate additional rows (rows 10–29) ────────────────────────────────
+  var EXTRA_USERS = [
+    [10,'Sophie Turner',  '#D97706','updated'],
+    [11,'Carlos Ramirez', '#059669','updated'],
+    [12,'Mei Li',         '#7C3AED','updated'],
+    [13,'James Patel',    '#DC2626','pending'],
+    [14,'Fatima Hassan',  '#2563EB','pending'],
+    [15,'David Kim',      '#0891B2','pending'],
+    [16,'Priya Sharma',   '#DB2777','pending'],
+    [17,'Tom Anderson',   '#65A30D','pending'],
+    [18,'Isabella Rossi', '#EA580C','pending'],
+    [19,'Omar Abdullah',  '#6D28D9','pending'],
+    [20,'Yuki Tanaka',    '#0D9488','pending'],
+    [21,'Ana Silva',      '#B45309','pending'],
+    [22,"Ryan O'Brien",   '#1D4ED8','na'],
+    [23,'Layla Ahmed',    '#7E22CE','na'],
+    [24,'Marcus Johnson', '#047857','na'],
+    [25,'Elena Popescu',  '#B91C1C','na'],
+    [26,'Felix Wagner',   '#0369A1','na'],
+    [27,'Aisha Osei',     '#9D174D','na'],
+    [28,'Nathan Lee',     '#164E63','na'],
+    [29,'Sara Kovač',     '#78350F','na'],
+  ];
+
+  function buildWiseUpdateCell(wiseStatus) {
+    if (wiseStatus === 'updated') {
+      return '<td class="col-wiseupdate"><div class="status-cell"><span class="icon icon-status-updated">check</span><p class="label-status-updated">Updated</p></div></td>';
+    } else if (wiseStatus === 'pending') {
+      return '<td class="col-wiseupdate" data-wise-status="pending"><div class="status-cell status-cell--pending"><span class="icon icon-status-pending">warning</span><p class="label-status-pending">Pending</p></div></td>';
+    } else {
+      return '<td class="col-wiseupdate"><div class="status-cell"><span class="icon" style="font-size:18px;color:#6b7280;line-height:18px;">do_not_disturb_on</span><p class="label-status-na">Not applicable</p></div></td>';
+    }
+  }
+
+  // ─── Payout logo HTML constants ──────────────────────────────────────────
+  var WISE_LOGO_HTML = '<img src="https://www.figma.com/api/mcp/asset/fea86418-3ce0-492e-911b-91569ea8cc6b" alt="Wise" style="height:10px;width:46px;display:block;flex-shrink:0;">';
+
+  var PAYPAL_LOGO_HTML = (function() {
+    var pieces = [
+      ['7eea7480-c3d2-4d18-8ab4-09d70f561b3a','20.45%','57.92%','21.98%','28.76%'],
+      ['8c6410a3-1d1e-4050-976b-b3f5eba18a75','38.69%','45.79%','21.06%','41.26%'],
+      ['abb25397-9923-49da-99f9-dd61fdb854ca','39.62%','31.72%','8.55%','55.51%'],
+      ['e9bebe7d-9143-497b-bb9c-69e92bfbedb7','20.45%','18.58%','21.98%','68.10%'],
+      ['58ceae91-bbb9-43d0-8ab8-a1f104b489f4','38.69%','6.45%','21.06%','80.60%'],
+      ['6726b065-2238-4e89-b5fc-cbcc9d19af4c','20.45%','0.33%','21.98%','93.94%'],
+      ['35630e77-acf7-4bd0-a536-d0a7c7febadc','3.10%','80.20%','11.65%','0.86%'],
+      ['e0f65df8-1753-45a2-b643-83ead6b5b848','23.23%','79.37%','8.55%','4.99%'],
+      ['8c506b78-19f2-48af-9f93-3faa12ee5663','20.32%','81.41%','45.78%','6.46%'],
+      ['2892a7df-1d3c-4ae2-8927-530fe507e067','0%','81.30%','18.70%','0%'],
+    ];
+    var inner = pieces.map(function(p) {
+      return '<div style="position:absolute;top:'+p[1]+';right:'+p[2]+';bottom:'+p[3]+';left:'+p[4]+';">'
+        + '<img src="https://www.figma.com/api/mcp/asset/'+p[0]+'" style="position:absolute;inset:0;max-width:none;width:100%;height:100%;display:block;">'
+        + '</div>';
+    }).join('');
+    return '<div style="position:relative;height:14px;width:56px;overflow:hidden;flex-shrink:0;">'+inner+'</div>';
+  })();
+
+  function buildPayoutCell(wiseStatus) {
+    if (wiseStatus === 'updated' || wiseStatus === 'pending') {
+      return '<td class="col-payout"><div class="payout-cell">' + WISE_LOGO_HTML + '<span class="pill pill-blue" style="font-size:11px;padding:1px 7px;">Connected</span></div></td>';
+    } else {
+      return '<td class="col-payout"><div class="payout-cell">' + PAYPAL_LOGO_HTML + '<span style="background:#f3f4f6;border-radius:9999px;padding:2px 8px;font-size:12px;font-weight:400;color:#4b5563;white-space:nowrap;">Invited</span></div></td>';
+    }
+  }
+
+  function generateAdditionalRows() {
+    var tbody = document.getElementById('members-tbody');
+    if (!tbody) return;
+    var adjustOptions = [
+      '<span class="text-muted">—</span>',
+      '<div class="adj-pills"><span class="adj-pill"><span class="icon">add_circle</span><span class="adj-pill__text">1 addition</span></span></div>',
+      '<div class="adj-pills"><span class="adj-pill"><span class="icon">do_not_disturb_on</span><span class="adj-pill__text">1 deduction</span></span></div>',
+    ];
+    var otOptions = [1,2,3,4,null];
+    var toOptions = [null,1,2,4];
+    var wbOptions = [1,2,4,null];
+
+    EXTRA_USERS.forEach(function(u) {
+      var idx = u[0], name = u[1], bg = u[2], wiseStatus = u[3];
+      var initials = name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+      var isNA = wiseStatus === 'na';
+      var pill = isNA ? '<span class="pill pill-green">Ready (manual)</span>' : '<span class="pill pill-green">Ready (automatic)</span>';
+      var ot = otOptions[idx % otOptions.length];
+      var to = toOptions[idx % toOptions.length];
+      var wb = wbOptions[idx % wbOptions.length];
+      var cell = function(v){ return v !== null ? '<span class="pill pill-gray">'+v+' active</span>' : '<span class="text-muted">—</span>'; };
+      var adj = adjustOptions[idx % adjustOptions.length];
+      var isManual = isNA || (idx % 3 === 0);
+      var autoMode = isManual ? 'Manual' : 'Automatic';
+      var autoSchedules = ['Weekly','Bi-weekly','Monthly — 1st','Monthly — 15th'];
+      var autoSub = isManual ? 'Monthly — 4th' : autoSchedules[idx % autoSchedules.length];
+      var payTypes = ['Fixed','Fixed','Fixed','Hourly'];
+      var payType = payTypes[idx % payTypes.length];
+      var currencies = ['USD','EUR','GBP','AUD','CAD','BRL'];
+      var currency = currencies[idx % currencies.length];
+      var salaries = ['1,200/wk','3,000/bi-wk','5,000/mo','6,200/mo','2,400/wk','4,800/mo'];
+      var payAmt = isManual ? (currency + ' 5,000/mo') : (currency + ' ' + salaries[idx % salaries.length]);
+      var periods = ['Every Friday','Every other Mon','1st of month','15th of month'];
+      var payPeriod = isManual ? '4th of month' : periods[idx % periods.length];
+      var ts = idx % 3 !== 0 ? '<span class="pill pill-gray">Yes</span>' : '<span class="text-muted">No</span>';
+
+      var tr = document.createElement('tr');
+      tr.dataset.row = idx;
+      tr.dataset.currency = currency;
+      tr.innerHTML =
+        '<td class="col-check" onclick="toggleRow('+idx+')"><div class="checkbox-wrap"><div class="cb-box" id="cb-'+idx+'" data-checked="false"></div></div></td>' +
+        '<td class="col-member"><div class="member-cell"><div class="member-avatar" style="background:'+bg+';">'+initials+'</div><span class="member-name">'+name+'</span></div></td>' +
+        '<td class="col-status">'+pill+'</td>' +
+        '<td class="col-payinfo"><div class="cell-stack"><span class="cell-main">'+payType+'</span><span class="cell-sub">'+payAmt+' · '+payPeriod+'</span></div></td>' +
+        '<td class="col-automation"><div class="automation-cell"><span class="automation-main">'+autoMode+'</span><span class="automation-sub">'+autoSub+'</span></div></td>' +
+        buildPayoutCell(wiseStatus) +
+        buildWiseUpdateCell(wiseStatus) +
+        '<td class="col-backup"><span style="color:#9CA3AF;font-size:12px;">None</span></td>' +
+        '<td class="col-lastpayment"><span style="font-size:12px;color:#111827;">Mar 15, 2025</span></td>' +
+        '<td class="col-timesheet">'+ts+'</td>' +
+        '<td class="col-adjustments">'+adj+'</td>' +
+        '<td class="col-overtime">'+cell(ot)+'</td>' +
+        '<td class="col-timeoff">'+cell(to)+'</td>' +
+        '<td class="col-workbreak">'+cell(wb)+'</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ─── Filter drawer ────────────────────────────────────────────────────────
+  function openFilterDrawer() {
+    var overlay = document.getElementById('filter-drawer-overlay');
+    var drawer  = document.getElementById('filter-drawer');
+    overlay.classList.remove('hidden');
+    overlay.classList.add('is-open');
+    drawer.classList.remove('hidden');
+    requestAnimationFrame(function(){ drawer.classList.add('is-open'); });
+  }
+
+  function closeFilterDrawer() {
+    var overlay = document.getElementById('filter-drawer-overlay');
+    var drawer  = document.getElementById('filter-drawer');
+    overlay.classList.remove('is-open');
+    drawer.classList.remove('is-open');
+    closeAllDrawerDropdowns();
+    setTimeout(function() {
+      if (!drawer.classList.contains('is-open')) {
+        overlay.classList.add('hidden');
+        drawer.classList.add('hidden');
+      }
+    }, 230);
+  }
+
+  function toggleWiseStatusDropdown(evt) {
+    evt.stopPropagation();
+    var menu    = document.getElementById('wise-status-menu');
+    var chevron = document.getElementById('wise-status-chevron');
+    var isOpen  = !menu.classList.contains('hidden');
+    closeAllDrawerDropdowns();
+    if (!isOpen) { menu.classList.remove('hidden'); chevron.textContent = 'expand_less'; }
+  }
+
+  function selectWiseStatus(el, value) {
+    el.closest('.drawer-dropdown-menu').querySelectorAll('.drawer-dropdown-item').forEach(function(i){ i.classList.remove('selected'); });
+    el.classList.add('selected');
+    var valueEl = document.getElementById('wise-status-value');
+    valueEl.textContent = value;
+    var isDefault = (value === 'Show All' || value === 'All');
+    valueEl.classList.toggle('has-value', !isDefault);
+    closeAllDrawerDropdowns();
+    var statusMap = { 'Updated':'updated','Pending':'pending','Expired':'deprecated','Not applicable':'na' };
+    pendingWiseStatusFilter = statusMap[value] || null;
+  }
+
+  function toggleCurrencyFilter(evt) {
+    evt.stopPropagation();
+    var menu    = document.getElementById('currency-filter-menu');
+    var chevron = document.getElementById('currency-filter-chevron');
+    var isOpen  = !menu.classList.contains('hidden');
+    closeAllDrawerDropdowns();
+    if (!isOpen) { menu.classList.remove('hidden'); chevron.textContent = 'expand_less'; }
+  }
+
+  function selectCurrencyFilter(el, value) {
+    el.closest('.drawer-dropdown-menu').querySelectorAll('.drawer-dropdown-item').forEach(function(i){ i.classList.remove('selected'); });
+    el.classList.add('selected');
+    var valueEl = document.getElementById('currency-filter-value');
+    valueEl.textContent = value;
+    var isDefault = (value === 'All currencies');
+    valueEl.classList.toggle('has-value', !isDefault);
+    closeAllDrawerDropdowns();
+    pendingCurrencyFilter = isDefault ? null : value.split(' ')[0]; // extract code e.g. 'USD'
+  }
+
+  // ─── Pagination + filter engine ───────────────────────────────────────────
+  var currentPage = 1;
+  var rowsPerPage = 10;
+  var activeWiseStatusFilter  = null;
+  var pendingWiseStatusFilter = null;
+  var activeCurrencyFilter    = null;
+  var pendingCurrencyFilter   = null;
+
+  function getWiseStatusFromCell(td) {
+    if (!td) return null;
+    var attr = td.dataset.wiseStatus;
+    if (attr) return attr;
+    if (td.querySelector('.icon-status-updated')) return 'updated';
+    if (td.querySelector('.label-status-na'))     return 'na';
+    return null;
+  }
+
+  function getAllTableRows() {
+    return Array.from(document.querySelectorAll('#members-tbody tr[data-row]'));
+  }
+
+  function getFilteredRows() {
+    var rows = getAllTableRows();
+    if (activeWiseStatusFilter) {
+      rows = rows.filter(function(tr) {
+        var wiseCell = tr.querySelector('td.col-wiseupdate');
+        return getWiseStatusFromCell(wiseCell) === activeWiseStatusFilter;
+      });
+    }
+    if (activeCurrencyFilter) {
+      rows = rows.filter(function(tr) {
+        return tr.dataset.currency === activeCurrencyFilter;
+      });
+    }
+    return rows;
+  }
+
+  function renderPage() {
+    var allRows  = getAllTableRows();
+    var filtered = getFilteredRows();
+    var start = (currentPage - 1) * rowsPerPage;
+    var end   = start + rowsPerPage;
+    var visibleSet = new Set(filtered.slice(start, end).map(function(r){ return r.dataset.row; }));
+    allRows.forEach(function(tr){ tr.style.display = visibleSet.has(tr.dataset.row) ? '' : 'none'; });
+    updatePaginationControls(filtered.length);
+  }
+
+  function updatePaginationControls(total) {
+    var totalPages = Math.ceil(total / rowsPerPage) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    var s = total === 0 ? 0 : (currentPage - 1) * rowsPerPage + 1;
+    var e = Math.min(currentPage * rowsPerPage, total);
+    var infoEl = document.getElementById('pagination-info-text');
+    if (infoEl) infoEl.textContent = 'Showing ' + s + '–' + e + ' of ' + total;
+    var pagesEl = document.getElementById('pagination-pages');
+    if (!pagesEl) return;
+    pagesEl.innerHTML = '';
+    if (currentPage > 1) {
+      var prev = document.createElement('button');
+      prev.className = 'page-next';
+      prev.innerHTML = '<span class="icon" style="font-size:16px;color:#6B7280;">chevron_left</span> Prev';
+      prev.onclick = function(){ goToPage(currentPage - 1); };
+      pagesEl.appendChild(prev);
+    }
+    var maxBtns = 5;
+    var startPage = Math.max(1, currentPage - 2);
+    var endPage   = Math.min(totalPages, startPage + maxBtns - 1);
+    if (endPage - startPage < maxBtns - 1) startPage = Math.max(1, endPage - maxBtns + 1);
+    for (var p = startPage; p <= endPage; p++) {
+      (function(page) {
+        var btn = document.createElement('button');
+        btn.className = 'page-btn' + (page === currentPage ? ' active' : '');
+        btn.textContent = page;
+        btn.onclick = function(){ goToPage(page); };
+        pagesEl.appendChild(btn);
+      })(p);
+    }
+    if (currentPage < totalPages) {
+      var next = document.createElement('button');
+      next.className = 'page-next';
+      next.innerHTML = 'Next <span class="icon" style="font-size:16px;color:#6B7280;">chevron_right</span>';
+      next.onclick = function(){ goToPage(currentPage + 1); };
+      pagesEl.appendChild(next);
+    }
+  }
+
+  function goToPage(page) { currentPage = page; renderPage(); }
+  function changeRowsPerPage(val) { rowsPerPage = parseInt(val, 10); currentPage = 1; renderPage(); }
+
+  function applyFilters() {
+    activeWiseStatusFilter = pendingWiseStatusFilter;
+    activeCurrencyFilter   = pendingCurrencyFilter;
+    currentPage = 1;
+    renderPage();
+    closeFilterDrawer();
+  }
+
+  function clearAllFilters() {
+    activeWiseStatusFilter = null;
+    pendingWiseStatusFilter = null;
+    activeCurrencyFilter = null;
+    pendingCurrencyFilter = null;
+    var wiseEl = document.getElementById('wise-status-value');
+    if (wiseEl) { wiseEl.textContent = 'Show All'; wiseEl.classList.remove('has-value'); }
+    var currEl = document.getElementById('currency-filter-value');
+    if (currEl) { currEl.textContent = 'All currencies'; currEl.classList.remove('has-value'); }
+    document.querySelectorAll('.drawer-dropdown-item').forEach(function(i){ i.classList.remove('selected'); });
+    currentPage = 1;
+    renderPage();
+  }
+
+  function closeAllDrawerDropdowns() {
+    document.querySelectorAll('.drawer-dropdown-menu').forEach(function(m){ m.classList.add('hidden'); });
+    document.querySelectorAll('#wise-status-chevron, #currency-filter-chevron').forEach(function(c){ c.textContent = 'expand_more'; });
+  }
+
+  document.addEventListener('click', function(evt) {
+    if (!evt.target.closest('.drawer-dropdown-wrapper')) { closeAllDrawerDropdowns(); }
+  });
+
+
+  // ═══════════════════════════════════════════════════════
+  //  EDIT PAY RATE MODAL
+  // ═══════════════════════════════════════════════════════
+  (function() {
+    var EPR_CURRENCIES = [
+      { code:'AED', name:'UAE Dirham' },
+      { code:'ARS', name:'Argentine Peso' },
+      { code:'AUD', name:'Australian Dollar' },
+      { code:'BDT', name:'Bangladeshi Taka' },
+      { code:'BGN', name:'Bulgarian Lev' },
+      { code:'BRL', name:'Brazilian Real' },
+      { code:'CAD', name:'Canadian Dollar' },
+      { code:'CHF', name:'Swiss Franc' },
+      { code:'CLP', name:'Chilean Peso' },
+      { code:'CNY', name:'Chinese Yuan' },
+      { code:'COP', name:'Colombian Peso' },
+      { code:'CZK', name:'Czech Koruna' },
+      { code:'DKK', name:'Danish Krone' },
+      { code:'EGP', name:'Egyptian Pound' },
+      { code:'EUR', name:'Euro' },
+      { code:'GBP', name:'British Pound' },
+      { code:'HKD', name:'Hong Kong Dollar' },
+      { code:'HUF', name:'Hungarian Forint' },
+      { code:'IDR', name:'Indonesian Rupiah' },
+      { code:'ILS', name:'Israeli Shekel' },
+      { code:'INR', name:'Indian Rupee' },
+      { code:'JPY', name:'Japanese Yen' },
+      { code:'KRW', name:'South Korean Won' },
+      { code:'MAD', name:'Moroccan Dirham' },
+      { code:'MXN', name:'Mexican Peso' },
+      { code:'MYR', name:'Malaysian Ringgit' },
+      { code:'NGN', name:'Nigerian Naira' },
+      { code:'NOK', name:'Norwegian Krone' },
+      { code:'NZD', name:'New Zealand Dollar' },
+      { code:'PEN', name:'Peruvian Sol' },
+      { code:'PHP', name:'Philippine Peso' },
+      { code:'PKR', name:'Pakistani Rupee' },
+      { code:'PLN', name:'Polish Zloty' },
+      { code:'RON', name:'Romanian Leu' },
+      { code:'SAR', name:'Saudi Riyal' },
+      { code:'SEK', name:'Swedish Krona' },
+      { code:'SGD', name:'Singapore Dollar' },
+      { code:'THB', name:'Thai Baht' },
+      { code:'TRY', name:'Turkish Lira' },
+      { code:'TWD', name:'Taiwan Dollar' },
+      { code:'UAH', name:'Ukrainian Hryvnia' },
+      { code:'USD', name:'US Dollar' },
+      { code:'VND', name:'Vietnamese Dong' },
+      { code:'ZAR', name:'South African Rand' },
+    ];
+
+    var EPR_ORG_CURRENCY    = 'USD'; // Organization default currency
+    var eprSelectedCurrency = 'USD';
+    var eprActiveDropdown   = null;
+
+    // Stable currencies that never trigger the "unusual currency" warning.
+    // Anything outside this set (e.g. BRL, PHP) is flagged as potentially unusual.
+    var EPR_STABLE = ['USD','EUR','GBP','CAD','AUD','CHF','JPY','SGD','NZD','SEK','NOK','DKK','HKD'];
+
+    function eprGetFreqSuffix() {
+      // Suffix is based on pay type only (no pay-period context in this dialog)
+      return 'Monthly';
+    }
+
+    window.updateEprSuffix = function() {
+      var type    = document.getElementById('epr-pay-type');
+      var suffix  = document.getElementById('epr-pay-suffix');
+      var label   = document.getElementById('epr-label-rate-type');
+      var isEmpty  = !type || type.value === '';
+      var isHourly = type && type.value === 'hourly';
+      if (type) type.classList.toggle('is-placeholder', isEmpty);
+      if (suffix)  suffix.textContent = eprSelectedCurrency + (isHourly ? '/hr' : '/Monthly');
+      if (label)   label.textContent  = isHourly ? 'Pay rate' : 'Fixed amount';
+    };
+
+    function eprMakeCurrItem(c) {
+      var li = document.createElement('li');
+      li.className = 'epr-curr-item' + (c.code === eprSelectedCurrency ? ' is-selected' : '');
+      li.textContent = c.code + ' — ' + c.name;
+      li.dataset.code = c.code;
+      li.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        eprCurrencySelect(c.code);
+      });
+      return li;
+    }
+
+    function eprRenderList(query) {
+      var q = (query || '').toLowerCase();
+      var list = document.querySelector('#epr-currency .epr-curr-list');
+      list.innerHTML = '';
+
+      if (q) {
+        // While searching: flat alphabetical, no pinning
+        var filtered = EPR_CURRENCIES.filter(function(c) {
+          return c.code.toLowerCase().indexOf(q) !== -1 || c.name.toLowerCase().indexOf(q) !== -1;
+        }).sort(function(a, b) { return a.name.localeCompare(b.name); });
+        if (!filtered.length) {
+          var empty = document.createElement('li');
+          empty.className = 'epr-curr-empty';
+          empty.textContent = 'No currencies found';
+          list.appendChild(empty);
+        } else {
+          filtered.forEach(function(c) { list.appendChild(eprMakeCurrItem(c)); });
+        }
+        return;
+      }
+
+      // No search: org currency pinned first, then divider, then rest alphabetically
+      var orgCurr = EPR_CURRENCIES.find(function(c) { return c.code === EPR_ORG_CURRENCY; });
+      if (orgCurr) {
+        var orgLabel = document.createElement('li');
+        orgLabel.className = 'epr-curr-section-label';
+        orgLabel.textContent = 'Organization currency';
+        list.appendChild(orgLabel);
+        list.appendChild(eprMakeCurrItem(orgCurr));
+        var divider = document.createElement('li');
+        divider.className = 'epr-curr-divider';
+        list.appendChild(divider);
+      }
+      var rest = EPR_CURRENCIES.filter(function(c) { return c.code !== EPR_ORG_CURRENCY; })
+        .sort(function(a, b) { return a.name.localeCompare(b.name); });
+      rest.forEach(function(c) { list.appendChild(eprMakeCurrItem(c)); });
+    }
+
+    // Show a non-blocking yellow warning when the chosen currency is an
+    // unusual pairing for the org (anything outside the stable set).
+    function eprCheckCurrencyWarning() {
+      var alert = document.getElementById('epr-currency-alert');
+      var body  = document.getElementById('epr-currency-alert-body');
+      if (!alert || !body) return;
+      if (EPR_STABLE.indexOf(eprSelectedCurrency) !== -1) {
+        alert.style.display = 'none';
+        return;
+      }
+      var curr = EPR_CURRENCIES.find(function(c) { return c.code === eprSelectedCurrency; });
+      var name = curr ? (curr.code + ' — ' + curr.name) : eprSelectedCurrency;
+      body.textContent = 'Unusual currency. Paying in ' + name + ' is uncommon for your organization (' +
+        EPR_ORG_CURRENCY + ' — US Dollar). Double-check this is intended — you can still save.';
+      alert.style.display = 'flex';
+    }
+
+    function eprCurrencySelect(code) {
+      eprSelectedCurrency = code;
+      var curr  = EPR_CURRENCIES.find(function(c) { return c.code === code; });
+      var label = curr ? code + ' — ' + curr.name : code;
+      document.querySelector('#epr-currency .epr-curr-btn-text').textContent = label;
+      eprCloseAll();
+      updateEprSuffix();
+      eprCheckCurrencyWarning();
+    }
+
+    function eprOpenPanel(wrapper) {
+      eprCloseAll();
+      var panel = wrapper.querySelector('.epr-curr-panel');
+      panel.removeAttribute('hidden');
+      wrapper.querySelector('.epr-curr-btn').setAttribute('aria-expanded', 'true');
+      var search = panel.querySelector('.epr-curr-search');
+      search.value = '';
+      eprRenderList('');
+      search.focus();
+      eprActiveDropdown = wrapper;
+    }
+
+    function eprCloseAll() {
+      document.querySelectorAll('.epr-curr-panel').forEach(function(p) { p.setAttribute('hidden', ''); });
+      document.querySelectorAll('#epr-currency .epr-curr-btn').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+      eprActiveDropdown = null;
+    }
+
+    // Wire currency button
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.querySelector('#epr-currency .epr-curr-btn');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          var wrapper = btn.closest('.epr-curr-wrap');
+          if (wrapper.querySelector('.epr-curr-panel').hasAttribute('hidden')) {
+            eprOpenPanel(wrapper);
+          } else {
+            eprCloseAll();
+          }
+        });
+      }
+      var search = document.querySelector('#epr-currency .epr-curr-search');
+      if (search) {
+        search.addEventListener('input', function() { eprRenderList(search.value); });
+      }
+    });
+
+    // Close currency dropdown on outside click
+    document.addEventListener('mousedown', function(e) {
+      if (eprActiveDropdown && !eprActiveDropdown.contains(e.target)) eprCloseAll();
+    });
+
+    // Build avatar stack from selected rows (up to 3 avatars)
+    function buildEprAvatarStack() {
+      var stack = document.getElementById('epr-avatar-stack');
+      if (!stack) return;
+      var items = Array.from(selected).slice(0, 3);
+      stack.innerHTML = items.map(function(idx) {
+        var tr = document.querySelector('tr[data-row="' + idx + '"]');
+        if (!tr) return '';
+        var avatarEl = tr.querySelector('.member-avatar');
+        var bg = avatarEl ? avatarEl.style.background : '#6b7280';
+        var initials = avatarEl ? avatarEl.textContent.trim() : '??';
+        return '<div class="epr-avatar" style="background:' + bg + ';">' + initials + '</div>';
+      }).filter(Boolean).join('');
+    }
+
+    // Build pay-type breakdown from selected rows
+    function buildEprBreakdown() {
+      var el = document.getElementById('epr-members-breakdown');
+      if (!el) return;
+      var groups = {};
+      var groupOrder = [];
+      selected.forEach(function(idx) {
+        var tr = document.querySelector('tr[data-row="' + idx + '"]');
+        if (!tr) return;
+        var mainEl = tr.querySelector('.col-payinfo .cell-main');
+        var type = mainEl ? mainEl.textContent.trim() : 'Fixed';
+        if (!groups[type]) { groups[type] = { count: 0, amounts: [] }; groupOrder.push(type); }
+        groups[type].count++;
+        var subEl = tr.querySelector('.col-payinfo .cell-sub');
+        if (subEl) {
+          var amt = subEl.textContent.trim().split('·')[0].trim().replace(/^\$/, 'USD ');
+          if (amt) groups[type].amounts.push(amt);
+        }
+      });
+      if (groupOrder.length === 0) { el.innerHTML = ''; return; }
+      el.innerHTML = groupOrder.map(function(type, i) {
+        var g = groups[type];
+        var amounts = g.amounts;
+        var rateRange = amounts.length === 0 ? '' :
+          amounts.length === 1 ? amounts[0] : amounts[0] + ' – ' + amounts[amounts.length - 1];
+        var rateText = rateRange
+          ? 'with rates ranging <strong>' + rateRange + '</strong>'
+          : 'with ' + (type === 'Hourly' ? 'hourly' : 'fixed') + ' pay';
+        var divider = i < groupOrder.length - 1 ? '<div class="epr-bd-divider"></div>' : '';
+        return '<div class="epr-breakdown-row">' +
+          '<div class="epr-breakdown-left">' +
+            '<span class="epr-breakdown-pill">' + type + '</span>' +
+            '<span class="epr-breakdown-text">' + rateText + '</span>' +
+          '</div>' +
+          '<span class="epr-breakdown-link">' + g.count + ' member' + (g.count !== 1 ? 's' : '') + '</span>' +
+        '</div>' + divider;
+      }).join('');
+    }
+
+    // Open modal
+    window.checkEprAlert = function() {
+      var payType = document.getElementById('epr-pay-type');
+      var rateInput = document.getElementById('epr-rate-input');
+      var alert = document.getElementById('epr-skipped-alert');
+      if (!alert) return;
+      var hasType = payType && payType.value !== '';
+      var hasRate = rateInput && rateInput.value.trim() !== '';
+      alert.style.display = (hasType && hasRate) ? 'flex' : 'none';
+    };
+
+    window.openEditPayRateModal = function() {
+      var n = selected.size;
+      document.getElementById('epr-members-count').textContent = n + ' selected member' + (n !== 1 ? 's' : '');
+      buildEprAvatarStack();
+      buildEprBreakdown();
+      eprCurrencySelect('USD');
+      var payType = document.getElementById('epr-pay-type');
+      if (payType) payType.value = '';
+      var rateInput = document.getElementById('epr-rate-input');
+      if (rateInput) rateInput.value = '';
+      var dateText = document.getElementById('epr-date-text');
+      if (dateText) { dateText.textContent = 'Select a date'; dateText.classList.add('is-placeholder'); }
+      updateEprSuffix();
+      var alert = document.getElementById('epr-skipped-alert');
+      if (alert) alert.style.display = 'none';
+      var currAlert = document.getElementById('epr-currency-alert');
+      if (currAlert) currAlert.style.display = 'none';
+      document.getElementById('epr-overlay').classList.remove('hidden');
+    };
+
+    // Close modal
+    window.closeEditPayRateModal = function() {
+      document.getElementById('epr-overlay').classList.add('hidden');
+      eprCloseAll();
+    };
+
+    // Save
+    window.saveEditPayRate = function() {
+      closeEditPayRateModal();
+    };
+
+    // Close on overlay click or Escape
+    document.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('epr-overlay');
+      if (overlay) {
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) closeEditPayRateModal(); });
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var overlay = document.getElementById('epr-overlay');
+        if (overlay && !overlay.classList.contains('hidden')) closeEditPayRateModal();
+      }
+    });
+  })();
+</script>
+
+<!-- Design Annotations — remove before shipping to production -->
+<script src="design-annotations.js"></script>
+<script src="design-tasks.js"></script>
+<script>
+  DesignAnnotations.init({ page: 'Payroll', required: [], suggestions: [] });
+</script>
+
+</body>
+</html>

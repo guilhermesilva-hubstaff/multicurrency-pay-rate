@@ -1,0 +1,1024 @@
+/* =============================================================
+   Project Detail page — pd- prefix
+   ============================================================= */
+
+html, body { background: #ffffff; }
+
+/* Roboto everywhere on the page + modal; never override Material Symbols */
+.pd-page,
+.pd-page *:not(.material-symbols-rounded),
+.pd-modal-backdrop,
+.pd-modal-backdrop *:not(.material-symbols-rounded) {
+  font-family: 'Roboto', sans-serif;
+}
+
+.pd-page *:focus { outline: none; }
+
+.pd-page {
+  padding: 32px;
+}
+
+/* ── Back link ── */
+.pd-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #6b7280;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 120ms ease;
+}
+.pd-back-link:hover { color: #0168dd; }
+.pd-back-link .material-symbols-rounded { font-size: 16px; }
+
+/* ── Page header ── */
+.pd-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.pd-project-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+/* ── Action buttons row ── */
+.pd-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.pd-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font: 400 13px/1 'Roboto', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.pd-action-btn:hover {
+  background: #f3f4f6;
+  border-color: #D6DBE6;
+}
+.pd-action-btn .material-symbols-rounded { font-size: 16px; color: #2aa7ff; }
+.pd-action-btn--disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+.pd-action-btn--disabled:hover {
+  background: transparent;
+  border-color: transparent;
+}
+.pd-action-btn--disabled .material-symbols-rounded { color: #d1d5db; }
+.pd-action-btn--danger { color: #dc2626; }
+.pd-action-btn--danger:hover { background: #fef2f2; border-color: #fecaca; }
+.pd-action-btn--danger .material-symbols-rounded { color: #dc2626; }
+
+.pd-action-divider {
+  width: 1px;
+  height: 20px;
+  background: #D6DBE6;
+  margin: 0 4px;
+}
+
+/* ── Meta section ── */
+.pd-meta {
+  display: flex;
+  gap: 48px;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid #D6DBE6;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.pd-meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.pd-meta-group + .pd-meta-group {
+  padding-left: 48px;
+  border-left: 1px solid #e5e7eb;
+}
+
+.pd-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pd-meta-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+}
+
+.pd-meta-value {
+  font-size: 14px;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pd-status-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  background: #d1fae5;
+  color: #065f46;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Budget inline ── */
+.pd-budget-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pd-budget-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pd-budget-pct {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.pd-budget-amount {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.pd-progress {
+  width: 200px;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.pd-progress-bar {
+  height: 100%;
+  background: #2aa7ff;
+  border-radius: 99px;
+  transition: width 300ms ease;
+}
+
+.pd-edit-budget-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid #D6DBE6;
+  border-radius: 5px;
+  background: #fff;
+  font: 400 12px/1 'Roboto', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.pd-edit-budget-btn:hover { background: #f9fafb; }
+
+.pd-no-todos {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ── Tabs ── */
+.pd-tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.pd-tab {
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  font: 500 13px/1 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 120ms ease;
+}
+.pd-tab:hover { color: #374151; }
+.pd-tab.is-active { color: #2aa7ff; border-bottom-color: #2aa7ff; }
+
+/* ── Toolbar ── */
+/* ── Currency filter bar ── */
+.pd-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.pd-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pd-filter-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+}
+.pd-filter-select-wrap {
+  position: relative;
+  width: 340px;
+}
+.pd-filter-select {
+  width: 100%;
+  box-sizing: border-box;
+  height: 36px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #D6DBE6;
+  border-radius: 6px;
+  font: 400 14px/1 'Roboto', sans-serif;
+  color: #111827;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 120ms ease;
+}
+.pd-filter-select:focus { border-color: #2aa7ff; box-shadow: 0 0 0 3px rgba(42,167,255,.15); }
+.pd-filter-select-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #6b7280;
+  pointer-events: none;
+}
+.pd-apply-btn {
+  height: 36px;
+  padding: 0 20px;
+  border: 1px solid #2aa7ff;
+  border-radius: 6px;
+  background: transparent;
+  color: #2aa7ff;
+  font: 500 14px/1 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: background 120ms ease;
+  white-space: nowrap;
+}
+.pd-apply-btn:hover { background: #eff6ff; }
+
+.pd-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.pd-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-batch-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.pd-batch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #D6DBE6;
+  border-radius: 6px;
+  background: #fff;
+  font: 400 13px/1 'Roboto', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.pd-batch-btn:not(:disabled):hover { background: #f9fafb; border-color: #c7cdd9; }
+.pd-batch-btn .material-symbols-rounded { font-size: 16px; color: #6b7280; }
+/* Disabled (nothing selected) */
+.pd-batch-btn:disabled { color: #9ca3af; cursor: not-allowed; }
+.pd-batch-btn:disabled .material-symbols-rounded { color: #d1d5db; }
+
+/* Batch dropdown — left-aligned under the button */
+.pd-batch-dropdown { left: 0; right: auto; min-width: 190px; }
+
+.pd-selected-label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ── Table ── */
+.pd-table-wrap { overflow-x: auto; }
+
+.pd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 14px/1.4 'Roboto', sans-serif;
+}
+
+.pd-th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.pd-th--check, .pd-td--check {
+  width: 40px;
+  padding: 10px 8px 10px 16px;
+}
+
+.pd-th--actions { text-align: right; }
+
+.pd-th-rate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pd-th-rate .material-symbols-rounded {
+  font-size: 14px;
+  color: #9ca3af;
+  cursor: default;
+}
+
+.pd-tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 80ms ease;
+}
+.pd-tr:hover { background: #f9fafb; }
+
+.pd-td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  color: #111827;
+}
+
+/* ── Checkbox ── */
+.pd-check-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.pd-check-wrap input[type="checkbox"] { display: none; }
+.pd-check-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #D6DBE6;
+  border-radius: 4px;
+  display: block;
+  position: relative;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.pd-check-wrap:hover .pd-check-box { border-color: #2aa7ff; }
+.pd-check-wrap input:checked + .pd-check-box {
+  background: #2aa7ff;
+  border-color: #2aa7ff;
+}
+/* White check mark */
+.pd-check-wrap input:checked + .pd-check-box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1.5px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ── Member name cell ── */
+.pd-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pd-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.pd-member-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pd-member-info-icon {
+  font-size: 14px;
+  color: #9ca3af;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+/* ── Role select ── */
+.pd-role-select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.pd-role-select {
+  height: 30px;
+  padding: 0 28px 0 10px;
+  border: 1px solid #D6DBE6;
+  border-radius: 6px;
+  background: #fff;
+  font: 400 13px/1 'Roboto', sans-serif;
+  color: #374151;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 120ms ease;
+  white-space: nowrap;
+  min-width: 130px;
+}
+.pd-role-select:focus { border-color: #2aa7ff; box-shadow: 0 0 0 3px rgba(42,167,255,.15); }
+
+.pd-role-select-icon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* ── Pay/bill rate link ── */
+.pd-rate-link {
+  font-size: 13px;
+  color: #2aa7ff;
+  text-decoration: none;
+  transition: color 120ms ease;
+  white-space: nowrap;
+}
+.pd-rate-link:hover { color: #0168dd; text-decoration: underline; }
+
+.pd-rate-none {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ── Actions dropdown ── */
+.pd-td--actions { text-align: right; white-space: nowrap; }
+
+.pd-actions-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.pd-actions-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #D6DBE6;
+  border-radius: 6px;
+  background: #fff;
+  font: 400 13px/1 'Roboto', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.pd-actions-btn:hover { background: #f9fafb; }
+.pd-actions-btn .material-symbols-rounded { font-size: 15px; color: #6b7280; }
+
+.pd-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  min-width: 170px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.10);
+  z-index: 50;
+  overflow: hidden;
+  text-align: left;
+}
+.pd-dropdown.is-open { display: block; }
+
+.pd-dropdown-item {
+  display: block;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: #374151;
+  text-decoration: none;
+  transition: background 80ms ease;
+  cursor: pointer;
+}
+.pd-dropdown-item:hover { background: #f9fafb; }
+.pd-dropdown-item--danger { color: #dc2626; }
+.pd-dropdown-item--danger:hover { background: #fef2f2; }
+
+/* ── Table footer ── */
+.pd-table-footer {
+  padding: 14px 0 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ── Rate cell with hover pencil ── */
+.pd-rate-cell {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  cursor: pointer;
+}
+.pd-rate-cell__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pd-rate-pencil {
+  font-size: 15px;
+  color: #2aa7ff;
+  opacity: 0;
+  transition: opacity 100ms ease;
+  flex-shrink: 0;
+}
+
+.pd-rate-cell:hover .pd-rate-pencil { opacity: 1; }
+.pd-rate-cell:hover .pd-rate-text   { color: #2aa7ff; }
+.pd-rate-cell:hover .pd-rate-none   { color: #2aa7ff; }
+
+/* ── Edit project rates modal ── */
+.pd-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pd-modal-backdrop[hidden] { display: none; }
+
+.pd-modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  overflow: hidden;
+}
+
+.pd-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  gap: 16px;
+}
+
+/* ── Explicit Roboto reset for modal text — exclude icon spans ── */
+.pd-modal {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+.pd-modal p, .pd-modal label, .pd-modal input,
+.pd-modal select, .pd-modal h4, .pd-modal button:not(.pd-modal-close),
+.pd-modal span:not(.material-symbols-rounded) {
+  font-family: 'Roboto', sans-serif;
+}
+
+.pd-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+  font-family: 'Roboto', sans-serif;
+}
+
+.pd-modal-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: color 120ms ease;
+}
+.pd-modal-close:hover { color: #374151; }
+
+.pd-modal-desc {
+  margin: 12px 24px 0;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.pd-modal-link {
+  color: #2aa7ff;
+  text-decoration: none;
+}
+.pd-modal-link:hover { text-decoration: underline; }
+
+.pd-modal-body {
+  padding: 20px 24px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pd-modal-field-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.pd-modal-field-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: #9ca3af;
+  min-width: 72px;
+}
+
+.pd-modal-field-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.pd-modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pd-modal-section-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  display: block;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.pd-modal-section-desc {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* ── Two-column split: Pay rate | Bill rate ── */
+.pd-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.pd-modal-grid .pd-modal-col:first-child {
+  padding-right: 24px;
+  border-right: 1px solid #e5e7eb;
+}
+.pd-modal-grid .pd-modal-col:last-child {
+  padding-left: 24px;
+}
+/* Single-rate mode: only one column shown (Edit pay rate / Edit bill rate) */
+.pd-modal-grid.is-single { grid-template-columns: 1fr; }
+.pd-modal-grid.is-single .pd-modal-col {
+  padding-left: 0;
+  padding-right: 0;
+  border-right: none;
+}
+.pd-modal-col[hidden] { display: none; }
+
+/* Lead description — under the dialog title, above the member row */
+.pd-modal-lead-desc {
+  margin: 10px 24px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111827;
+}
+.pd-modal-lead-desc[hidden] { display: none; }
+
+/* Currency + Amount: stacked by default (both-rate view) */
+.pd-modal-fields-row {
+  display: flex;
+  flex-direction: column;
+}
+/* Single-rate view: hide the redundant section heading/description,
+   and lay Currency + Amount side by side at 50 / 50 */
+.pd-modal-grid.is-single .pd-modal-section-label,
+.pd-modal-grid.is-single .pd-modal-section-desc {
+  display: none;
+}
+.pd-modal-grid.is-single .pd-modal-fields-row {
+  flex-direction: row;
+  gap: 16px;
+}
+.pd-modal-grid.is-single .pd-modal-field {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-top: 0;
+}
+/* Stacked Currency / Amount fields within each column */
+.pd-modal-field {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+}
+
+.pd-modal-input-group {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.pd-modal-input-group:focus-within {
+  border-color: #2aa7ff;
+  box-shadow: 0 0 0 3px rgba(42,167,255,.15);
+}
+
+.pd-modal-input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 12px;
+  border: none;
+  background: #fff;
+  font: 400 14px/1 'Roboto', sans-serif;
+  color: #111827;
+  outline: none;
+}
+.pd-modal-input::placeholder { color: #9ca3af; }
+
+.pd-modal-input-addon {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: #f9fafb;
+  border-left: 1px solid #d1d5db;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.pd-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 24px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 20px;
+}
+
+.pd-modal-cancel {
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #D6DBE6;
+  border-radius: 8px;
+  background: #fff;
+  font: 400 14px/1 'Roboto', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.pd-modal-cancel:hover { background: #f9fafb; }
+
+.pd-modal-save {
+  height: 38px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2aa7ff;
+  font: 500 14px/1 'Roboto', sans-serif;
+  color: #fff;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.pd-modal-save:hover { background: #0168dd; }
+
+/* ── Section divider ── */
+.pd-modal-section-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 12px 0;
+}
+
+/* ── Side-by-side rate row (currency + amount) ── */
+.pd-modal-rate-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.pd-modal-rate-row .pd-modal-currency-row {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.pd-modal-amount-col {
+  flex: 0 0 190px;
+  min-width: 0;
+}
+/* Allow the text input to shrink so the addon stays visible */
+.pd-modal-amount-col .pd-modal-input {
+  min-width: 0;
+  width: 0;
+}
+
+/* ── Modal currency field ── */
+.pd-modal-currency-row {
+  margin-bottom: 0;
+}
+
+.pd-modal-currency-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.pd-modal-currency-select-wrap {
+  position: relative;
+}
+
+/* Pay rate currency — inline inside the input group (replaces plain addon) */
+.pd-modal-currency-select-wrap--pay {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #d1d5db;
+  background: #f9fafb;
+  border-radius: 0 8px 8px 0;
+  overflow: hidden;
+}
+.pd-modal-currency-select-wrap--pay .pd-modal-currency-sel {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  height: 42px;
+  padding: 0 28px 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: none;
+  min-width: 80px;
+}
+.pd-modal-currency-select-wrap--pay .pd-modal-currency-sel:focus { outline: none; box-shadow: none; }
+.pd-modal-currency-select-wrap--pay .pd-modal-currency-arrow {
+  position: absolute;
+  right: 6px;
+  font-size: 16px !important;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.pd-modal-currency-sel {
+  width: 100%;
+  height: 42px;
+  padding: 0 36px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font: 400 13px/1 'Roboto', sans-serif;
+  color: #111827;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.pd-modal-currency-sel:focus {
+  border-color: #2aa7ff;
+  box-shadow: 0 0 0 3px rgba(42, 167, 255, 0.15);
+}
+
+.pd-modal-currency-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px !important;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.pd-modal-currency-readonly {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #f9fafb;
+  font-size: 13px;
+  color: #374151;
+  box-sizing: border-box;
+}
+
+.pd-modal-currency-note {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+/* Design notes live in styles.css (shared) */
+
+
+/* ── Pay rate / Bill rate split columns ── */
+.pd-td--pay-rate, .pd-td--bill-rate { min-width: 140px; }
+.pd-th-info { font-size: 14px !important; color: #9CA3AF; vertical-align: middle; margin-left: 2px; }
+
+/* ── Alert 4: affected member row highlight ── */
+.pd-tr--affected { background: inherit !important; }
+.pd-tr--affected:hover { background: inherit !important; }
+.pd-rate-alert {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  font-size: 11px;
+  color: #8E4B10;
+}
+.pd-rate-alert .material-symbols-rounded {
+  font-size: 12px !important;
+  color: #C27803;
+}
+
+/* Solid warning icons inside alerts */
+.cl-currency-inline-alert .material-symbols-rounded,
+.cl-ccd-warning-box .material-symbols-rounded,
+.cl-curr-alert-pill .material-symbols-rounded,
+.pr-currency-banner .material-symbols-rounded,
+.pr-client-alert .material-symbols-rounded,
+.pd-rate-alert .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

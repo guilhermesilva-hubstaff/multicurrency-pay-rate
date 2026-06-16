@@ -1,0 +1,554 @@
+
+/* =====================================================================
+   EDIT PAY RATE DIALOG  (.epr-)
+   Matches Figma: VSZkrrTwgFs3zac1kkcEuP / node 39:244708
+   ===================================================================== */
+
+/* Overlay */
+.epr-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.epr-overlay.hidden { display: none; }
+
+/* Dialog box */
+.epr-dialog {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  width: 580px;
+  max-width: calc(100vw - 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Header */
+.epr-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.epr-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: normal;
+  color: #111827;
+  flex: 1;
+  margin: 0;
+}
+.epr-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.epr-close:hover { background: #f3f4f6; }
+
+/* Form body */
+/* ── Members breakdown card ── */
+.epr-members-card {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.epr-members-top {
+  background: #f9fafb;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+.epr-avatar-stack {
+  display: flex;
+  align-items: center;
+  height: 28px;
+}
+.epr-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: -3px;
+  position: relative;
+}
+.epr-avatar:first-child { margin-left: 0; }
+.epr-members-count {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+.epr-members-breakdown {
+  border-top: 1px solid #e5e7eb;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.epr-members-breakdown:empty { display: none; }
+.epr-breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.epr-breakdown-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+.epr-breakdown-pill {
+  background: #f3f4f6;
+  border-radius: 9999px;
+  padding: 4px 8px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #4b5563;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.epr-breakdown-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.epr-breakdown-text strong { font-weight: 600; }
+.epr-breakdown-link {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #374151;
+  text-decoration: underline;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.epr-bd-divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  border-top: 1px dashed #e5e7eb;
+}
+
+/* ── Section divider ── */
+.epr-section-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+
+/* ── Section heading ── */
+.epr-section-head {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.epr-section-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #111928;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: 0;
+}
+.epr-section-sub {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #6b7280;
+  width: 100%;
+  margin: 0;
+}
+
+/* ── Skipped members alert (Gray/neutral variant from DS) ── */
+.epr-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9fafb;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+}
+.epr-alert-body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1f2937;
+  margin: 0;
+}
+.epr-alert-dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  color: #6b7280;
+}
+.epr-alert-dismiss .icon { font-size: 18px; line-height: 18px; color: #6b7280; }
+.epr-alert-dismiss:hover { background: #e5e7eb; }
+
+/* Yellow warning variant (e.g. unusual currency combination) */
+.epr-alert--warning {
+  background: #fdfdea;
+  border-color: #faca15;
+  align-items: flex-start;
+}
+.epr-alert--warning .epr-alert-body { color: #8e4b10; }
+.epr-alert-icon {
+  font-size: 20px;
+  line-height: 20px;
+  color: #c27803;
+  flex-shrink: 0;
+  font-variation-settings: 'FILL' 1;
+}
+.epr-alert--warning .epr-alert-dismiss .icon { color: #8e4b10; }
+.epr-alert--warning .epr-alert-dismiss:hover { background: #fbe6a2; }
+
+/* ── Form body ── */
+.epr-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.epr-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+.epr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* Field labels */
+.epr-label-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.epr-label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #4b5563;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.epr-info-icon {
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+/* Native select */
+.epr-select-wrap {
+  position: relative;
+  width: 100%;
+}
+.epr-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0 32px 0 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111827;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.epr-select:focus { border-color: #0168dd; }
+.epr-select.is-placeholder { color: #9ca3af; }
+.epr-select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 18px;
+  pointer-events: none;
+}
+
+/* Searchable currency dropdown */
+.epr-curr-wrap { position: relative; width: 100%; }
+.epr-curr-btn {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.epr-curr-btn:hover { border-color: #9ca3af; }
+.epr-curr-btn[aria-expanded="true"] { border-color: #0168dd; }
+.epr-curr-btn-text {
+  flex: 1 0 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111827;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 6px;
+}
+.epr-curr-chevron {
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 18px;
+  flex-shrink: 0;
+  padding: 0 6px;
+}
+.epr-curr-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -2px rgba(0,0,0,.05);
+  z-index: 1200;
+  overflow: hidden;
+}
+.epr-curr-panel[hidden] { display: none; }
+.epr-curr-search-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.epr-curr-search-icon { color: #9ca3af; font-size: 16px; line-height: 16px; }
+.epr-curr-search {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #374151;
+  background: transparent;
+}
+.epr-curr-search::placeholder { color: #9ca3af; }
+.epr-curr-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.epr-curr-item {
+  padding: 8px 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111827;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.epr-curr-item:hover { background: #f9fafb; }
+.epr-curr-item.is-selected { color: #0168dd; font-weight: 500; }
+.epr-curr-divider { list-style: none; height: 1px; background: #e5e7eb; margin: 4px 0; }
+.epr-curr-section-label {
+  list-style: none;
+  padding: 6px 14px 2px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+.epr-curr-empty {
+  padding: 12px 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Pay rate split input */
+.epr-split-field {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-width: 210px;
+}
+.epr-split-input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  padding: 0 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #374151;
+  background: #fff;
+  min-width: 0;
+  outline: none;
+}
+.epr-split-input:focus { border-color: #0168dd; }
+.epr-split-suffix {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 0 6px 6px 0;
+  padding: 0 8px 0 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #374151;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Effective date */
+.epr-date-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0 16px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+}
+.epr-date-icon {
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 18px;
+  flex-shrink: 0;
+}
+.epr-date-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111827;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.epr-date-text.is-placeholder { color: #9ca3af; }
+
+/* Footer */
+.epr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-top: 8px;
+}
+.epr-btn-cancel {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.epr-btn-cancel:hover { background: #f9fafb; }
+.epr-btn-save {
+  background: #2aa7ff;
+  border: none;
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.epr-btn-save:hover { background: #1a96ee; }

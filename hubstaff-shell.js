@@ -41,15 +41,15 @@
     { key: 'locations',           icon: 'location_on',           title: 'Locations',
       subs: ['Map', 'Job sites'] },
     { key: 'project_management',  icon: 'check_box',             title: 'Project management',
-      subs: ['Project', 'To-do', 'Clients', 'Work orders'] },
+      subs: [{ label: 'Project', href: 'projects.html' }, 'To-do', 'Clients', 'Work orders'] },
     { key: 'calendar',            icon: 'calendar_today',        title: 'Calendar',
       subs: ['Schedules', 'Time off requests'] },
     { key: 'reports',             icon: 'insert_chart_outlined', title: 'Reports',
-      subs: ['Time activity', 'Daily totals', 'Amounts owed', 'Payments', 'All reports', 'Customized reports'] },
+      subs: ['Time activity', 'Daily totals', { label: 'Amounts owed', href: 'amounts-owed.html' }, { label: 'Payments', href: 'payments.html' }, 'All reports', 'Customized reports'] },
     { key: 'people',              icon: 'group',                 title: 'People',
-      subs: ['Members', 'Teams'] },
+      subs: [{ label: 'Members', href: 'members.html' }, { label: 'Teams', href: '#' }] },
     { key: 'financials',          icon: 'payments',              title: 'Financials',
-      sections: [{ header: 'Payroll', items: ['Manage', 'Overview', 'Create payments', 'Payment records', 'Payroll adjustments', 'Invoices', 'Expenses'] }] },
+      sections: [{ header: 'Payroll', href: 'payroll.html', items: ['Manage', 'Overview', 'Create payments', { label: 'Payment records', href: 'payment-records.html' }, { label: 'Payroll adjustments', href: 'payroll-adjustments.html' }, 'Invoices', 'Expenses'] }] },
     { key: 'silent_app',          icon: 'computer',              title: 'Silent app',
       subs: ['Setup', 'Computers'] },
     { key: 'settings',            icon: 'settings',              title: 'Settings',
@@ -557,7 +557,7 @@
   }
 
   // ── Build nav item ────────────────────────────────────────────────
-  function buildNavItem(item, activeKey) {
+  function buildNavItem(item, activeKey, activeSubHref) {
     const isActive = item.key === activeKey ? ' active' : '';
     const hasSubs = (item.subs && item.subs.length) || (item.sections && item.sections.length);
     const chevron = hasSubs ? `<span class="hs-nav-chevron">chevron_right</span>` : '';
@@ -566,15 +566,26 @@
     if (hasSubs) {
       let rows = '';
       if (item.subs) {
-        rows = item.subs.map(s =>
-          `<a class="hs-sub-item" href="#">${s}</a>`
-        ).join('');
+        rows = item.subs.map(s => {
+          const label = typeof s === 'string' ? s : s.label;
+          const href  = typeof s === 'string' ? '#' : (s.href || '#');
+          const activeSub = activeSubHref && href === activeSubHref ? ' active' : '';
+          return `<a class="hs-sub-item${activeSub}" href="${href}">${label}</a>`;
+        }).join('');
       } else if (item.sections) {
         rows = item.sections.map(sec => {
-          const items = sec.items.map(s =>
-            `<a class="hs-sub-item" href="#">${s}</a>`
-          ).join('');
-          return `<div class="hs-sub-header"><span class="hs-sub-header-pill">${sec.header}</span></div>${items}`;
+          const headerHref = sec.href || '#';
+          const activeHeader = activeSubHref && headerHref !== '#' && headerHref === activeSubHref ? ' active' : '';
+          const headerHTML = sec.href
+            ? `<a class="hs-sub-item${activeHeader}" href="${headerHref}">${sec.header}</a>`
+            : `<div class="hs-sub-header"><span class="hs-sub-header-pill">${sec.header}</span></div>`;
+          const items = sec.items.map(s => {
+            const label = typeof s === 'string' ? s : s.label;
+            const href  = typeof s === 'string' ? '#' : (s.href || '#');
+            const activeSub = activeSubHref && href !== '#' && href === activeSubHref ? ' active' : '';
+            return `<a class="hs-sub-item${activeSub}" href="${href}">${label}</a>`;
+          }).join('');
+          return `${headerHTML}${items}`;
         }).join('');
       }
       submenuHTML = `<div class="hs-nav-submenu">${rows}</div>`;
@@ -593,7 +604,7 @@
 
   // ── Build sidebar ─────────────────────────────────────────────────
   function buildSidebar(opts) {
-    const navHTML = NAV_ITEMS.map(i => buildNavItem(i, opts.activeItem)).join('');
+    const navHTML = NAV_ITEMS.map(i => buildNavItem(i, opts.activeItem, opts.activeSubHref)).join('');
     return `
     <nav id="hs-sidebar" class="hs-shell">
       <a class="hs-sidebar-logo" href="${opts.logoHref || '#'}" title="Home">
@@ -807,7 +818,7 @@
   // ── Public API ────────────────────────────────────────────────────
   const HubstaffShell = {
     init(opts) {
-      opts = Object.assign({ activeItem: 'dashboard', logoHref: '#', expanded: false }, opts || {});
+      opts = Object.assign({ activeItem: 'dashboard', logoHref: '#', expanded: false, activeSubHref: '' }, opts || {});
 
       // Inject CSS
       const style = document.createElement('style');

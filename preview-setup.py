@@ -11,14 +11,38 @@ Usage:
 import base64, gzip, json, os
 
 TEMPLATE_DIR = os.path.dirname(os.path.abspath(__file__))
-LAUNCH_DIR   = os.path.join(TEMPLATE_DIR, ".claude")
+# Write to the parent project root so Claude Code's preview tool finds it
+LAUNCH_DIR   = os.path.join(os.path.dirname(TEMPLATE_DIR), ".claude")
 LAUNCH_PATH  = os.path.join(LAUNCH_DIR, "launch.json")
 
 SERVE_FILES = {
-    "/index.html":        ("index.html",        "text/html; charset=utf-8"),
-    "/hubstaff-shell.js": ("hubstaff-shell.js", "application/javascript"),
-    "/layout.js":         ("layout.js",         "application/javascript"),
-    "/styles.css":        ("styles.css",        "text/css"),
+    "/index.html":              ("index.html",              "text/html; charset=utf-8"),
+    "/members.html":            ("members.html",            "text/html; charset=utf-8"),
+    "/member-detail.html":      ("member-detail.html",      "text/html; charset=utf-8"),
+    "/hubstaff-shell.js":       ("hubstaff-shell.js",       "application/javascript"),
+    "/layout.js":               ("layout.js",               "application/javascript"),
+    "/design-annotations.js":   ("design-annotations.js",   "application/javascript"),
+    "/design-tasks.js":         ("design-tasks.js",         "application/javascript"),
+    "/styles.css":              ("styles.css",              "text/css"),
+    "/members.css":             ("members.css",             "text/css"),
+    "/member-detail.css":       ("member-detail.css",       "text/css"),
+    "/project-detail.css":      ("project-detail.css",      "text/css"),
+    "/payroll.html":            ("payroll.html",            "text/html; charset=utf-8"),
+    "/payroll.css":             ("payroll.css",             "text/css"),
+    "/epr.css":                 ("epr.css",                 "text/css"),
+    "/projects.html":           ("projects.html",           "text/html; charset=utf-8"),
+    "/projects.css":            ("projects.css",            "text/css"),
+    "/project-detail.html":     ("project-detail.html",     "text/html; charset=utf-8"),
+    "/amounts-owed.html":       ("amounts-owed.html",       "text/html; charset=utf-8"),
+    "/amounts-owed.css":        ("amounts-owed.css",        "text/css"),
+    "/payments.html":           ("payments.html",           "text/html; charset=utf-8"),
+    "/payments.css":            ("payments.css",            "text/css"),
+    "/payment-records.html":    ("payment-records.html",    "text/html; charset=utf-8"),
+    "/payment-records.css":     ("payment-records.css",     "text/css"),
+    "/team-payment.html":       ("team-payment.html",       "text/html; charset=utf-8"),
+    "/team-payment.css":        ("team-payment.css",        "text/css"),
+    "/payroll-adjustments.html": ("payroll-adjustments.html", "text/html; charset=utf-8"),
+    "/payroll-adjustments.css":  ("payroll-adjustments.css",  "text/css"),
 }
 
 def build_launch_json():

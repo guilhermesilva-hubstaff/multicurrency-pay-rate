@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Hubstaff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="projects.css?v=8" />
+</head>
+<body>
+  <div id="shell-content">
+    <div class="pr-page">
+
+      <div class="pr-header">
+        <h2 class="pr-title">Projects</h2>
+        <a href="#" class="pr-sync-link">
+          <span class="material-symbols-rounded">refresh</span>
+          Sync new Asana projects
+        </a>
+      </div>
+
+      <div class="pr-tabs">
+        <button class="pr-tab is-active" data-tab="active">ACTIVE (132)</button>
+        <button class="pr-tab" data-tab="archived">ARCHIVED (72)</button>
+      </div>
+
+      <!-- Alert 3: amber banner above currency filter -->
+      <div class="pr-currency-banner" id="pr-currency-banner" hidden>
+        <span class="material-symbols-rounded pr-currency-banner__icon">warning</span>
+        <p class="pr-currency-banner__text" id="pr-currency-banner-text"></p>
+      </div>
+
+      <!-- Filters -->
+      <div class="pr-filters">
+        <div class="pr-filter-group">
+          <label class="pr-filter-label">Client</label>
+          <div class="pr-filter-select-wrap">
+            <select class="pr-filter-select" id="pr-client-filter">
+              <option value="">All Clients</option>
+              <option value="Acme Corp">Acme Corp</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="Shawn Williams">Shawn Williams</option>
+              <option value="City of Chicago">City of Chicago</option>
+              <option value="Jorge">Jorge</option>
+              <option value="TechBrasil">TechBrasil</option>
+              <option value="Global Trading Ltd">Global Trading Ltd</option>
+            </select>
+            <span class="material-symbols-rounded pr-filter-select-icon">expand_more</span>
+          </div>
+        </div>
+        <button class="pr-apply-btn" id="pr-apply-btn">Apply</button>
+      </div>
+
+      <div class="pr-toolbar">
+        <div class="pr-search-wrap">
+          <span class="material-symbols-rounded pr-search-icon">search</span>
+          <input class="pr-search" type="search" placeholder="Search projects" />
+        </div>
+        <div class="pr-toolbar-actions">
+          <button type="button" class="btn btn--outline">Import projects</button>
+          <button type="button" class="btn btn--primary">Add project</button>
+        </div>
+      </div>
+
+      <div class="pr-batch-row">
+        <div class="pr-batch-wrap">
+          <button class="pr-batch-btn js-batch-btn" type="button">
+            Batch actions <span class="material-symbols-rounded">expand_more</span>
+          </button>
+          <div class="pr-batch-dropdown js-batch-dd">
+            <a href="#" class="pr-batch-item pr-batch-item--disabled">Edit Projects</a>
+            <a href="#" class="pr-batch-item pr-batch-item--disabled">Edit Budget</a>
+            <a href="#" class="pr-batch-item pr-batch-item--disabled">Archive</a>
+          </div>
+        </div>
+        <span class="pr-selected-label">0/132 selected</span>
+      </div>
+
+      <div class="pr-table-wrap">
+        <table class="pr-table">
+          <thead>
+            <tr>
+              <th class="pr-th pr-th--check">
+                <label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label>
+              </th>
+              <th class="pr-th">Name</th>
+              <th class="pr-th">Client</th>
+              <th class="pr-th">Teams</th>
+              <th class="pr-th">Members</th>
+              <th class="pr-th">To-dos</th>
+              <th class="pr-th">Budget</th>
+              <th class="pr-th">Member limits</th>
+              <th class="pr-th"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- 0969 Ocean View Road -->
+            <tr class="pr-tr" data-currency="CAD" data-client="Acme Corp">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="project-detail.html" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#189a0b;">0</div>
+                  0969 Ocean View Road
+                </a>
+              </td>
+              <td class="pr-td pr-client-cell"><span class="pr-client-name">Acme Corp</span></td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                  <span class="pr-member-avatar pr-member-avatar--c"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-set">Set</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 0969 Ocean View Road EDITED by import -->
+            <tr class="pr-tr" data-currency="PHP" data-client="Shawn Williams">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#413e4e;">0</div>
+                  0969 Ocean View Road EDITED by import
+                </a>
+              </td>
+              <td class="pr-td pr-client-cell"><span class="pr-client-name">Shawn Williams</span></td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                  <span class="pr-member-avatar pr-member-avatar--c"></span>
+                  <span class="pr-member-more">+2</span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 2024 plan / List (ClickUp) -->
+            <tr class="pr-tr" data-currency="EUR">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#5a1008;">2</div>
+                  2024 plan / List
+                  <span class="pr-integration pr-integration--clickup" title="ClickUp">CU</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 2024 plan / List - change -->
+            <tr class="pr-tr" data-currency="EUR">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#0771ca;">2</div>
+                  2024 plan / List - change
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 2024 plan / Routine -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#1a1a29;">2</div>
+                  2024 plan / Routine
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 55 Twin Lane (Asana) -->
+            <tr class="pr-tr" data-currency="GBP">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#4a9872;">5</div>
+                  55 Twin Lane
+                  <span class="pr-integration pr-integration--asana" title="Asana">A</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Amy's Bird Sanctuary -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#4a8b12;">A</div>
+                  Amy's Bird Sanctuary
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- App development -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#a573b6;">A</div>
+                  App development
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Barnett Design -->
+            <tr class="pr-tr" data-currency="EUR">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#055ac1;">B</div>
+                  Barnett Design
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Beacon Creative / ClearView Dental Studio (ClickUp) -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#61b22b;">B</div>
+                  Beacon Creative / ClearView Dental Studio
+                  <span class="pr-integration pr-integration--clickup" title="ClickUp">CU</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Beacon Creative / ClearView Dental Studio (#2) (ClickUp) -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#7d2a12;">B</div>
+                  Beacon Creative / ClearView Dental Studio (#2)
+                  <span class="pr-integration pr-integration--clickup" title="ClickUp">CU</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Beacon Creative / List (ClickUp) -->
+            <tr class="pr-tr" data-currency="GBP">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#309d3e;">B</div>
+                  Beacon Creative / List
+                  <span class="pr-integration pr-integration--clickup" title="ClickUp">CU</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Beacon Creative / PeakTrail Outfitters - Brand & Social (ClickUp) -->
+            <tr class="pr-tr" data-currency="GBP">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#4f4278;">B</div>
+                  Beacon Creative / PeakTrail Outfitters - Brand &amp; Social
+                  <span class="pr-integration pr-integration--clickup" title="ClickUp">CU</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Billing escalations overtime -->
+            <tr class="pr-tr" data-currency="BRL">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#238226;">B</div>
+                  Billing escalations overtime
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Bill's Windsurf Shop -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#ad3619;">B</div>
+                  Bill's Windsurf Shop
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Blog (with Team) -->
+            <tr class="pr-tr" data-currency="JPY">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#9871c1;">B</div>
+                  Blog
+                </a>
+              </td>
+              <td class="pr-td">
+                <div class="pr-team-avatar" style="background:#ba4ec9;">T</div>
+              </td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td">
+                <div class="pr-budget">
+                  <div class="pr-budget-top">
+                    <span class="pr-budget-pct">0%</span>
+                    <span class="pr-budget-info material-symbols-rounded" title="Spent: 0:00:00 · Remaining: within budget">info</span>
+                  </div>
+                  <div class="pr-progress"><div class="pr-progress-bar" style="width:0%"></div></div>
+                  <div class="pr-budget-scale"><span>0%</span><span>100%</span></div>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Content (with Team, many members) -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#c14a16;">C</div>
+                  Content
+                </a>
+              </td>
+              <td class="pr-td">
+                <div class="pr-team-avatar" style="background:#0a9652;">T</div>
+              </td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                  <span class="pr-member-avatar pr-member-avatar--c"></span>
+                  <span class="pr-member-more">+11</span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Cool Cars -->
+            <tr class="pr-tr" data-currency="CAD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#a89a72;">C</div>
+                  Cool Cars
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td"></td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Cool Cars (#2) -->
+            <tr class="pr-tr" data-currency="CAD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#029a89;">C</div>
+                  Cool Cars (#2)
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Freshdesk (with integration + many members) -->
+            <tr class="pr-tr" data-currency="USD">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#c61c60;">F</div>
+                  Freshdesk
+                  <span class="pr-integration pr-integration--freshdesk" title="Freshdesk">FD</span>
+                </a>
+              </td>
+              <td class="pr-td"><span class="pr-none">None</span></td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                  <span class="pr-member-avatar pr-member-avatar--c"></span>
+                  <span class="pr-member-more">+2</span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--disabled">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- John Melton (Team + many members) -->
+            <tr class="pr-tr" data-currency="EUR">
+              <td class="pr-td pr-td--check"><label class="pr-check-wrap"><input type="checkbox" /><span class="pr-check-box"></span></label></td>
+              <td class="pr-td">
+                <a href="#" class="pr-project-link">
+                  <div class="pr-avatar" style="background:#c95682;">J</div>
+                  John Melton
+                </a>
+              </td>
+              <td class="pr-td">
+                <div class="pr-team-avatar" style="background:#966ea6;">T</div>
+              </td>
+              <td class="pr-td">
+                <div class="pr-member-group">
+                  <span class="pr-member-avatar"></span>
+                  <span class="pr-member-avatar pr-member-avatar--b"></span>
+                  <span class="pr-member-avatar pr-member-avatar--c"></span>
+                  <span class="pr-member-more">+1</span>
+                </div>
+              </td>
+              <td class="pr-td"><span class="pr-no-todos">No to-dos</span></td>
+              <td class="pr-td"><span class="pr-budget-none">Budget: none</span></td>
+              <td class="pr-td"><span class="pr-limits-none">None</span></td>
+              <td class="pr-td pr-td--actions">
+                <div class="pr-actions-wrap">
+                  <button class="pr-actions-btn" type="button">Actions <span class="material-symbols-rounded">expand_more</span></button>
+                  <div class="pr-dropdown">
+                    <a href="#" class="pr-dropdown-item js-edit-project">Edit project</a>
+                    <a href="#" class="pr-dropdown-item">Manage members</a>
+                    <a href="#" class="pr-dropdown-item">Edit budget</a>
+                    <a href="#" class="pr-dropdown-item">Duplicate project</a>
+                    <a href="#" class="pr-dropdown-item">Archive project</a>
+                    <a href="#" class="pr-dropdown-item">Transfer</a>
+                    <a href="#" class="pr-dropdown-item pr-dropdown-item--danger">Delete project</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pr-pagination">
+        <button class="pr-page-btn" disabled>
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+        <span class="pr-pages">
+          <a href="#" class="pr-page-link is-active">1</a>
+          <a href="#" class="pr-page-link">2</a>
+          <a href="#" class="pr-page-link">3</a>
+        </span>
+        <button class="pr-page-btn">
+          <span class="material-symbols-rounded">chevron_right</span>
+        </button>
+        <span class="pr-page-info">Showing <strong>1</strong> – <strong>50</strong> of <strong>132</strong> projects</span>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Edit project modal -->
+  <div class="pr-modal-backdrop" id="editProjectModal">
+    <div class="pr-modal" role="dialog" aria-modal="true">
+
+      <div class="pr-modal-header">
+        <h3 class="pr-modal-title" id="editProjectTitle">Edit project</h3>
+        <button class="pr-modal-close js-pr-modal-close" type="button" aria-label="Close">&#x2715;</button>
+      </div>
+
+      <div class="pr-modal-tabs">
+        <button class="pr-modal-tab" data-modal-tab="general">General</button>
+        <button class="pr-modal-tab" data-modal-tab="members">Members</button>
+        <button class="pr-modal-tab" data-modal-tab="budget">Budget &amp; limits</button>
+        <button class="pr-modal-tab" data-modal-tab="teams">Teams</button>
+        <button class="pr-modal-tab is-active" data-modal-tab="invoicing">Invoicing</button>
+      </div>
+
+      <div class="pr-modal-body">
+        <div class="pr-modal-panel" id="pr-tab-general"></div>
+        <div class="pr-modal-panel" id="pr-tab-members"></div>
+        <div class="pr-modal-panel" id="pr-tab-budget"></div>
+        <div class="pr-modal-panel" id="pr-tab-teams"></div>
+
+        <div class="pr-modal-panel is-active" id="pr-tab-invoicing">
+          <div class="pr-inv-field">
+            <label class="pr-inv-label" for="pr-currency">Project Default Currency</label>
+            <div class="pr-select-wrap">
+              <select class="pr-select" id="pr-currency">
+                <option value="">Use client default</option>
+                <option value="USD">USD - United States Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="CAD" selected>CAD - Canadian Dollar</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="BRL">BRL - Brazilian Real</option>
+                <option value="MXN">MXN - Mexican Peso</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="PHP">PHP - Philippine Peso</option>
+              </select>
+              <span class="material-symbols-rounded pr-select-icon">expand_more</span>
+            </div>
+            <p class="pr-inv-note">This currency will be used for the client invoices, when the client is charged for the hours tracked towards project <strong id="pr-inv-note-name">this project</strong>. It overrides the default client currency. If not set, <a href="#" class="pr-inv-note-link">client currency</a> applies.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-modal-footer">
+        <button type="button" class="btn js-pr-modal-close">Cancel</button>
+        <button type="button" class="btn btn--primary">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="hubstaff-shell.js?v=13"></script>
+  <script>
+    HubstaffShell.init({ activeItem: 'project_management', expanded: true });
+
+    // Page tabs
+    document.querySelectorAll('.pr-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.pr-tab').forEach(function(t) { t.classList.remove('is-active'); });
+        this.classList.add('is-active');
+      });
+    });
+
+    // Batch actions dropdown
+    var batchBtn = document.querySelector('.js-batch-btn');
+    var batchDd = document.querySelector('.js-batch-dd');
+    batchBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      batchDd.classList.toggle('is-open');
+    });
+
+    // Actions dropdowns
+    document.querySelectorAll('.pr-actions-wrap').forEach(function(wrap) {
+      var btn = wrap.querySelector('.pr-actions-btn');
+      var dd = wrap.querySelector('.pr-dropdown');
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = dd.classList.contains('is-open');
+        document.querySelectorAll('.pr-dropdown, .js-batch-dd').forEach(function(d) { d.classList.remove('is-open'); });
+        if (!isOpen) dd.classList.add('is-open');
+      });
+    });
+
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.pr-dropdown, .js-batch-dd').forEach(function(d) { d.classList.remove('is-open'); });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.pr-dropdown, .js-batch-dd').forEach(function(d) { d.classList.remove('is-open'); });
+        closePrModal();
+      }
+    });
+
+    // Edit project modal
+    var prModal = document.getElementById('editProjectModal');
+    var prModalTitle = document.getElementById('editProjectTitle');
+
+    document.querySelectorAll('.js-edit-project').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelectorAll('.pr-dropdown').forEach(function(d) { d.classList.remove('is-open'); });
+        var row = this.closest('.pr-tr');
+        var linkClone = row ? row.querySelector('.pr-project-link').cloneNode(true) : null;
+        if (linkClone) { linkClone.querySelectorAll('.pr-avatar, .pr-integration').forEach(function(el) { el.remove(); }); }
+        var name = linkClone ? linkClone.textContent.trim() : 'Project';
+        prModalTitle.textContent = 'Edit project — ' + name;
+        var prNoteNameEl = document.getElementById('pr-inv-note-name');
+        if (prNoteNameEl) prNoteNameEl.textContent = name;
+        prModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        DesignAnnotations.setContext({
+          page: 'New / Edit project dialog',
+          required: [
+            {
+              text: 'Add a "Project default currency" dropdown',
+              sub: [
+                'Falls back to the client currency when no project currency is set',
+                'When set, overrides the client currency on all invoices containing this project\'s line items',
+                'Add helper text explaining the override behavior'
+              ]
+            }
+          ],
+          suggestions: []
+        });
+      });
+    });
+
+    function closePrModal() {
+      prModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      DesignAnnotations.clearContext();
+    }
+
+    document.querySelectorAll('.js-pr-modal-close').forEach(function(btn) {
+      btn.addEventListener('click', closePrModal);
+    });
+
+    prModal.addEventListener('click', function(e) {
+      if (e.target === prModal) closePrModal();
+    });
+
+    document.querySelectorAll('.pr-modal-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = this.dataset.modalTab;
+        document.querySelectorAll('.pr-modal-tab').forEach(function(t) { t.classList.remove('is-active'); });
+        document.querySelectorAll('.pr-modal-panel').forEach(function(p) { p.classList.remove('is-active'); });
+        this.classList.add('is-active');
+        document.getElementById('pr-tab-' + target).classList.add('is-active');
+      });
+    });
+
+    // ── Currency filter ──
+    function applyFilters() {
+      var currencyEl = document.getElementById('pr-currency-filter');
+      var currency = currencyEl ? currencyEl.value : '';
+      var client   = document.getElementById('pr-client-filter').value;
+      document.querySelectorAll('.pr-tr').forEach(function(row) {
+        var matchCurrency = !currency || row.dataset.currency === currency;
+        var matchClient   = !client   || row.dataset.client   === client;
+        row.style.display = (matchCurrency && matchClient) ? '' : 'none';
+      });
+    }
+
+    document.getElementById('pr-apply-btn').addEventListener('click', applyFilters);
+
+    // ── Alert 2: inject Client column cells + handle URL filter ──
+    var PROJECT_CLIENT_MAP = {
+      // Microsoft
+      'Beacon Creative / ClearView Dental Studio': 'Microsoft',
+      'Beacon Creative / ClearView Dental Studio (#2)': 'Microsoft',
+      'Beacon Creative / List': 'Microsoft',
+      'Beacon Creative / PeakTrail Outfitters - Brand & Social': 'Microsoft',
+      'Blog': 'Microsoft',
+      'Freshdesk': 'Microsoft',
+      // Shawn Williams
+      '0969 Ocean View Road EDITED by import': 'Shawn Williams',
+      '2024 plan / List': 'Shawn Williams',
+      '2024 plan / List - change': 'Shawn Williams',
+      '2024 plan / Routine': 'Shawn Williams',
+      'Content': 'Shawn Williams',
+      // City of Chicago
+      '55 Twin Lane': 'City of Chicago',
+      'App development': 'City of Chicago',
+      'Billing escalations overtime': 'City of Chicago',
+      // Jorge
+      "Amy's Bird Sanctuary": 'Jorge',
+      'Barnett Design': 'Jorge',
+      'John Melton': 'Jorge',
+      // Acme Corp
+      "Bill's Windsurf Shop": 'Acme Corp',
+      'Cool Cars': 'Acme Corp',
+      'Cool Cars (#2)': 'Acme Corp',
+      '0969 Ocean View Road': 'Acme Corp',
+    };
+
+    // Inject Client cells into all rows that don't have one yet
+    document.querySelectorAll('.pr-tr').forEach(function(row) {
+      var nameCell = row.querySelector('.pr-project-link');
+      var projectName = '';
+      if (nameCell) {
+        var clone = nameCell.cloneNode(true);
+        clone.querySelectorAll('.pr-avatar, .pr-integration').forEach(function(el) { el.remove(); });
+        projectName = clone.textContent.trim();
+      }
+      var clientName = row.dataset.client ||
+        (projectName ? PROJECT_CLIENT_MAP[projectName] || 'None' : 'None');
+      row.dataset.client = clientName;
+
+      // Insert Client cell after Name cell (position 2)
+      if (!row.querySelector('.pr-client-cell')) {
+        var nameColTd = row.cells[1];
+        var clientTd = document.createElement('td');
+        clientTd.className = 'pr-td pr-client-cell';
+        clientTd.innerHTML = '<span class="pr-client-name">' + clientName + '</span>';
+        row.insertBefore(clientTd, nameColTd.nextSibling);
+      }
+    });
+
+    // ── Alert 3: URL param handling ──────────────────────────────
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var filterClient  = params.get('client');
+      var prevCurrency  = params.get('prevCurrency');
+      var newCurrency   = params.get('newCurrency');
+
+      if (filterClient) {
+        // Pre-fill and auto-apply the client filter
+        var clientSelect = document.getElementById('pr-client-filter');
+        if (clientSelect) {
+          clientSelect.value = filterClient;
+          applyFilters();
+        }
+
+        // Show banner
+        var banner = document.getElementById('pr-currency-banner');
+        var bannerText = document.getElementById('pr-currency-banner-text');
+        if (prevCurrency && newCurrency) {
+          bannerText.textContent = 'Some members have bill rates in ' + prevCurrency +
+            ' while ' + filterClient + ' now invoices in ' + newCurrency +
+            '. Update rates to avoid incorrect invoice amounts.';
+        } else {
+          bannerText.textContent = 'Showing projects for ' + filterClient + '.';
+        }
+        banner.hidden = false;
+
+        // Add per-row alert + wire project links for matching client (keep all rows visible)
+        var tbody = document.querySelector('.pr-table tbody');
+        // Rate counts per project (prototype values)
+        var PROJECT_RATE_COUNTS = {
+          '0969 Ocean View Road': 7,
+          "Bill's Windsurf Shop": 3,
+          'Cool Cars': 5,
+          'Cool Cars (#2)': 4,
+          'Beacon Creative / ClearView Dental Studio': 6,
+          'Beacon Creative / ClearView Dental Studio (#2)': 2,
+          'Beacon Creative / List': 4,
+          'Beacon Creative / PeakTrail Outfitters - Brand & Social': 8,
+          'Blog': 3,
+          'Freshdesk': 5,
+          '0969 Ocean View Road EDITED by import': 2,
+          '2024 plan / List': 3,
+          '2024 plan / List - change': 1,
+          '2024 plan / Routine': 4,
+          'Content': 2,
+        };
+
+        document.querySelectorAll('.pr-tr').forEach(function(row) {
+          var isMatch = row.dataset.client === filterClient;
+
+          if (isMatch && prevCurrency && newCurrency) {
+            // Float matching rows to top
+            tbody.insertBefore(row, tbody.firstChild);
+
+            // Alert under member avatars in Members cell — with member count
+            var linkEl = row.querySelector('.pr-project-link');
+            var pName = linkEl ? linkEl.cloneNode(true) : null;
+            if (pName) pName.querySelectorAll('.pr-avatar, .pr-integration').forEach(function(el) { el.remove(); });
+            var pKey = pName ? pName.textContent.trim() : '';
+            var count = PROJECT_RATE_COUNTS[pKey] || '—';
+            var memberGroup = row.querySelector('.pr-member-group');
+            var memberTd = memberGroup ? memberGroup.closest('td') : null;
+            if (memberTd && !memberTd.querySelector('.pr-member-alert')) {
+              var alertEl = document.createElement('a');
+              alertEl.className = 'pr-client-alert pr-member-alert';
+              alertEl.innerHTML = '<span class="material-symbols-rounded">warning</span><span class="pr-client-alert-text"> ' + count + ' rates need updating</span>';
+              alertEl.dataset.pendingHref = '1';
+              memberTd.appendChild(alertEl);
+            }
+
+            // Wire project link to carry currency params into project-detail
+            var projectLink = row.querySelector('.pr-project-link');
+            if (projectLink && projectLink.getAttribute('href')) {
+              var rawHref = projectLink.getAttribute('href').split('?')[0];
+              var baseHref = (rawHref === '#' || !rawHref) ? 'project-detail.html' : rawHref;
+              var detailHref = baseHref +
+                '?prevCurrency=' + encodeURIComponent(prevCurrency) +
+                '&newCurrency='  + encodeURIComponent(newCurrency);
+              projectLink.href = detailHref;
+              // Give the same href to the rate alert link
+              var pendingAlert = row.querySelector('[data-pending-href]');
+              if (pendingAlert) {
+                pendingAlert.href = detailHref;
+                pendingAlert.removeAttribute('data-pending-href');
+              }
+            }
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- Design annotations -->
+  <script>
+    // Assign professional adult portrait photos to member avatar spans
+    (function() {
+      var portraits = [
+        'https://randomuser.me/api/portraits/thumb/women/44.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/32.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/68.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/12.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/55.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/29.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/41.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/57.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/18.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/83.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/62.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/36.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/91.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/5.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/48.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/72.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/27.jpg',
+        'https://randomuser.me/api/portraits/thumb/women/61.jpg',
+        'https://randomuser.me/api/portraits/thumb/men/84.jpg',
+      ];
+      var idx = 0;
+      document.querySelectorAll('.pr-member-avatar').forEach(function(el) {
+        el.style.backgroundImage = 'url(' + portraits[idx % portraits.length] + ')';
+        el.style.backgroundColor = 'transparent';
+        idx++;
+      });
+    })();
+  </script>
+  <script src="design-annotations.js?v=11"></script>
+<script src="design-tasks.js?v=9"></script>
+  <script>
+    DesignAnnotations.init({
+      page: 'Projects',
+      required: [
+        {
+          text: 'Client filter — required alongside Currency filter',
+          target: '#pr-client-filter',
+          sub: [
+            'Add a "Client" filter dropdown to the left of the Currency filter',
+            'Options: "All Clients" + one entry per client that has projects in the org',
+            'When the page is opened via a client currency-change redirect (URL param ?client=X), pre-select that client and auto-apply the filter so only their projects are shown',
+            'Users can clear the filter by selecting "All Clients" and clicking Apply',
+            'Filter state should be reflected in the URL so it can be shared or bookmarked'
+          ]
+        },
+        {
+          text: 'Currency filter — options must be populated from real data',
+          target: '#pr-currency-filter',
+          sub: [
+            'List should only include currencies that are actually in use across the organisation\'s projects',
+            'Selecting a currency and clicking Apply should filter the table to matching projects only',
+            'Filter state should be reflected in the URL so it can be shared or bookmarked'
+          ]
+        },
+        {
+          text: 'Apply button — use blue outlined style, not green filled',
+          target: '.pr-apply-btn',
+          sub: [
+            'Correct style: transparent background, #2aa7ff border and text, hover fills light blue (#eff6ff)',
+            'Green filled is incorrect and inconsistent with the filter Apply button on other pages (e.g. Invoices, Clients)',
+            'This applies to all filter Apply buttons across the product'
+          ]
+        },
+        {
+          text: 'Client column — required in the projects table',
+          target: '.pr-client-cell',
+          sub: [
+            'Every project row must show the client it belongs to in a dedicated "Client" column',
+            'Value comes from the project\'s client association — "None" if no client is set',
+            'Column must be sortable and filterable (drives the Client filter dropdown)',
+            'When a client\'s currency changes, the client name in this column is the link between the currency alert and the correct project rows'
+          ]
+        },
+        {
+          text: 'Currency mismatch alert — show below member avatars in Members column',
+          target: '.pr-member-alert',
+          sub: [
+            'When arriving from a client currency change (URL param ?client=X&prevCurrency=Y&newCurrency=Z), show "N rates need updating" below the avatar stack for each affected project',
+            'N = number of members in that project who have bill rates still set in the old currency',
+            'Alert is a clickable link — navigates to the project detail page with the same currency params so the user can update rates inline',
+            'Alert only appears on projects belonging to the affected client, not on all rows',
+            'Copy: "[N] rates need updating" — short, action-oriented, fits in one line'
+          ]
+        },
+        {
+          text: 'Currency mismatch banner — shown above filters when arriving from a client currency change',
+          target: '#pr-currency-banner',
+          sub: [
+            'Displayed when the page is opened via ?client=X&prevCurrency=Y&newCurrency=Z URL params',
+            'Text: "Some members have bill rates in [OLD] while [CLIENT] now invoices in [NEW]. Update rates to avoid incorrect invoice amounts."',
+            'Positioned between the page tabs and the filter row — above the Client and Currency filters',
+            'Banner is hidden by default and only shown when the relevant URL params are present',
+            'Styled with amber background (#FDFDEA), amber border (#FACA15), dark brown text (#8E4B10), solid warning icon (#C27803)'
+          ]
+        },
+        {
+          text: 'Currency column — value must be derived from the client\'s currency setting',
+          target: '.pr-curr',
+          sub: [
+            'Default: inherit the client\'s currency ("Use client default" in the Edit project → Invoicing tab)',
+            'When a project overrides the currency, show that value instead',
+            'This currency drives rate formatting on the project detail page and in the Edit project rates modal — all three surfaces must stay in sync'
+          ]
+        }
+      ],
+      suggestions: [
+        {
+          text: 'Improve the budget progress bar — it currently looks like a loading state',
+          target: '.pr-budget',
+          sub: ['Add clear 0% (empty) and 100% (full) visual markers', 'Consider a label showing the percentage or amount filled']
+        }
+      ]
+    });
+  </script>
+</body>
+</html>
