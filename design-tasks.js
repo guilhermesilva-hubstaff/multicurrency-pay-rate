@@ -52,7 +52,7 @@
           'Custom dropdown with live search — native <select> replaced to support inline filtering',
           'When a country is selected on Info tab, the matching currency floats to the top above a divider',
           'All remaining currencies follow alphabetically below the divider',
-          'Selecting a currency updates the Fixed amount suffix in real time (e.g. USD/monthly → EUR/monthly)',
+          'The amount field suffix shows the pay period only (e.g. "monthly") — the selected currency lives in this dropdown, not repeated in the suffix',
         ]},
         { text: 'Country → currency linking across tabs', target: '#pb-country-select', sub: [
           'The country field (Info tab) and currency dropdown (Pay / Bill tab) are connected via shared JS state',
@@ -136,7 +136,7 @@
         { text: 'Edit dialog — add a currency note + "USD" suffix to Amount per member', target: '.pa-actions-btn', sub: [
           'Actions → Edit opens the "Edit payroll adjustment" dialog',
           'Amount per member shows a "USD" (organization currency) suffix on the right of the field',
-          'A helper note reads: "Pay adjustments are always set in organization currency, (USD — US Dollar)."',
+          'A helper note reads: "Payroll adjustments are always set in organization currency, (USD — US Dollar)."',
           'Clarifies the amount is in the org currency, not the member\'s local currency',
         ]},
       ]
@@ -161,10 +161,10 @@
           'Lists each currency: native amount, exchange rate, converted USD, plus the org-currency total',
           'Shown in the "All currencies" view; replaced by the native total when filtered to one currency',
         ]},
-        { text: 'Current rate — member\'s own (original) currency only', target: '.ao-rate', sub: [
-          'Shows the rate the member is actually paid — e.g. "EUR 18.00/hr", "USD 2,000.00/fixed"',
-          'No USD conversion: the rate is fixed in the member\'s currency; the USD equivalent fluctuates daily',
-          'Members without a rate show "No rate set"',
+        { text: 'Current rate — organization currency, then regional currency', target: '.ao-rate', sub: [
+          'Large line: rate in the organization currency (USD) with the period — e.g. "USD 25.40/hr"',
+          'Small line: rate in the member\'s own (regional) currency — e.g. "GBP 20.00/hr"',
+          'Same dual treatment as the Amount column; USD-paid members show one line; no rate shows "No rate set"',
         ]},
         { text: 'Amount — organization currency, then original currency', target: '.ao-amount', sub: [
           'Large line: the amount owed in the organization currency (USD) — what you pay out',

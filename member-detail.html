@@ -324,7 +324,7 @@
               </div>
               <div class="pb-split-field">
                 <input type="text" class="pb-split-input" value="2500.00">
-                <span class="pb-split-suffix" id="pb-pay-suffix">USD/monthly</span>
+                <span class="pb-split-suffix" id="pb-pay-suffix">monthly</span>
               </div>
             </div>
             <div class="pb-field">
@@ -1115,9 +1115,8 @@
       var freqSel = document.getElementById('pb-freq-select');
       freq = freqSel ? freqSel.value : 'Monthly';
     }
-    var payCurrency = getCurrencyCode();
-    var paySuffix   = document.getElementById('pb-pay-suffix');
-    if (paySuffix) paySuffix.textContent = payCurrency + '/' + getFreqLabel(freq);
+    var paySuffix = document.getElementById('pb-pay-suffix');
+    if (paySuffix) paySuffix.textContent = getFreqLabel(freq);  // period only — the currency is set via the currency dropdown
     // Bill suffixes are now static per-client row and don't need dynamic updates
   }
 
@@ -1929,7 +1928,7 @@
           'Replaces the native <select> with a custom dropdown that includes a live search input',
           'When a country is set on the Info tab, the matching currency floats to the top above a divider',
           'All remaining currencies follow alphabetically below the divider',
-          'Selecting a currency updates the Fixed amount suffix in real time (e.g. USD/monthly → EUR/monthly)'
+          'The amount field suffix shows the pay period only (e.g. "monthly") — the selected currency lives in this dropdown, not repeated in the suffix'
         ]
       },
       {

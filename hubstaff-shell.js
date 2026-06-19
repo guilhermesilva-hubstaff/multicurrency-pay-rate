@@ -60,6 +60,13 @@
   const CSS = `
     [hidden] { display: none !important; }
 
+    /* Base layout reset — the shell pins the fixed topbar/sidebar to the viewport edge and
+       offsets #shell-content, so the document must carry no default UA margin. Setting this
+       at the shell level keeps every page aligned to the chrome by default (no per-page body
+       reset needed) and stops a wide page from forcing a horizontal scrollbar. */
+    html, body { margin: 0; }
+    html { overflow-x: hidden; }
+
     /* ── Topbar ── */
     #hs-topbar {
       position: fixed; top: 0; left: 0; right: 0; height: 48px;

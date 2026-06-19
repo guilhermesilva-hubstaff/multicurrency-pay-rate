@@ -4,6 +4,8 @@
    ============================================================= */
 
 html, body { background: #ffffff; }
+body { margin: 0; }  /* shell leaves the browser-default 8px body margin, which shows as a gap beside the fixed sidebar */
+html { overflow-x: hidden; }  /* page stays within the viewport; wide tables scroll inside .ao-table-wrap */
 
 .ao-page,
 .ao-page *:not(.material-symbols-rounded) {
@@ -29,12 +31,45 @@ html, body { background: #ffffff; }
 
 /* ── Title ── */
 .ao-title {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   font-size: 28px;
   font-weight: 300;
   color: #374151;
   line-height: 1.2;
 }
+
+/* V1 / V2 version toggle */
+.ao-version { display: inline-flex; gap: 6px; margin: 0 0 18px; }
+.ao-ver-btn {
+  height: 24px; padding: 0 12px;
+  border: 1px solid #d1d5db; border-radius: 9999px;
+  background: #fff; color: #6b7280;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  display: inline-flex; align-items: center; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.ao-ver-btn:hover { background: #f9fafb; color: #374151; }
+.ao-ver-btn.is-active { background: #2ba7ff; border-color: #2ba7ff; color: #fff; }
+
+/* ── Multi-currency advisory banner (Zone DS "Alert / Blue") ── */
+.ao-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px; margin: 0 0 20px;
+  background: #eaf6ff; border: 1px solid #0168dd; border-radius: 8px;
+}
+.ao-banner[hidden] { display: none; }
+.ao-banner-content { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.ao-banner-head { display: flex; align-items: center; gap: 8px; }
+.ao-banner-icon { font-size: 18px; color: #0a4b96; }
+.ao-banner-title { font-size: 16px; font-weight: 600; line-height: 24px; color: #0a4b96; }
+.ao-banner-body { margin: 0; font-size: 14px; line-height: 20px; color: #0a4b96; }
+.ao-banner-close {
+  flex-shrink: 0; width: 20px; height: 20px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; background: none; border-radius: 9999px;
+  color: #0168dd; cursor: pointer; transition: background 120ms ease;
+}
+.ao-banner-close:hover { background: rgba(1, 104, 221, 0.12); }
+.ao-banner-close .material-symbols-rounded { font-size: 18px; }
 
 /* ── Toolbar ── */
 .ao-toolbar {
@@ -225,6 +260,7 @@ html, body { background: #ffffff; }
 .ao-action .material-symbols-rounded { font-size: 18px; color: #2ba7ff; }
 
 /* ── Table ── */
+.ao-table-wrap { width: 100%; overflow-x: auto; }
 .ao-table {
   width: 100%;
   border-collapse: collapse;

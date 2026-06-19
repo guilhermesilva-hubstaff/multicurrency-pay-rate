@@ -50,10 +50,13 @@
       <div class="pmt-card">
         <div class="pmt-card-label">Payments</div>
         <div class="pmt-card-value" id="pmt-count">0</div>
+        <div class="pmt-card-sub" id="pmt-count-note"></div>
       </div>
       <div class="pmt-card">
         <div class="pmt-card-label">Amount</div>
-        <div class="pmt-card-value" id="pmt-total">$0.00</div>
+        <div class="pmt-card-value" id="pmt-total">USD 0.00</div>
+        <button class="pmt-bd-trigger" id="pmt-bd-open" type="button">View breakdown<span class="material-symbols-rounded">keyboard_arrow_down</span></button>
+        <div class="pmt-card-native" id="pmt-card-native" style="display:none"></div>
       </div>
       <button class="pmt-chart-toggle" aria-label="Toggle chart">
         <span class="material-symbols-rounded">monitoring</span>
@@ -87,6 +90,7 @@
     </div>
 
     <!-- Payments table -->
+    <div class="pmt-table-wrap">
     <table class="pmt-table">
       <thead>
         <tr>
@@ -104,9 +108,81 @@
       </thead>
       <tbody id="pmt-tbody"></tbody>
     </table>
+    </div>
 
   </div>
 </div>
+
+<!-- Filters drawer -->
+<div class="pmtf-backdrop" id="pmtf-backdrop"></div>
+<aside class="pmtf-drawer" id="pmtf-drawer" role="dialog" aria-modal="true" aria-label="Filters">
+  <button class="pmtf-close" id="pmtf-close" type="button" aria-label="Close sidebar">
+    <span class="material-symbols-rounded">close</span>
+  </button>
+
+  <div class="pmtf-tabs">
+    <button class="pmtf-tab is-active" id="pmtf-tab-filters" type="button">Filters</button>
+    <button class="pmtf-tab" id="pmtf-tab-saved" type="button">Saved Filters</button>
+  </div>
+
+  <div class="pmtf-pane is-active" id="pmtf-pane-filters">
+    <div class="pmtf-body">
+      <div class="pmtf-field">
+        <label class="pmtf-label" for="pmtf-currency">Currency</label>
+        <select class="pmtf-native-select" id="pmtf-currency">
+          <option value="all">All currencies</option>
+          <option value="BRL">BRL &mdash; Brazilian Real</option>
+          <option value="CAD">CAD &mdash; Canadian Dollar</option>
+          <option value="EUR">EUR &mdash; Euro</option>
+          <option value="GBP">GBP &mdash; British Pound</option>
+          <option value="PHP">PHP &mdash; Philippine Peso</option>
+          <option value="USD">USD &mdash; US Dollar</option>
+        </select>
+        <p class="pmtf-hint">Filters the report to a single currency. The <strong>Amount</strong> shows that currency&rsquo;s total in USD, with the original amount beneath.</p>
+      </div>
+
+      <div class="pmtf-field">
+        <label class="pmtf-label">Members</label>
+        <div class="pmtf-select" tabindex="0"><span class="pmtf-select-ph">Select members</span><span class="material-symbols-rounded pmtf-select-caret">expand_more</span></div>
+      </div>
+
+      <div class="pmtf-field">
+        <label class="pmtf-label">Payment type</label>
+        <div class="pmtf-select" tabindex="0"><span class="pmtf-select-ph">All payment types</span><span class="material-symbols-rounded pmtf-select-caret">expand_more</span></div>
+      </div>
+
+      <label class="pmtf-toggle">
+        <input type="checkbox" id="pmtf-sum-ranges">
+        <span class="pmtf-toggle-track"></span>
+        <span class="pmtf-toggle-label">Sum date ranges</span>
+      </label>
+    </div>
+    <div class="pmtf-foot">
+      <button class="pmtf-btn pmtf-btn--info" type="button">Schedule report</button>
+      <button class="pmtf-btn pmtf-btn--outline" type="button">Save filters</button>
+      <button class="pmtf-btn pmtf-btn--default" id="pmtf-clear" type="button">Clear filters</button>
+    </div>
+  </div>
+
+  <div class="pmtf-pane" id="pmtf-pane-saved">
+    <div class="pmtf-body">
+      <h6 class="pmtf-saved-title">Saved filters</h6>
+      <div class="pmtf-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" placeholder="Search saved filters">
+      </div>
+      <div class="pmtf-saved-list">
+        <div class="pmtf-saved-item">
+          <span class="pmtf-saved-name"><span class="material-symbols-rounded">menu</span>Filter A</span>
+          <span class="pmtf-saved-actions">
+            <button class="pmtf-saved-action" type="button" aria-label="Edit"><span class="material-symbols-rounded">edit</span></button>
+            <button class="pmtf-saved-action" type="button" aria-label="Delete"><span class="material-symbols-rounded">delete</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
 
 <script>
   HubstaffShell.init({ activeItem: 'reports', activeSubHref: 'payments.html', expanded: true });
@@ -116,19 +192,21 @@
 (function () {
   'use strict';
 
+  var FX = { USD: 1, EUR: 1.08, GBP: 1.27, BRL: 0.18, PHP: 0.018, CAD: 0.73 };
   var AVATAR_COLORS = ['#0168DD','#7c3aed','#db2777','#059669','#d97706','#dc2626','#0891b2','#2563eb'];
   function initials(name){ var p = name.split(' '); return (p[0][0] + (p[1] ? p[1][0] : '')).toUpperCase(); }
-  function money(n){ return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function fmtMoney(n){ return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
-  // Sample data — grouped by member (no real PII). Amounts are self-consistent.
+  // Sample data — grouped by member, multi-currency (no real PII).
+  // Component amounts are in the member's own (native) currency; USD is the organization currency.
   var MEMBERS = [
-    { name: 'Marcus Bell', avatar: 0, payments: [
+    { name: 'Marcus Bell', avatar: 0, cur: 'USD', payments: [
       { type: 'Automatic payment', date: 'Wed, Mar 25, 2026', day: 24, fixed: 5000, add: 110 },
     ]},
-    { name: 'Tara Nguyen', avatar: 'default', payments: [
+    { name: 'Tara Nguyen', avatar: 'default', cur: 'USD', payments: [
       { type: 'One-time payment', date: 'Tue, Mar 17, 2026', day: 16, bonus: 200 },
     ]},
-    { name: 'Devon Pierce', avatar: 'default', payments: [
+    { name: 'Devon Pierce', avatar: 'default', cur: 'USD', payments: [
       { type: 'Automatic payment', date: 'Mon, Mar 2, 2026',  day: 1,  fixed: 2700 },
       { type: 'Automatic payment', date: 'Mon, Mar 16, 2026', day: 15, fixed: 2700 },
       { type: 'Automatic payment', date: 'Mon, Mar 30, 2026', day: 29, fixed: 2700 },
@@ -138,85 +216,219 @@
       { type: 'Automatic payment', date: 'Mon, May 25, 2026', day: 85, fixed: 2700 },
       { type: 'Automatic payment', date: 'Fri, Jun 5, 2026',  day: 96, fixed: 2700 },
     ]},
-    { name: 'Lena Fischer', avatar: 2, payments: [
-      { type: 'Automatic payment', date: 'Tue, Mar 31, 2026', day: 30, hours: '90:00:00', hourly: 2700 },
-      { type: 'Automatic payment', date: 'Thu, Apr 30, 2026', day: 60, hours: '90:00:00', hourly: 2700 },
-      { type: 'Automatic payment', date: 'Sun, May 31, 2026', day: 91, hours: '90:00:00', hourly: 2700 },
+    { name: 'Lena Fischer', avatar: 2, cur: 'EUR', payments: [
+      { type: 'Automatic payment', date: 'Tue, Mar 31, 2026', day: 30, hours: '90:00:00', hourly: 2700, pto: 180, add: 120, ded: 60, bonus: 150 },
+      { type: 'Automatic payment', date: 'Thu, Apr 30, 2026', day: 60, hours: '90:00:00', hourly: 2700, pto: 240, add: 150, ded: 90, bonus: 300 },
+      { type: 'Automatic payment', date: 'Sun, May 31, 2026', day: 91, hours: '90:00:00', hourly: 2700, pto: 200, add: 100, ded: 75, bonus: 200 },
     ]},
-    { name: 'Omar Haddad', avatar: 3, payments: [
+    { name: 'Omar Haddad', avatar: 3, cur: 'GBP', payments: [
       { type: 'Automatic payment', date: 'Sun, Mar 15, 2026', day: 14, fixed: 3000 },
       { type: 'Automatic payment', date: 'Wed, Apr 15, 2026', day: 45, fixed: 3000 },
     ]},
+    { name: 'Bianca Souza', avatar: 1, cur: 'BRL', payments: [
+      { type: 'Automatic payment', date: 'Mon, Mar 9, 2026',  day: 8,  fixed: 8000 },
+      { type: 'Automatic payment', date: 'Thu, Apr 9, 2026',  day: 39, fixed: 8000 },
+    ]},
+    { name: 'Mateo Reyes', avatar: 'default', cur: 'PHP', payments: [
+      { type: 'Automatic payment', date: 'Fri, Mar 20, 2026', day: 19, hours: '80:00:00', hourly: 60000 },
+      { type: 'Automatic payment', date: 'Mon, Apr 20, 2026', day: 50, hours: '80:00:00', hourly: 60000 },
+    ]},
+    { name: 'Noah Tremblay', avatar: 4, cur: 'CAD', payments: [
+      { type: 'Automatic payment', date: 'Tue, Mar 10, 2026', day: 9,  fixed: 4200 },
+      { type: 'One-time payment',  date: 'Wed, Apr 22, 2026', day: 52, bonus: 900 },
+    ]},
   ];
 
-  function payTotal(p){ return (p.hourly||0) + (p.fixed||0) + (p.pto||0) + (p.add||0) + (p.bonus||0) - (p.ded||0); }
+  function payNative(p){ return (p.hourly||0) + (p.fixed||0) + (p.pto||0) + (p.add||0) + (p.bonus||0) - (p.ded||0); }
+  function comp(val, cur){ return val ? (cur + ' ' + fmtMoney(val)) : '<span class="pmt-muted">&ndash;</span>'; }
+  // Total Amount — organization currency (USD) over the member's own currency
+  function amountStack(nativeTotal, cur){
+    var usd = nativeTotal * FX[cur];
+    var inner = '<span>USD ' + fmtMoney(usd) + '</span>';
+    if (cur !== 'USD') inner += '<span class="pmt-sub">' + cur + ' ' + fmtMoney(nativeTotal) + '</span>';
+    return '<span class="pmt-stack">' + inner + '</span>';
+  }
 
-  // ── Build table ──
-  var tbody = document.getElementById('pmt-tbody');
-  var html = '', count = 0, grand = 0, dayTotals = {};
-  MEMBERS.forEach(function (mem) {
-    var memTotal = mem.payments.reduce(function (s, p) { return s + payTotal(p); }, 0);
+  var tbody   = document.getElementById('pmt-tbody');
+  var countEl = document.getElementById('pmt-count');
+  var totalEl = document.getElementById('pmt-total');
+  var noteEl  = document.getElementById('pmt-count-note');
+  var bdBtn   = document.getElementById('pmt-bd-open');
+  var natLine = document.getElementById('pmt-card-native');
+
+  // per-currency totals over ALL members — drives the breakdown popover and filtered totals
+  var byCur = {}, GRAND_USD = 0;
+  MEMBERS.forEach(function (m) { m.payments.forEach(function (p) {
+    var nt = payNative(p), usd = nt * FX[m.cur];
+    GRAND_USD += usd;
+    byCur[m.cur] = byCur[m.cur] || { native: 0, usd: 0 };
+    byCur[m.cur].native += nt; byCur[m.cur].usd += usd;
+  }); });
+
+  function memberRows(mem){
+    var memNative = mem.payments.reduce(function (s, p) { return s + payNative(p); }, 0);
     var avatar = mem.avatar === 'default'
       ? '<span class="pmt-avatar pmt-avatar--default"><span class="material-symbols-rounded">person</span></span>'
       : '<span class="pmt-avatar" style="background:' + AVATAR_COLORS[mem.avatar] + '">' + initials(mem.name) + '</span>';
-    html +=
+    var html =
       '<tr class="pmt-member">' +
-        '<td class="pmt-member-cell" colspan="9">' + avatar + '<span class="pmt-member-name">' + mem.name + '</span></td>' +
-        '<td class="pmt-td--r pmt-member-total">' + money(memTotal) + '</td>' +
+        '<td class="pmt-member-cell" colspan="9"><div class="pmt-member-inner">' + avatar + '<span class="pmt-member-name">' + mem.name + '</span></div></td>' +
+        '<td class="pmt-td--r pmt-member-total">' + amountStack(memNative, mem.cur) + '</td>' +
       '</tr>';
     mem.payments.forEach(function (p) {
-      count++; grand += payTotal(p);
-      dayTotals[p.day] = (dayTotals[p.day] || 0) + payTotal(p);
       html +=
         '<tr class="pmt-row">' +
           '<td class="pmt-td">' + p.type + '</td>' +
           '<td class="pmt-td pmt-paid">' + p.date + '</td>' +
-          '<td class="pmt-td pmt-td--r ' + (p.hours ? '' : 'pmt-muted') + '">' + (p.hours || '-') + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.hourly || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.fixed || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.pto || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.add || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.ded || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r">' + money(p.bonus || 0) + '</td>' +
-          '<td class="pmt-td pmt-td--r pmt-amount">' + money(payTotal(p)) + '</td>' +
+          '<td class="pmt-td pmt-td--r ' + (p.hours ? '' : 'pmt-muted') + '">' + (p.hours || '&ndash;') + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.hourly, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.fixed, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.pto, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.add, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.ded, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r">' + comp(p.bonus, mem.cur) + '</td>' +
+          '<td class="pmt-td pmt-td--r pmt-amount">' + amountStack(payNative(p), mem.cur) + '</td>' +
         '</tr>';
     });
-  });
-  tbody.innerHTML = html;
-  document.getElementById('pmt-count').textContent = count;
-  document.getElementById('pmt-total').textContent = money(grand);
+    return html;
+  }
 
-  // ── Area chart: Total amount per day (Mar 1 → Jun 30, 122 days) ──
+  // Render the table + summary cards for a given currency ('all' or an ISO code).
+  function render(cur){
+    var html = '', count = 0, usdTotal = 0, auto = 0, once = 0, dayTotals = {};
+    MEMBERS.forEach(function (mem) {
+      if (cur !== 'all' && mem.cur !== cur) return;
+      html += memberRows(mem);
+      mem.payments.forEach(function (p) {
+        count++;
+        var usd = payNative(p) * FX[mem.cur];
+        usdTotal += usd;
+        dayTotals[p.day] = (dayTotals[p.day] || 0) + usd;
+        if (/one-time/i.test(p.type)) once++; else auto++;
+      });
+    });
+    tbody.innerHTML = html;
+    countEl.textContent = count;
+    totalEl.textContent = 'USD ' + fmtMoney(usdTotal);
+    // count note — payment-type split (drop a term when it's zero)
+    var parts = [];
+    if (auto) parts.push(auto + ' automatic');
+    if (once) parts.push(once + ' one-time');
+    if (noteEl) noteEl.textContent = parts.join(' · ');
+    // Amount card: "View breakdown" in the All view; the native total when filtered to one currency
+    if (cur === 'all') { bdBtn.style.display = ''; natLine.style.display = 'none'; }
+    else if (cur === 'USD') { bdBtn.style.display = 'none'; natLine.style.display = 'none'; }
+    else { bdBtn.style.display = 'none'; natLine.style.display = ''; natLine.textContent = cur + ' ' + fmtMoney(byCur[cur] ? byCur[cur].native : 0); }
+    drawChart(dayTotals);
+  }
+
+  // ── Area chart: Total amount per day (Mar 1 → Jun 30, 122 days), in USD ──
   var N = 122;
-  var values = new Array(N).fill(0);
-  Object.keys(dayTotals).forEach(function (d) { values[+d] = dayTotals[d]; });
-  var maxVal = Math.max.apply(null, values);
-  var MAX_Y = Math.max(6000, Math.ceil(maxVal / 1000) * 1000);
-  var STEP = MAX_Y / 6;
-
-  var W = 1000, H = 300, padL = 48, padR = 12, padT = 10, padB = 26;
-  var plotW = W - padL - padR, plotH = H - padT - padB;
-  function xAt(i){ return padL + (i / (N - 1)) * plotW; }
-  function yAt(v){ return padT + (1 - v / MAX_Y) * plotH; }
-
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function labelFor(i){ var d = new Date(2026, 2, 1 + i); return MONTHS[d.getMonth()] + ' ' + (d.getDate() < 10 ? '0' : '') + d.getDate(); }
+  function drawChart(dayTotals){
+    var values = new Array(N).fill(0);
+    Object.keys(dayTotals).forEach(function (d) { values[+d] = dayTotals[d]; });
+    var maxVal = Math.max.apply(null, values.concat([0]));
+    var MAX_Y = Math.max(6000, Math.ceil(maxVal / 1000) * 1000);
+    var STEP = MAX_Y / 6;
+    var W = 1000, H = 300, padL = 56, padR = 12, padT = 10, padB = 26;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    function xAt(i){ return padL + (i / (N - 1)) * plotW; }
+    function yAt(v){ return padT + (1 - v / MAX_Y) * plotH; }
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="pmt-chart-svg" role="img" aria-label="Total amount per day">';
+    for (var v = 0; v <= MAX_Y; v += STEP) {
+      var y = yAt(v);
+      svg += '<line class="pmt-grid" x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '"/>';
+      svg += '<text class="pmt-axis" x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + v + '</text>';
+    }
+    for (var i = 0; i < N; i += 13) {
+      svg += '<text class="pmt-axis" x="' + xAt(i) + '" y="' + (H - 8) + '" text-anchor="middle">' + labelFor(i) + '</text>';
+    }
+    var pts = values.map(function (val, i) { return xAt(i) + ',' + yAt(val); });
+    svg += '<path class="pmt-area" d="M' + padL + ',' + yAt(0) + ' L' + pts.join(' L') + ' L' + xAt(N - 1) + ',' + yAt(0) + ' Z"/>';
+    svg += '<polyline class="pmt-line" points="' + pts.join(' ') + '"/>';
+    values.forEach(function (val, i) { svg += '<circle class="pmt-dot" cx="' + xAt(i) + '" cy="' + yAt(val) + '" r="2.5"/>'; });
+    svg += '</svg>';
+    document.getElementById('pmt-chart').innerHTML = svg;
+  }
 
-  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="pmt-chart-svg" role="img" aria-label="Total amount per day">';
-  for (var v = 0; v <= MAX_Y; v += STEP) {
-    var y = yAt(v);
-    svg += '<line class="pmt-grid" x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '"/>';
-    svg += '<text class="pmt-axis" x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + v + '</text>';
+  // ── Amount → "Currency breakdown" popover (same anchored popover as Amounts owed) ──
+  // Per Olga: aggregate by originating currency for the selected period — no per-payment rows,
+  // no exchange rates (it's a mixture across many payments). Details live in Team Payments.
+  var BD_ORDER = ['BRL', 'CAD', 'EUR', 'GBP', 'PHP', 'USD'];
+  var bdPanel = document.createElement('div');
+  bdPanel.className = 'pmt-bd-panel';
+  document.body.appendChild(bdPanel);
+  function buildBd(){
+    var rows = BD_ORDER.filter(function (c) { return byCur[c]; }).map(function (c) {
+      return '<div class="pmt-bd-row pmt-bd-col2">' +
+        '<span class="pmt-bd-native">' + c + ' ' + fmtMoney(byCur[c].native) + '</span>' +
+        '<span class="pmt-bd-usd">USD ' + fmtMoney(byCur[c].usd) + '</span></div>';
+    }).join('');
+    bdPanel.innerHTML =
+      '<div class="pmt-bd-title"><span>Breakdown by currency</span>' +
+        '<button type="button" class="pmt-bd-close" aria-label="Close"><span class="material-symbols-rounded">close</span></button></div>' +
+      '<div class="pmt-bd-header pmt-bd-col2"><span class="pmt-bd-header-col">Amount</span>' +
+        '<span class="pmt-bd-header-col pmt-bd-header-col--usd">USD</span></div>' +
+      rows +
+      '<div class="pmt-bd-footer"><div class="pmt-bd-footer-total"><span>Total (organization currency)</span>' +
+        '<span class="pmt-bd-footer-value">USD ' + fmtMoney(GRAND_USD) + '</span></div></div>' +
+      '<div class="pmt-bd-note"><span class="material-symbols-rounded pmt-bd-note-icon">info</span>' +
+        '<span>These totals come from your Team Payments for the selected period, converted to your organization currency. Each payment may use a different exchange rate &mdash; open <a href="#" class="pmt-bd-inline-link">Team Payments</a> to see the rate on a specific payment.</span></div>';
   }
-  for (var i = 0; i < N; i += 13) {
-    svg += '<text class="pmt-axis" x="' + xAt(i) + '" y="' + (H - 8) + '" text-anchor="middle">' + labelFor(i) + '</text>';
+  function placeBd(){
+    if (!bdBtn) return;
+    var r = bdBtn.getBoundingClientRect();
+    var pw = bdPanel.offsetWidth, ph = bdPanel.offsetHeight;
+    var left = Math.max(16, Math.min(r.left, window.innerWidth - pw - 16));
+    var top = r.bottom + 6;
+    if (top + ph > window.innerHeight - 16) top = Math.max(16, r.top - ph - 6);
+    bdPanel.style.left = left + 'px'; bdPanel.style.top = top + 'px';
   }
-  var pts = values.map(function (val, i) { return xAt(i) + ',' + yAt(val); });
-  svg += '<path class="pmt-area" d="M' + padL + ',' + yAt(0) + ' L' + pts.join(' L') + ' L' + xAt(N - 1) + ',' + yAt(0) + ' Z"/>';
-  svg += '<polyline class="pmt-line" points="' + pts.join(' ') + '"/>';
-  values.forEach(function (val, i) { svg += '<circle class="pmt-dot" cx="' + xAt(i) + '" cy="' + yAt(val) + '" r="2.5"/>'; });
-  svg += '</svg>';
-  document.getElementById('pmt-chart').innerHTML = svg;
+  function openBd(){ buildBd(); bdPanel.classList.add('is-open'); placeBd(); }
+  function closeBd(){ bdPanel.classList.remove('is-open'); }
+  if (bdBtn) bdBtn.addEventListener('click', function (e) {
+    e.preventDefault(); e.stopPropagation();
+    if (bdPanel.classList.contains('is-open')) { closeBd(); } else { openBd(); }
+  });
+  bdPanel.addEventListener('click', function (e) { if (e.target.closest('.pmt-bd-close')) closeBd(); });
+  document.addEventListener('click', function (e) {
+    if (bdPanel.classList.contains('is-open') && !bdPanel.contains(e.target) && !e.target.closest('#pmt-bd-open')) closeBd();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBd(); });
+  window.addEventListener('resize', function () { if (bdPanel.classList.contains('is-open')) placeBd(); });
+
+  // ── Filters drawer ──
+  var fBackdrop = document.getElementById('pmtf-backdrop');
+  var fDrawer = document.getElementById('pmtf-drawer');
+  function openF(){ fBackdrop.classList.add('is-open'); fDrawer.classList.add('is-open'); }
+  function closeF(){ fBackdrop.classList.remove('is-open'); fDrawer.classList.remove('is-open'); }
+  var fBtn = document.querySelector('.pmt-filters-btn');
+  if (fBtn) fBtn.addEventListener('click', openF);
+  var fCaret = document.querySelector('.pmt-filters-caret');
+  if (fCaret) fCaret.addEventListener('click', openF);
+  var fClose = document.getElementById('pmtf-close');
+  if (fClose) fClose.addEventListener('click', closeF);
+  fBackdrop.addEventListener('click', closeF);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeF(); });
+
+  var tabF = document.getElementById('pmtf-tab-filters'), tabS = document.getElementById('pmtf-tab-saved');
+  var paneF = document.getElementById('pmtf-pane-filters'), paneS = document.getElementById('pmtf-pane-saved');
+  function selectTab(isF){ tabF.classList.toggle('is-active', isF); tabS.classList.toggle('is-active', !isF); paneF.classList.toggle('is-active', isF); paneS.classList.toggle('is-active', !isF); }
+  tabF.addEventListener('click', function () { selectTab(true); });
+  tabS.addEventListener('click', function () { selectTab(false); });
+
+  var curSel = document.getElementById('pmtf-currency');
+  if (curSel) curSel.addEventListener('change', function () { render(this.value); });
+  var fClear = document.getElementById('pmtf-clear');
+  if (fClear) fClear.addEventListener('click', function () {
+    if (curSel) curSel.value = 'all';
+    var s = document.getElementById('pmtf-sum-ranges'); if (s) s.checked = false;
+    render('all');
+  });
+
+  render('all');
 })();
 </script>
 

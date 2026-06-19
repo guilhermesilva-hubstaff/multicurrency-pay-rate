@@ -26,6 +26,10 @@
 
     <!-- Title -->
     <h1 class="ao-title">Amounts owed report</h1>
+    <div class="ao-version" role="tablist" aria-label="Version">
+      <button class="ao-ver-btn is-active" id="ao-ver-v1" type="button">V1</button>
+      <button class="ao-ver-btn" id="ao-ver-v2" type="button">V2</button>
+    </div>
 
     <!-- Toolbar: ME/ALL tabs + date range + filters -->
     <div class="ao-toolbar">
@@ -47,6 +51,20 @@
           <button class="ao-filters-caret" aria-label="Filter options"><span class="material-symbols-rounded">expand_more</span></button>
         </div>
       </div>
+    </div>
+
+    <!-- Multi-currency advisory banner (Zone DS "Alert / Blue", shown in V1 — the default org-currency view — when non-org-currency earnings are present) -->
+    <div class="ao-banner" id="ao-mc-banner" role="status" hidden>
+      <div class="ao-banner-content">
+        <div class="ao-banner-head">
+          <span class="material-symbols-rounded ao-banner-icon">currency_exchange</span>
+          <span class="ao-banner-title">Multi-currency earnings included</span>
+        </div>
+        <p class="ao-banner-body">Some earnings are in other currencies, converted to USD at today&rsquo;s exchange rates &mdash; so these totals are estimates that can shift as rates change. Keep a small funding buffer to cover any difference at payment time.</p>
+      </div>
+      <button class="ao-banner-close" id="ao-mc-banner-close" type="button" aria-label="Dismiss">
+        <span class="material-symbols-rounded">close</span>
+      </button>
     </div>
 
     <!-- Summary cards + chart toggle -->
@@ -86,6 +104,7 @@
     </div>
 
     <!-- Report table -->
+    <div class="ao-table-wrap">
     <table class="ao-table">
       <thead>
         <tr>
@@ -103,6 +122,7 @@
         <!-- rows injected by script -->
       </tbody>
     </table>
+    </div>
 
   </div>
 </div>
@@ -282,12 +302,16 @@
     var amtMember = m.rate * totalDec;
     return { hasRate: true, rateMember: m.rate, rateUSD: m.rate * FX[m.cur], totalDec: totalDec, amtMember: amtMember, amtUSD: amtMember * FX[m.cur] };
   }
-  function rateCell(m, c) {  // current rate shows the member's own (original) currency only — USD conversion fluctuates daily
+  function rateCell(m, c) {  // current rate: organization currency (USD) over the member's own (regional) currency — same pattern as the Amount column
     if (!c.hasRate) return '<td class="ao-td ao-td--r ao-norate">No rate set</td>';
     var per = c.fixed ? 'fixed' : 'hr';
-    return '<td class="ao-td ao-td--r ao-rate">' + m.cur + ' ' + fmtMoney(c.rateMember) + '/' + per + '</td>';
+    if (version === 'v1') return '<td class="ao-td ao-td--r ao-rate">USD ' + fmtMoney(c.rateUSD) + '/' + per + '</td>';
+    var inner = '<span>USD ' + fmtMoney(c.rateUSD) + '/' + per + '</span>';
+    if (m.cur !== 'USD') inner += '<span class="ao-sub">' + m.cur + ' ' + fmtMoney(c.rateMember) + '/' + per + '</span>';
+    return '<td class="ao-td ao-td--r ao-rate"><span class="ao-stack">' + inner + '</span></td>';
   }
   function amountCell(m, c) {
+    if (version === 'v1') return '<td class="ao-td ao-td--r ao-amount">USD ' + fmtMoney(c.amtUSD) + '</td>';
     var inner = '<span>USD ' + fmtMoney(c.amtUSD) + '</span>';
     if (c.hasRate && m.cur !== 'USD') inner += '<span class="ao-sub">' + m.cur + ' ' + fmtMoney(c.amtMember) + '</span>';
     return '<td class="ao-td ao-td--r ao-amount"><span class="ao-stack">' + inner + '</span></td>';
@@ -295,6 +319,7 @@
 
   var tbody = document.getElementById('ao-tbody');
   var cardVals = document.querySelectorAll('.ao-card-value');
+  var version = 'v1';  // 'v1' = org-currency-only baseline + advisory banner (default/main); 'v2' = full multi-currency view (dual values + filters)
 
   // per-currency totals — computed once over ALL members; drives the breakdown popover and the currency filter
   var byCur = {}, GRAND_USD = 0;
@@ -363,6 +388,34 @@
     }
   }
   render('all');
+
+  /* ── Version toggle (V1 = full multi-currency · V2 = org-currency-only baseline) ── */
+  // Multi-currency advisory banner — shown in V1 (the default org-currency view) when earnings exist in a non-org currency.
+  // (V1 keeps everything in the org currency, so the banner is the only cue the totals are conversions.)
+  var bannerDismissed = false;
+  function updateBanner() {
+    var banner = document.getElementById('ao-mc-banner');
+    if (!banner) return;
+    var hasMultiCurrency = Object.keys(byCur).some(function (c) { return c !== 'USD'; });
+    banner.hidden = !(version === 'v1' && hasMultiCurrency && !bannerDismissed);
+  }
+  function applyVersion(v) {
+    version = v;
+    var b1 = document.getElementById('ao-ver-v1'), b2 = document.getElementById('ao-ver-v2');
+    if (b1) b1.classList.toggle('is-active', v === 'v1');
+    if (b2) b2.classList.toggle('is-active', v === 'v2');
+    var filters = document.querySelector('.ao-filters');     // V1 (the org-currency baseline) drops the Filters control
+    if (filters) filters.style.display = (v === 'v1') ? 'none' : '';
+    var sel = document.getElementById('aof-currency');
+    if (v === 'v1' && sel) sel.value = 'all';                // V1 is single-currency — reset any filter
+    render('all');
+    updateBanner();
+  }
+  var verV1 = document.getElementById('ao-ver-v1'), verV2 = document.getElementById('ao-ver-v2');
+  if (verV1) verV1.addEventListener('click', function () { applyVersion('v1'); });
+  if (verV2) verV2.addEventListener('click', function () { applyVersion('v2'); });
+  var bannerClose = document.getElementById('ao-mc-banner-close');
+  if (bannerClose) bannerClose.addEventListener('click', function () { bannerDismissed = true; updateBanner(); });
 
   /* ── Amount → "View breakdown by currency" popover (same component as Payment records) ── */
   var BD_ORDER = ['BRL', 'CAD', 'EUR', 'GBP', 'PHP', 'USD'];
@@ -452,6 +505,8 @@
     var sum = document.getElementById('aof-sum-ranges'); if (sum) sum.checked = false;
     render('all');
   });
+
+  applyVersion('v1');  // V1 is the default/main view (org-currency baseline + banner)
 })();
 </script>
 
@@ -474,10 +529,10 @@
         'Lists each currency: native amount, exchange rate, and converted USD value, plus the org-currency total',
         'Shown only in the "All currencies" view; when filtered to one currency it is replaced by that currency\'s own total',
       ]},
-      { text: 'Current rate — member\'s own (original) currency only', target: '.ao-rate', sub: [
-        'Shows the rate the member is actually paid — e.g. "EUR 18.00/hr", "BRL 30.00/hr", "USD 2,000.00/fixed"',
-        'No USD conversion here: the rate is fixed in the member\'s currency, while the USD equivalent fluctuates daily',
-        'Members without a rate show "No rate set"',
+      { text: 'Current rate — organization currency, then regional currency', target: '.ao-rate', sub: [
+        'Large line: the rate in the organization currency (USD) with the period — e.g. "USD 25.40/hr", "USD 19.44/hr"',
+        'Small line beneath: the rate in the member\'s own (regional) currency — e.g. "GBP 20.00/hr", "EUR 18.00/hr"',
+        'Same dual-currency treatment as the Amount column; members paid in USD show a single line; no rate shows "No rate set"',
       ]},
       { text: 'Amount — organization currency, then original currency', target: '.ao-amount', sub: [
         'Large line: the amount owed in the organization currency (USD) — what you actually pay out',
