@@ -6,7 +6,8 @@
   <title>Manage Payroll — Hubstaff</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@18..48,100..700,0..1,-50..200&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <link rel="stylesheet" href="payroll.css" />
   <link rel="stylesheet" href="epr.css" />
 </head>
@@ -168,7 +169,7 @@
             </button>
           </div>
           <div class="batch-right">
-            <button class="batch-action-btn" onclick="openEditPayRateModal()">Edit pay rate</button>
+            <button class="batch-action-btn" id="epr-batch-btn" onclick="openEditPayRateModal()">Edit pay rate</button>
             <button class="batch-action-btn">Edit pay period</button>
             <button class="batch-action-btn">Manage primary payout method</button>
             <button class="batch-more-btn" id="more-btn" onclick="toggleDropdown(event)">
@@ -1506,7 +1507,27 @@
 <script src="design-annotations.js"></script>
 <script src="design-tasks.js"></script>
 <script>
-  DesignAnnotations.init({ page: 'Payroll', required: [], suggestions: [] });
+  DesignAnnotations.init({
+    page: 'Payroll',
+    required: [
+      { text: 'Edit pay rate (batch) — select members, then "Edit pay rate"', target: '.col-check, #epr-batch-btn', sub: [
+        'Tick the checkbox on one or more members (or the header checkbox to select all) — the blue batch bar appears above the table',
+        'Then click "Edit pay rate" in that bar (highlighted) to open the modal',
+        'The modal shows an avatar stack + selected count, members grouped by pay type (Fixed / Hourly), and empty fields — members may have different values',
+      ]},
+      { text: 'Skipped members alert — inside the Edit pay rate modal', target: '#epr-skipped-alert', sub: [
+        'Open the Edit pay rate modal, then pick a pay type AND enter a rate — the alert appears only once both are set',
+        'It flags members already at that rate: they are skipped, and the new rate applies to the rest',
+        'Dismissable via the × button',
+      ]},
+      { text: 'Currency filter — open the Filters drawer', target: '.btn-filter', sub: [
+        'Click "Filters" (highlighted) to open the drawer — the Currency filter is a section inside it',
+        'Lists every currency present in the table: USD, EUR, GBP, AUD, CAD, BRL; apply via "Apply filters"',
+        'Currency codes are stored as a data-currency attribute on each table row',
+      ]},
+    ],
+    suggestions: [],
+  });
 </script>
 
 </body>

@@ -433,7 +433,37 @@
 </script>
 
 <script>
-  DesignAnnotations.init({ page: 'Payments report', required: [], suggestions: [] });
+  DesignAnnotations.init({
+    page: 'Payments report',
+    required: [
+      { text: 'Currency filter — filter the report to one currency', target: '.pmt-filters-btn', sub: [
+        'Filters &rarr; Currency: pick a single currency (BRL, CAD, EUR, GBP, PHP, USD) or "All currencies"',
+        'Narrows the report to that currency\'s payments and re-totals the Payments and Amount cards',
+        'The Amount then shows that currency\'s total in USD, with the original-currency total beneath',
+      ]},
+      { text: 'Payments count — automatic vs one-time split', target: '#pmt-count-note', sub: [
+        'Below the payments count, a secondary line splits it — e.g. "19 automatic &middot; 2 one-time"',
+        'Separates recurring (automatic) payroll from manual one-off payments at a glance',
+        'Re-counts when the report is filtered by currency or date range',
+      ]},
+      { text: 'View breakdown — per-currency popover below the Amount', target: '#pmt-bd-open', sub: [
+        'The Amount (USD) carries a "View breakdown" link that opens a per-currency popover',
+        'Lists each currency: the original amount and the converted USD value, plus the org-currency total',
+        'Anchored to the trigger (same popover used on Amounts owed); links out to Team Payments for per-payment rates',
+      ]},
+      { text: 'Amount — member\'s original currency, then organization currency', target: '.pmt-member-total', sub: [
+        'Each pay component (fixed pay, hourly, PTO &amp; holiday, additions, deductions, bonus) is set in the member\'s own currency',
+        'The Total Amount shows the organization currency (USD) on top, with the original-currency total beneath',
+        'Members already paid in USD show a single line',
+      ]},
+      { text: 'Member grouping — more space between members', target: '.pmt-member', sub: [
+        'Each member\'s payments are grouped under their name with a running total on the right',
+        'Extra spacing above each member separates the groups so every block reads as one unit',
+        'The first member sits tight to the header; the gap only appears between groups',
+      ]},
+    ],
+    suggestions: [],
+  });
 </script>
 
 </body>

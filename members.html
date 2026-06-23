@@ -1332,31 +1332,30 @@
     page: 'People → Members',
     required: [
       {
-        text: 'Member status badges — Active, Inactive, Pending',
-        target: '.mem-status',
+        text: 'Pay rate column — each member\'s current rate',
+        target: '.mem-col--payrate',
         sub: [
-          'Active: green pill — member is actively using the app',
-          'Inactive: gray pill — member has not tracked time recently',
-          'Pending: amber pill — invitation sent but not yet accepted',
-          'Badge colours and labels must be consistent with the rest of the product'
+          'Shows the active pay rate for every member, with the pay period (e.g. "/hr", "/mo")',
+          'Sortable; sits between Work orders and Bill rate',
+          'Inline edit and batch edit both write back to this column'
         ]
       },
       {
-        text: 'Batch actions — enabled when one or more rows are selected',
-        target: '#mem-batch-actions-btn',
+        text: 'Currency shown in the Pay rate column',
+        target: '.mem-pay__val',
         sub: [
-          '"Batch actions" dropdown activates only when at least one checkbox is checked',
-          'Select-all in the header selects all rows visible under the current filter/search',
-          'Typical actions: Remove member, Change role, Export selected'
+          'Each rate is displayed in the member\'s own currency — e.g. "EUR 18.00/hr", "BRL 40.00/hr"',
+          'No USD conversion in the column: the rate is fixed in the member\'s currency (the USD equivalent fluctuates daily)',
+          'Consistent with Team payment and Amounts owed — show the ISO code, never the "$" symbol'
         ]
       },
       {
-        text: 'Column visibility toggle',
-        target: '#mem-cols-btn',
+        text: 'Batch action — Edit pay rate dialog',
+        target: '#mem-batch-btn',
         sub: [
-          'Grid icon (top-right of the table) opens a column picker',
-          'Member and Status columns are always visible and cannot be hidden',
-          'Column visibility should persist across sessions via user preferences'
+          'Select one or more members, then Batch actions → "Edit pay rate" opens the dialog',
+          'Choose a pay type, currency, rate and effective date — applied to all selected members',
+          'Changing the currency warns when selected members are currently paid in a different currency'
         ]
       }
     ],

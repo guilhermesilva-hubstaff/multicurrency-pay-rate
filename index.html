@@ -3,62 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hubstaff shell — starter template</title>
+  <title>Hubstaff — Manage payroll</title>
 
-  <!-- Fonts required by the shell -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Land on the Manage payroll page as the index -->
+  <meta http-equiv="refresh" content="0; url=payroll.html" />
+  <script>location.replace('payroll.html');</script>
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@18,400,0,0;24,400,0,0&display=swap" rel="stylesheet" />
-
-  <!-- Page-level styles (just the placeholder) -->
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { margin: 0; font-family: Roboto, sans-serif; color: #6b7280;
+           display: flex; align-items: center; justify-content: center;
+           height: 100vh; }
+  </style>
 </head>
 <body>
-
-  <!--
-    The Hubstaff shell injects the top bar and sidebar into the page
-    automatically. The only requirement is a wrapper with id="shell-content"
-    that holds everything below the top bar.
-
-    ▼ ▼ ▼  Replace the contents of #shell-content with your own page  ▼ ▼ ▼
-  -->
-  <div id="shell-content">
-    <div class="page">
-
-      <div class="placeholder">
-        <div class="placeholder__art" aria-hidden="true">
-          <span class="material-symbols-rounded">widgets</span>
-        </div>
-        <h1 class="placeholder__title">Your content goes here</h1>
-        <p class="placeholder__body">
-          This is the centre of the layout. Replace this block with any page,
-          component or view. The top bar and sidebar will stay in place.
-        </p>
-        <div class="placeholder__actions">
-          <button type="button" class="btn btn--primary">Primary action</button>
-          <button type="button" class="btn">Secondary</button>
-        </div>
-        <p class="placeholder__hint">
-          Try the circular toggle next to the sidebar to collapse or expand it.
-        </p>
-      </div>
-
-    </div>
-  </div>
-  <!--  ▲ ▲ ▲  /Replace  ▲ ▲ ▲  -->
-
-  <!-- Shell library (top bar + sidebar + collapse/expand) -->
-  <script src="hubstaff-shell.js"></script>
-
-  <!-- Boot the shell -->
-  <script src="layout.js"></script>
-
-  <!-- Design Annotations — remove before shipping to production -->
-  <script src="design-annotations.js"></script>
-  <script src="design-tasks.js"></script>
-  <script>
-    DesignAnnotations.init({ page: 'Home', required: [], suggestions: [] });
-  </script>
+  <p>Redirecting to <a href="payroll.html">Manage payroll</a>…</p>
 </body>
 </html>

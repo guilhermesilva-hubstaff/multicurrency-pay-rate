@@ -19,21 +19,20 @@
       label: 'Members',
       href: 'members.html',
       tasks: [
-        { text: 'Member status badges — Active, Inactive, Pending', target: '.mem-status', sub: [
-          'Active: green pill — member is actively using the app',
-          'Inactive: gray pill — member has not tracked time recently',
-          'Pending: amber pill — invitation sent but not yet accepted',
-          'Badge colours and labels must be consistent with the rest of the product',
+        { text: 'Pay rate column — each member\'s current rate', target: '.mem-col--payrate', sub: [
+          'Shows the active pay rate for every member, with the pay period (e.g. "/hr", "/mo")',
+          'Sortable; sits between Work orders and Bill rate',
+          'Inline edit and batch edit both write back to this column',
         ]},
-        { text: 'Batch actions — enabled when one or more rows are selected', target: '#mem-batch-actions-btn', sub: [
-          '"Batch actions" dropdown activates only when at least one checkbox is checked',
-          'Select-all in the header selects all rows visible under the current filter/search',
-          'Typical actions: Remove member, Change role, Export selected',
+        { text: 'Currency shown in the Pay rate column', target: '.mem-pay__val', sub: [
+          'Each rate is displayed in the member\'s own currency — e.g. "EUR 18.00/hr", "BRL 40.00/hr"',
+          'No USD conversion in the column: the rate is fixed in the member\'s currency (the USD equivalent fluctuates daily)',
+          'Consistent with Team payment and Amounts owed — show the ISO code, never the "$" symbol',
         ]},
-        { text: 'Column visibility toggle', target: '#mem-cols-btn', sub: [
-          'Grid icon (top-right of the table) opens a column picker',
-          'Member and Status columns are always visible and cannot be hidden',
-          'Column visibility should persist across sessions via user preferences',
+        { text: 'Batch action — Edit pay rate dialog', target: '#mem-batch-btn', sub: [
+          'Select one or more members, then Batch actions → "Edit pay rate" opens the dialog',
+          'Choose a pay type, currency, rate and effective date — applied to all selected members',
+          'Changing the currency warns when selected members are currently paid in a different currency',
         ]},
       ]
     },
@@ -42,22 +41,17 @@
       label: 'Member Detail',
       href: 'member-detail.html',
       tasks: [
-        { text: 'Country field in Contact section (Info tab)', target: '#pb-country-select', sub: [
-          'Located in the Info tab → Contact section, after Home address',
+        { text: 'Country field — Info tab → Contact section', target: '.md-tab[data-tab="info"]', sub: [
+          'Lives on the Info tab → Contact section, after Home address — hover highlights the Info tab to open',
           'Uses the same md-select styling as the Birthday dropdowns on the same tab',
-          'Selecting a country automatically surfaces that country\'s currency at the top of the Pay / Bill currency dropdown',
+          'Selecting a country auto-surfaces that country\'s currency at the top of the Pay / Bill currency dropdown, and reorders the list (the currency itself does not change automatically)',
           '~48 countries supported; list is alphabetically sorted',
         ]},
-        { text: 'Searchable currency dropdown — Pay / Bill tab → Pay rate', target: '#pb-currency-pay', panel: 'pay', sub: [
+        { text: 'Searchable currency dropdown — Pay / Bill tab → Pay rate', target: '#pb-currency-pay', sub: [
           'Custom dropdown with live search — native <select> replaced to support inline filtering',
           'When a country is selected on Info tab, the matching currency floats to the top above a divider',
           'All remaining currencies follow alphabetically below the divider',
           'The amount field suffix shows the pay period only (e.g. "monthly") — the selected currency lives in this dropdown, not repeated in the suffix',
-        ]},
-        { text: 'Country → currency linking across tabs', target: '#pb-country-select', sub: [
-          'The country field (Info tab) and currency dropdown (Pay / Bill tab) are connected via shared JS state',
-          'Changing country on Info tab immediately reorders the currency list — no page reload needed',
-          'The currency does not change automatically; the country only influences ordering and suggestion',
         ]},
       ]
     },
@@ -66,20 +60,20 @@
       label: 'Payroll',
       href: 'payroll.html',
       tasks: [
-        { text: 'Edit pay rate modal — members breakdown card', target: '#epr-overlay', sub: [
-          'Shows avatar stack (up to 3) + selected member count',
-          'Groups members by pay type (Fixed / Hourly) with rate ranges',
-          'All form fields are empty on open — members may have different values',
+        { text: 'Edit pay rate (batch) — select members, then "Edit pay rate"', target: '.col-check, #epr-batch-btn', sub: [
+          'Tick the checkbox on one or more members (or the header checkbox to select all) — the blue batch bar appears above the table',
+          'Then click "Edit pay rate" in that bar (highlighted) to open the modal',
+          'The modal shows an avatar stack + selected count, members grouped by pay type (Fixed / Hourly), and empty fields — members may have different values',
         ]},
-        { text: 'Edit pay rate modal — skipped members alert', target: '#epr-skipped-alert', sub: [
-          'Alert appears only after pay type AND rate are both filled in',
+        { text: 'Skipped members alert — inside the Edit pay rate modal', target: '#epr-skipped-alert', sub: [
+          'Open the Edit pay rate modal, then pick a pay type AND enter a rate — the alert appears only once both are set',
+          'It flags members already at that rate: they are skipped, and the new rate applies to the rest',
           'Dismissable via the × button',
-          'Copy: "N member(s) already at this rate — they\'ll be skipped. The new rate applies to the other X members."',
         ]},
-        { text: 'Currency filter in the filter drawer', target: '#currency-filter-wrapper', sub: [
-          'Lists all currencies present in the table: USD, EUR, GBP, AUD, CAD, BRL',
-          'Filtering is functional — applies via "Apply filters" button',
-          'Currency codes stored as data-currency attribute on each table row',
+        { text: 'Currency filter — open the Filters drawer', target: '.btn-filter', sub: [
+          'Click "Filters" (highlighted) to open the drawer — the Currency filter is a section inside it',
+          'Lists every currency present in the table: USD, EUR, GBP, AUD, CAD, BRL; apply via "Apply filters"',
+          'Currency codes are stored as a data-currency attribute on each table row',
         ]},
       ]
     },
@@ -170,6 +164,38 @@
           'Large line: the amount owed in the organization currency (USD) — what you pay out',
           'Small line beneath: the same amount in the member\'s own (original) currency',
           'Members already paid in USD show a single line',
+        ]},
+      ]
+    },
+    {
+      id: 'payments',
+      label: 'Payments report',
+      href: 'payments.html',
+      tasks: [
+        { text: 'Currency filter — filter the report to one currency', target: '.pmt-filters-btn', sub: [
+          'Filters → Currency: pick a single currency (BRL, CAD, EUR, GBP, PHP, USD) or "All currencies"',
+          'Narrows the report to that currency\'s payments and re-totals the Payments and Amount cards',
+          'The Amount then shows that currency\'s total in USD, with the original-currency total beneath',
+        ]},
+        { text: 'Payments count — automatic vs one-time split', target: '#pmt-count-note', sub: [
+          'A secondary line splits the count — e.g. "19 automatic · 2 one-time"',
+          'Separates recurring (automatic) payroll from manual one-off payments at a glance',
+          'Re-counts when the report is filtered by currency or date range',
+        ]},
+        { text: 'View breakdown — per-currency popover below the Amount', target: '#pmt-bd-open', sub: [
+          'The Amount (USD) carries a "View breakdown" link opening a per-currency popover',
+          'Lists each currency: the original amount and the converted USD value, plus the org-currency total',
+          'Same anchored popover used on Amounts owed; links out to Team Payments for per-payment rates',
+        ]},
+        { text: 'Amount — member\'s original currency, then organization currency', target: '.pmt-member-total', sub: [
+          'Each pay component (fixed pay, hourly, PTO & holiday, additions, deductions, bonus) is set in the member\'s currency',
+          'The Total Amount shows the organization currency (USD) on top, original-currency total beneath',
+          'Members already paid in USD show a single line',
+        ]},
+        { text: 'Member grouping — more space between members', target: '.pmt-member', sub: [
+          'Each member\'s payments are grouped under their name with a running total on the right',
+          'Extra spacing above each member separates the groups so each block reads as one unit',
+          'The first member sits tight to the header; the gap only appears between groups',
         ]},
       ]
     },
